@@ -1,0 +1,242 @@
+/* ==================================================
+   MY BEAUTIFUL WORLD — Shared Book Stylesheet
+   ================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap');
+
+:root {
+  --cream:    #FDF8F0;
+  --parchment:#F5EDD8;
+  --sage:     #8BAF7C;
+  --bark:     #3D2B1F;
+  --forest:   #2E5E35;
+  --gold:     #D4A843;
+  --en-color: #2C3E6B;
+  --de-color: #8B5E1A;
+  --ro-color: #8B3A4A;
+  --es-color: #8B4513;
+  --it-color: #556B2F;
+  --shadow:   rgba(61,43,31,0.12);
+  --radius:   16px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--cream);
+  color: var(--bark);
+  font-family: 'Nunito', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── Book Page ── */
+.book-page {
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Navigation ── */
+.book-nav {
+  position: sticky; top:0; z-index:100;
+  background: rgba(253,248,240,0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid var(--parchment);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.nav-chapter {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  color: var(--forest);
+  font-weight: 700;
+  text-align: center;
+  flex: 1;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--parchment);
+  color: var(--bark);
+  text-decoration: none;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-btn:hover { background: var(--sage); color: white; }
+
+/* ── Illustration ── */
+.illustration-frame {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 20px 8px;
+}
+.illustration-frame img {
+  max-width: 100%;
+  max-height: 56vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 30px var(--shadow);
+}
+.illustration-placeholder {
+  width:100%; max-height:56vh; min-height:280px;
+  background: var(--parchment);
+  border-radius: var(--radius);
+  border: 3px dashed var(--sage);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sage);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* ── Word Panel ── */
+.word-panel {
+  padding: 16px 24px 8px;
+}
+.word-en {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--en-color);
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.word-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 20px;
+  margin-top: 4px;
+}
+.word-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.lang-badge {
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border-radius: 999px;
+  color: white;
+}
+.lang-de { background: var(--de-color); }
+.lang-ro { background: var(--ro-color); }
+.lang-es { background: var(--es-color); }
+.lang-it { background: var(--it-color); }
+.word-text {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--bark);
+}
+
+/* ── Page Dots ── */
+.page-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px 24px;
+}
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--parchment);
+  border: 2px solid var(--sage);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: block;
+}
+.dot.active { background: var(--sage); transform: scale(1.25); }
+.dot:hover  { background: var(--gold); border-color: var(--gold); }
+
+/* ── Index Page ── */
+.book-index {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 36px 20px 60px;
+}
+.book-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  color: var(--forest);
+  text-align: center;
+  margin-bottom: 6px;
+}
+.book-subtitle {
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--bark);
+  opacity: 0.7;
+  margin-bottom: 42px;
+  line-height: 2;
+}
+.chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+.chapter-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 3px 16px var(--shadow);
+  text-decoration: none;
+  color: var(--bark);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-left: 5px solid var(--sage);
+}
+.chapter-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px var(--shadow); }
+.ch-num {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.ch-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  color: var(--forest);
+  margin-bottom: 4px;
+}
+.ch-langs {
+  font-size: 0.72rem;
+  color: var(--bark);
+  opacity: 0.6;
+  line-height: 1.5;
+}
+.ch-status {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+.status-done { background:#d4f0d4; color:#2a6e2a; }
+.status-wip  { background:#fef3cd; color:#8a5700; }
+.status-todo { background:#f0f0f0; color:#888; }
+
+/* ── Responsive ── */
+@media (max-width:480px) {
+  .word-en    { font-size: 1.7rem; }
+  .book-title { font-size: 2rem; }
+  .nav-btn    { padding: 5px 10px; font-size: 0.72rem; }
+  .chapter-grid { grid-template-columns: 1fr; }
+}
