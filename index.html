@@ -1,113 +1,451 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Beautiful World — A Multilingual Word Book</title>
-<link rel="stylesheet" href="assets/css/book.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Beautiful World — A First-Words Picture Book in Six Languages</title>
+<meta name="description" content="A hand-painted first-words picture book in six languages: English, German, Romanian, Spanish, Italian, and Sanskrit. 45 painted scenes, 270 gentle words, every picture labeled and color-coded. Made by a father for his daughter." />
+<meta property="og:title" content="My Beautiful World — A First-Words Book in Six Languages" />
+<meta property="og:description" content="45 hand-painted scenes. 270 first words. English, Deutsch, Romana, Espanol, Italiano and Sanskrit. Instant PDF. Made by a father for his daughter." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
-  body { background: linear-gradient(135deg, #FDF8F0 0%, #F0EAD8 100%); }
-  .lang-bar { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:40px; }
-  .lang-pill { padding:4px 14px; border-radius:999px; font-size:0.78rem; font-weight:700; color:white; }
+:root{
+--cream:#FDF8EF;--paper:#FBF3E4;--paper2:#F6EBD6;--ink:#3A322E;--ink-soft:#6f655d;--line:#e7d9bf;
+--gold:#C6A15B;--gold-deep:#a9863f;
+--en:#2b6cb0;--de:#2f855a;--ro:#b7791f;--es:#c53030;--it:#c05621;--sa:#6b46c1;
+--r:20px;--shadow:0 18px 50px -22px rgba(58,50,46,.38);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Nunito,system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,.serif{font-family:Fraunces,Georgia,serif;line-height:1.12;font-weight:600;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1120px,92vw);margin:0 auto}
+.eyebrow{font-weight:800;text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;color:var(--gold-deep)}
+.center{text-align:center}
+section{position:relative}
+.soft{color:var(--ink-soft)}
+
+/* top bar */
+#bar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:12px min(4vw,26px);background:rgba(253,248,239,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transform:translateY(-110%);transition:transform .35s ease}
+#bar.show{transform:translateY(0)}
+#bar .bn{font-family:Fraunces;font-weight:600;font-size:1.02rem}
+#bar .bn small{color:var(--gold-deep)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;background:var(--gold);color:#fff;font-family:Nunito;font-weight:800;border:none;cursor:pointer;padding:14px 26px;border-radius:999px;font-size:1rem;box-shadow:0 10px 24px -10px rgba(169,134,63,.8);transition:transform .15s ease,box-shadow .15s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 16px 30px -12px rgba(169,134,63,.9)}
+.btn.sm{padding:10px 20px;font-size:.9rem}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);box-shadow:none}
+.price-strike{color:var(--ink-soft);text-decoration:line-through;font-weight:700;margin-left:.5em;font-size:.85em;opacity:.7}
+
+/* hero */
+.hero{padding:120px 0 40px;position:relative}
+.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 15% 10%,rgba(198,161,91,.16),transparent 60%),radial-gradient(50% 45% at 90% 20%,rgba(107,70,193,.10),transparent 60%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center;position:relative}
+.hero h1{font-size:clamp(2.3rem,5.4vw,3.7rem);margin:16px 0 18px}
+.hero h1 em{font-style:normal;color:var(--gold-deep)}
+.hero p.lead{font-size:1.16rem;max-width:38ch;color:var(--ink-soft)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 26px}
+.pill{font-weight:800;font-size:.74rem;color:#fff;padding:5px 13px;border-radius:999px;letter-spacing:.02em}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.microtrust{display:flex;flex-wrap:wrap;gap:14px;margin-top:20px;font-size:.86rem;color:var(--ink-soft);font-weight:700}
+.microtrust span{display:inline-flex;align-items:center;gap:6px}
+.dotg{width:7px;height:7px;border-radius:50%;background:var(--gold)}
+
+/* hero art / book mock */
+.book-mock{position:relative;aspect-ratio:4/3;border-radius:var(--r);background:
+radial-gradient(80% 60% at 25% 20%,rgba(198,161,91,.30),transparent 60%),
+radial-gradient(70% 70% at 80% 80%,rgba(43,108,176,.18),transparent 60%),
+linear-gradient(140deg,#fbf0da,#f4e3c6);
+box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.book-mock .haze{position:absolute;inset:0;background:radial-gradient(40% 40% at 60% 35%,rgba(197,48,48,.10),transparent 60%),radial-gradient(45% 45% at 30% 75%,rgba(47,133,90,.14),transparent 60%)}
+.mock-inner{position:relative;text-align:center;padding:24px}
+.mock-inner .mtitle{font-family:Fraunces;font-weight:600;font-size:clamp(1.4rem,3.6vw,2rem);color:var(--ink);opacity:.9}
+.mock-inner .msub{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);font-weight:800;margin-top:6px}
+.plates{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.plate{background:rgba(255,255,255,.82);border:1px solid rgba(58,50,46,.08);padding:7px 14px;border-radius:16px 20px 15px 22px;font-weight:800;font-size:.82rem;box-shadow:0 6px 14px -8px rgba(58,50,46,.4);transform:rotate(var(--rot,-2deg))}
+.slot-note{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);opacity:.55;font-weight:800}
+
+/* word demo */
+.worddemo{padding:46px 0}
+.worddemo .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:34px 26px;text-align:center;box-shadow:var(--shadow)}
+.worddemo .en-word{font-family:Fraunces;font-size:clamp(2rem,6vw,3rem);color:var(--ink);font-weight:600}
+.wgrid{display:flex;flex-wrap:wrap;gap:10px 14px;justify-content:center;margin-top:18px}
+.wchip{font-weight:800;font-size:1.02rem;transition:opacity .3s}
+.wlab{display:block;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;opacity:.6;margin-bottom:1px}
+
+/* generic section */
+.sec{padding:64px 0}
+.sec h2{font-size:clamp(1.7rem,4vw,2.5rem);margin-bottom:10px}
+.sec .kick{max-width:52ch}
+.sec.tint{background:linear-gradient(180deg,var(--paper),var(--cream))}
+
+/* story */
+.story{background:linear-gradient(160deg,#fbf1dc,#f7ead2)}
+.story .inner{max-width:760px;margin:0 auto;text-align:center}
+.story p{font-size:1.16rem;margin-top:16px;color:#4a4038}
+.story p.big{font-family:Fraunces;font-size:clamp(1.5rem,3.6vw,2rem);color:var(--ink);font-weight:500;line-height:1.3}
+.sig{margin-top:22px;font-family:Fraunces;font-style:italic;font-size:1.15rem;color:var(--gold-deep)}
+
+/* inside grid */
+.feat{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:32px}
+.fcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 22px}
+.fcard b{font-family:Fraunces;font-weight:600;font-size:1.12rem;display:block;margin-bottom:4px}
+.fcard span{font-size:.98rem;color:var(--ink-soft)}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.scene{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--paper);position:relative}
+.scene .art{aspect-ratio:4/3;position:relative;display:flex;align-items:center;justify-content:center;padding:18px}
+.scene .cap{padding:12px 16px 16px;border-top:1px solid var(--line)}
+.scene .cap b{font-family:Fraunces;font-weight:600;font-size:1.05rem}
+.scene .cap span{font-size:.8rem;color:var(--ink-soft);display:block}
+.six{display:flex;flex-wrap:wrap;gap:5px 9px;justify-content:center}
+.six b{font-size:.78rem;font-weight:800}
+
+/* why / two col lists */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px}
+.lcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px}
+.lcard h3{font-size:1.2rem;margin-bottom:12px}
+.li{display:flex;gap:11px;margin:10px 0;align-items:flex-start}
+.li .mk{flex:0 0 auto;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:900;color:#fff;margin-top:2px}
+.mk.y{background:var(--de)}.mk.n{background:#c98a2e}
+.li span{font-size:.98rem}
+
+/* color system */
+.langrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.langrow .lg{flex:1 1 150px;border-radius:14px;padding:16px 18px;color:#fff;font-weight:800}
+.lg small{display:block;font-weight:700;opacity:.85;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+.lg b{font-family:Fraunces;font-weight:600;font-size:1.25rem;display:block;margin-top:3px}
+
+/* offer */
+.offer{background:linear-gradient(160deg,#2f2a26,#443a30);color:#f6ecd9}
+.offer h2{color:#fff}
+.offerbox{max-width:620px;margin:26px auto 0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:34px 30px;text-align:center}
+.priceline{display:flex;align-items:baseline;justify-content:center;gap:10px;margin:6px 0 4px}
+.priceline .now{font-family:Fraunces;font-size:3.2rem;font-weight:700;color:#fff}
+.priceline .was{color:#cdbfa6;text-decoration:line-through;font-weight:700;font-size:1.2rem}
+.incl{text-align:left;max-width:420px;margin:22px auto 0}
+.incl div{display:flex;gap:10px;margin:9px 0;font-weight:600;font-size:.98rem;color:#efe4cf}
+.incl .ck{color:var(--gold);font-weight:900}
+.guar{margin-top:22px;font-size:.94rem;color:#d9cdb4}
+.guar b{color:#fff}
+
+/* capture */
+.capture{max-width:480px;margin:0 auto}
+.cform{display:flex;gap:10px;margin-top:8px}
+.cform input{flex:1;padding:15px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-family:Nunito;font-weight:600;font-size:1rem;outline:none}
+.cform input::placeholder{color:#cdbfa6}
+.cnote{font-size:.82rem;color:#cdbfa6;margin-top:10px}
+.ok{display:none;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:16px;margin-top:10px;font-weight:700;color:#fff}
+
+/* faq */
+.faq{max-width:760px;margin:30px auto 0}
+.q{border:1px solid var(--line);border-radius:14px;margin-bottom:12px;background:var(--paper);overflow:hidden}
+.q>button{width:100%;text-align:left;background:none;border:none;cursor:pointer;font-family:Fraunces;font-weight:600;font-size:1.08rem;color:var(--ink);padding:18px 20px;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.q .plus{color:var(--gold-deep);font-size:1.4rem;line-height:1;transition:transform .25s}
+.q.open .plus{transform:rotate(45deg)}
+.q .a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.q .a p{padding:0 20px 18px;color:var(--ink-soft)}
+
+/* founding */
+.found{text-align:center}
+.found .badge{display:inline-block;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:8px 18px;font-weight:800;font-size:.82rem;color:var(--gold-deep);letter-spacing:.04em;text-transform:uppercase}
+
+/* final */
+.final{background:linear-gradient(160deg,#fbf1dc,#f4e3c6);text-align:center}
+.final h2{font-size:clamp(1.9rem,4.6vw,2.9rem)}
+
+footer{padding:40px 0 90px;text-align:center;color:var(--ink-soft);font-size:.86rem}
+footer a{color:var(--gold-deep);font-weight:700}
+
+/* mobile sticky */
+#msticky{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;gap:12px;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(253,248,239,.95);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+#msticky .p{font-family:Fraunces;font-weight:700;font-size:1.1rem}
+#msticky .p small{color:var(--ink-soft);text-decoration:line-through;font-size:.72rem;font-weight:700;margin-left:5px}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:820px){
+.hero{padding:96px 0 20px}
+.hero-grid{grid-template-columns:1fr;gap:34px}
+.book-mock{order:-1}
+.feat{grid-template-columns:1fr}
+.gal{grid-template-columns:1fr 1fr}
+.split{grid-template-columns:1fr}
+#msticky{display:flex}
+body{padding-bottom:70px}
+.cta-row{flex-direction:column;align-items:stretch}
+.cta-row .btn{width:100%}
+}
+@media(max-width:520px){.gal{grid-template-columns:1fr}.cform{flex-direction:column}}
 </style>
 </head>
 <body>
-<div class="book-index">
 
-  <h1 class="book-title">🌿 My Beautiful World</h1>
-  <div class="lang-bar">
-    <span class="lang-pill" style="background:#2C3E6B">English</span>
-    <span class="lang-pill" style="background:#8B5E1A">Deutsch</span>
-    <span class="lang-pill" style="background:#8B3A4A">Română</span>
-    <span class="lang-pill" style="background:#8B4513">Español</span>
-    <span class="lang-pill" style="background:#556B2F">Italiano</span>
-  </div>
-
-  <div class="chapter-grid">
-
-    <a class="chapter-card" href="pages/ch01-body/face.html">
-      <div class="ch-num">Chapter 01</div>
-      <div class="ch-title">The Body</div>
-      <div class="ch-langs">Der Körper · Corpul · El Cuerpo · Il Corpo</div>
-      <span class="ch-status status-wip">🟡 In Progress</span>
-    </a>
-
-    <a class="chapter-card" href="pages/ch02-nature/oak-tree.html">
-      <div class="ch-num">Chapter 02</div>
-      <div class="ch-title">Nature</div>
-      <div class="ch-langs">Natur · Natură · Naturaleza · Natura</div>
-      <span class="ch-status status-wip">🟡 In Progress</span>
-    </a>
-
-    <a class="chapter-card" href="pages/ch03-farm-animals/">
-      <div class="ch-num">Chapter 03</div>
-      <div class="ch-title">Farm Animals</div>
-      <div class="ch-langs">Bauernhoftiere · Animale de fermă · Animales de granja · Animali da fattoria</div>
-      <span class="ch-status status-todo">⬜ Coming Soon</span>
-    </a>
-
-    <a class="chapter-card" href="pages/ch04-forest-animals/">
-      <div class="ch-num">Chapter 04</div>
-      <div class="ch-title">Forest Animals</div>
-      <div class="ch-langs">Waldtiere · Animale de pădure · Animales del bosque · Animali del bosco</div>
-      <span class="ch-status status-todo">⬜ Coming Soon</span>
-    </a>
-
-    <a class="chapter-card" href="pages/ch05-great-ones/">
-      <div class="ch-num">Chapter 05</div>
-      <div class="ch-title">The Great Ones</div>
-      <div class="ch-langs">Die Großen · Cei Mari · Los Grandes · I Grandi</div>
-      <span class="ch-status status-todo">⬜ Coming Soon</span>
-    </a>
-
-    <a class="chapter-card" href="pages/ch06-ocean/">
-      <div class="ch-num">Chapter 06</div>
-      <div class="ch-title">Ocean Life</div>
-      <div class="ch-langs">Das Meer · Viața oceanului · El Océano · L'Oceano</div>
-      <span class="ch-status status-todo">⬜ Coming Soon</span>
-    </a>
-
-    <a class="chapter-card" href="pages/ch07-small-creatures/">
-      <div class="ch-num">Chapter 07</div>
-      <div class="ch-title">Small Creatures</div>
-      <div class="ch-langs">Kleine Wesen · Creaturi mici · Criaturas Pequeñas · Piccole Creature</div>
-      <span class="ch-status status-todo">⬜ Coming Soon</span>
-    </a>
-
-    <a class="chapter-card" href="pages/ch08-sky/">
-      <div class="ch-num">Chapter 08</div>
-      <div class="ch-title">Sky &amp; Weather</div>
-      <div class="ch-langs">Himmel · Cerul · El Cielo · Il Cielo</div>
-      <span class="ch-status status-todo">⬜ Coming Soon</span>
-    </a>
-
-    <a class="chapter-card" href="pages/ch09-home/">
-      <div class="ch-num">Chapter 09</div>
-      <div class="ch-title">Home &amp; Hearth</div>
-      <div class="ch-langs">Zuhause · Acasă · El Hogar · La Casa</div>
-      <span class="ch-status status-todo">⬜ Coming Soon</span>
-    </a>
-
-    <a class="chapter-card" href="pages/ch10-feelings/">
-      <div class="ch-num">Chapter 10</div>
-      <div class="ch-title">Feelings</div>
-      <div class="ch-langs">Gefühle · Sentimente · Sentimientos · Sentimenti</div>
-      <span class="ch-status status-todo">⬜ Coming Soon</span>
-    </a>
-
-    <a class="chapter-card" href="pages/ch11-sacred/">
-      <div class="ch-num">Chapter 11</div>
-      <div class="ch-title">Sacred &amp; Wonders</div>
-      <div class="ch-langs">Das Heilige · Sacrul · Lo Sagrado · Il Sacro</div>
-      <span class="ch-status status-todo">⬜ Coming Soon</span>
-    </a>
-
-  </div>
-
-  <p style="text-align:center;margin-top:50px;font-size:0.78rem;opacity:0.45;">
-    Built with 🌿 love &nbsp;·&nbsp; <a href="https://github.com/SacredRebel/my-beautiful-world" style="color:inherit">GitHub</a>
-  </p>
-
+<div id="bar">
+  <div class="bn">My Beautiful World <small>·</small></div>
+  <a class="btn sm" href="#offer">Get the book — $12</a>
 </div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal in">
+      <div class="eyebrow">A first-words picture book · six languages</div>
+      <h1>Your child's first words, in the <em>six languages</em> of their world.</h1>
+      <p class="lead">45 hand-painted scenes. 270 gentle words. Every picture labeled, every word color-coded — so a small child learns to name the whole world at once.</p>
+      <div class="pills">
+        <span class="pill" style="background:var(--en)">English</span>
+        <span class="pill" style="background:var(--de)">Deutsch</span>
+        <span class="pill" style="background:var(--ro)">Română</span>
+        <span class="pill" style="background:var(--es)">Español</span>
+        <span class="pill" style="background:var(--it)">Italiano</span>
+        <span class="pill" style="background:var(--sa)">Sanskrit</span>
+      </div>
+      <div class="cta-row">
+        <a class="btn" href="#offer" id="heroCta">Get the book — $12 <span class="price-strike">$19</span></a>
+        <a class="btn ghost" href="#story">Read the story</a>
+      </div>
+      <div class="microtrust">
+        <span><i class="dotg"></i>Instant PDF</span>
+        <span><i class="dotg"></i>Print at home</span>
+        <span><i class="dotg"></i>45 painted scenes</span>
+        <span><i class="dotg"></i>Ages 0–5</span>
+      </div>
+    </div>
+    <div class="book-mock reveal in">
+      <div class="haze"></div>
+      <div class="mock-inner">
+        <div class="mtitle">My Beautiful World</div>
+        <div class="msub">Six Languages · One Child's World</div>
+        <div class="plates">
+          <span class="plate" style="--rot:-3deg;color:var(--en)">moon</span>
+          <span class="plate" style="--rot:2deg;color:var(--ro)">lună</span>
+          <span class="plate" style="--rot:-1deg;color:var(--sa)">candra</span>
+        </div>
+      </div>
+      <div class="slot-note">cover art — coming from the book</div>
+    </div>
+  </div>
+</section>
+
+<!-- WORD DEMO -->
+<section class="worddemo">
+  <div class="wrap">
+    <div class="card reveal">
+      <div class="eyebrow" style="margin-bottom:10px">One word · six languages</div>
+      <div class="en-word" id="demoWord">moon</div>
+      <div class="wgrid" id="demoGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="sec story" id="story">
+  <div class="wrap inner reveal">
+    <div class="eyebrow">Made by a father, for his daughter</div>
+    <p class="big">I couldn't find it anywhere. So I painted it myself.</p>
+    <p>My little girl is growing up between languages — the ones her family speaks, the ones her roots carry. I wanted her very first book to hold all of them at once. Not an app. Not flashcards that beep. Something warm she could hold in her lap.</p>
+    <p>I searched, and that book didn't exist. So over many months I made it — scene by scene. A lion. Our kitchen. Our dog, Leo. The night sky. And on every picture I labeled each thing in six languages, each language in its own color, so she could learn the whole world by name.</p>
+    <p>This is that book. I made it for her. Now I'm sharing it with your family too.</p>
+    <div class="sig">— from one parent to another</div>
+  </div>
+</section>
+
+<!-- WHAT'S INSIDE -->
+<section class="sec">
+  <div class="wrap">
+    <div class="eyebrow reveal">What's inside</div>
+    <h2 class="reveal">A whole small world — painted, named, and ready to read tonight.</h2>
+    <div class="feat">
+      <div class="fcard reveal"><b>45 hand-painted scenes</b><span>Six warm chapters — the body, nature, animals, home, the sky, and her wider world.</span></div>
+      <div class="fcard reveal"><b>~270 first words</b><span>Real nouns a child can point to and name — the true way first words are learned.</span></div>
+      <div class="fcard reveal"><b>Six languages on every label</b><span>English · Deutsch · Română · Español · Italiano · Sanskrit — together on one page.</span></div>
+      <div class="fcard reveal"><b>A color for each language</b><span>The learning thread that never changes, so the eye learns the pattern without effort.</span></div>
+      <div class="fcard reveal"><b>Instant PDF</b><span>Yours the moment you buy. Read it on any screen or print it at home.</span></div>
+      <div class="fcard reveal"><b>A keepsake, not a subscription</b><span>Buy it once. It's yours forever — to read, print, and pass down.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="sec tint">
+  <div class="wrap">
+    <div class="eyebrow reveal">Inside the book</div>
+    <h2 class="reveal">Six chapters. One beautiful world.</h2>
+    <p class="kick soft reveal">Every scene is a full watercolor painting with its parts gently labeled in all six languages.</p>
+    <div class="gal">
+      <div class="scene reveal"><div class="art" style="background:radial-gradient(70% 60% at 30% 30%,rgba(197,48,48,.16),transparent),linear-gradient(140deg,#fbeede,#f4dcc2)"><div class="six"><b style="color:var(--en)">hand</b><b style="color:var(--de)">Hand</b><b style="color:var(--ro)">mână</b><b style="color:var(--es)">mano</b><b style="color:var(--it)">mano</b><b style="color:var(--sa)">hasta</b></div></div><div class="cap"><b>Chapter 1 — My Body</b><span>eye · ear · hand · foot…</span></div></div>
+      <div class="scene reveal"><div class="art" style="background:radial-gradient(70% 60% at 70% 30%,rgba(47,133,90,.18),transparent),linear-gradient(140deg,#eef3df,#dfeccb)"><div class="six"><b style="color:var(--en)">tree</b><b style="color:var(--de)">Baum</b><b style="color:var(--ro)">copac</b><b style="color:var(--es)">árbol</b><b style="color:var(--it)">albero</b><b style="color:var(--sa)">vṛkṣa</b></div></div><div class="cap"><b>Chapter 2 — Nature</b><span>leaf · flower · river · mountain…</span></div></div>
+      <div class="scene reveal"><div class="art" style="background:radial-gradient(70% 60% at 40% 40%,rgba(183,121,31,.20),transparent),linear-gradient(140deg,#fbf0d6,#f2e0b8)"><div class="six"><b style="color:var(--en)">lion</b><b style="color:var(--de)">Löwe</b><b style="color:var(--ro)">leu</b><b style="color:var(--es)">león</b><b style="color:var(--it)">leone</b><b style="color:var(--sa)">siṃha</b></div></div><div class="cap"><b>Chapter 3 — Animals</b><span>lion · bird · horse · Leo the dog…</span></div></div>
+      <div class="scene reveal"><div class="art" style="background:radial-gradient(70% 60% at 60% 30%,rgba(43,108,176,.16),transparent),linear-gradient(140deg,#eaf1fb,#dbe6f4)"><div class="six"><b style="color:var(--en)">door</b><b style="color:var(--de)">Tür</b><b style="color:var(--ro)">ușă</b><b style="color:var(--es)">puerta</b><b style="color:var(--it)">porta</b><b style="color:var(--sa)">dvāra</b></div></div><div class="cap"><b>Chapter 4 — My Home</b><span>spoon · bed · door · window…</span></div></div>
+      <div class="scene reveal"><div class="art" style="background:radial-gradient(70% 60% at 50% 30%,rgba(107,70,193,.18),transparent),linear-gradient(140deg,#efeafb,#e0d8f2)"><div class="six"><b style="color:var(--en)">moon</b><b style="color:var(--de)">Mond</b><b style="color:var(--ro)">lună</b><b style="color:var(--es)">luna</b><b style="color:var(--it)">luna</b><b style="color:var(--sa)">candra</b></div></div><div class="cap"><b>Chapter 5 — Sky & Weather</b><span>sun · moon · cloud · rain…</span></div></div>
+      <div class="scene reveal"><div class="art" style="background:radial-gradient(70% 60% at 40% 60%,rgba(192,86,33,.18),transparent),linear-gradient(140deg,#fbecdd,#f2d9bf)"><div class="six"><b style="color:var(--en)">boat</b><b style="color:var(--de)">Boot</b><b style="color:var(--ro)">barcă</b><b style="color:var(--es)">barco</b><b style="color:var(--it)">barca</b><b style="color:var(--sa)">naukā</b></div></div><div class="cap"><b>Chapter 6 — Her World</b><span>car · boat · music · ceremony…</span></div></div>
+    </div>
+    <p class="center soft reveal" style="margin-top:22px;font-size:.82rem">Chapter previews show the six-language labeling system. The full watercolor paintings are in the book.</p>
+  </div>
+</section>
+
+<!-- WHO FOR -->
+<section class="sec">
+  <div class="wrap">
+    <div class="eyebrow reveal">Who it's for</div>
+    <h2 class="reveal">Made for families raising a child between languages.</h2>
+    <div class="split">
+      <div class="lcard reveal">
+        <h3>This is for you if…</h3>
+        <div class="li"><span class="mk y">✓</span><span>You're a multilingual or immigrant family keeping a mother tongue alive.</span></div>
+        <div class="li"><span class="mk y">✓</span><span>You love Montessori or homeschool learning — real objects, real words.</span></div>
+        <div class="li"><span class="mk y">✓</span><span>You're a grandparent passing a language down to little hands.</span></div>
+        <div class="li"><span class="mk y">✓</span><span>You want a calm, screen-free book — not another app that beeps.</span></div>
+      </div>
+      <div class="lcard reveal">
+        <h3>Maybe not, if…</h3>
+        <div class="li"><span class="mk n">–</span><span>You want a game with sounds, points, and rewards. This is a quiet, printed book.</span></div>
+        <div class="li"><span class="mk n">–</span><span>You only need a single-language board book from the shop down the street.</span></div>
+        <div class="li"><span class="mk n">–</span><span>You're looking for long stories. This is a first-words book — one word, one thing, one picture.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY DIFFERENT / COLOR SYSTEM -->
+<section class="sec tint">
+  <div class="wrap">
+    <div class="eyebrow reveal">The six-language system</div>
+    <h2 class="reveal">One color per language. The learning thread that never changes.</h2>
+    <p class="kick soft reveal">Every label shows all six languages, always in the same colors and the same order. A child's eye learns the pattern long before they can read — and heritage languages that get left out of most books, like Romanian and Sanskrit, finally get a place on the page.</p>
+    <div class="langrow reveal">
+      <div class="lg" style="background:var(--en)"><small>English</small><b>moon</b></div>
+      <div class="lg" style="background:var(--de)"><small>Deutsch</small><b>Mond</b></div>
+      <div class="lg" style="background:var(--ro)"><small>Română</small><b>lună</b></div>
+      <div class="lg" style="background:var(--es)"><small>Español</small><b>luna</b></div>
+      <div class="lg" style="background:var(--it)"><small>Italiano</small><b>luna</b></div>
+      <div class="lg" style="background:var(--sa)"><small>Sanskrit</small><b>candra</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="sec offer" id="offer">
+  <div class="wrap center">
+    <div class="eyebrow reveal" style="color:var(--gold)">The book</div>
+    <h2 class="reveal">Bring the whole world home — in six languages.</h2>
+    <div class="offerbox reveal">
+      <div class="priceline"><span class="now">$12</span><span class="was">$19</span></div>
+      <div class="soft" style="color:#cdbfa6;font-weight:700;font-size:.86rem">Founding-reader price for the first edition</div>
+      <div class="incl">
+        <div><span class="ck">✓</span> 45 hand-painted scenes across 6 chapters</div>
+        <div><span class="ck">✓</span> ~270 first words in six languages</div>
+        <div><span class="ck">✓</span> Instant PDF — read on any screen or print at home</div>
+        <div><span class="ck">✓</span> Yours forever — no subscription, no app</div>
+      </div>
+      <div id="buyArea" style="margin-top:24px">
+        <div class="capture">
+          <div style="font-weight:800;color:#fff;margin-bottom:6px">The first edition is almost ready.</div>
+          <div class="soft" style="color:#cdbfa6;font-size:.92rem;margin-bottom:12px">Join the founding readers — be first to get it, and lock the $12 price.</div>
+          <form class="cform" id="capForm">
+            <input type="email" id="capEmail" placeholder="your email" required />
+            <button class="btn" type="submit">Notify me</button>
+          </form>
+          <div class="ok" id="capOk">💛 You're on the list. I'll email you the moment it's ready.</div>
+          <div class="cnote">No spam, ever. Just one note when the book is live.</div>
+        </div>
+      </div>
+      <div class="guar"><b>My promise:</b> read it with your child. If it's not something you're glad to own, email me within 30 days for a full refund — and keep the book anyway.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="eyebrow center reveal">Questions</div>
+    <h2 class="center reveal">Everything a careful parent asks first.</h2>
+    <div class="faq">
+      <div class="q reveal"><button>What exactly do I get? <span class="plus">+</span></button><div class="a"><p>A downloadable PDF of the full book — 45 painted scenes, ~270 words in six languages. You can read it on any phone, tablet, or computer, or print it at home or a print shop.</p></div></div>
+      <div class="q reveal"><button>What ages is it for? <span class="plus">+</span></button><div class="a"><p>Made for ages 0–5. Babies love the colors and your voice; toddlers point and name; older children start to read the words themselves. It grows with them.</p></div></div>
+      <div class="q reveal"><button>Are the translations accurate? <span class="plus">+</span></button><div class="a"><p>Yes. The Romanian is verified by a native speaker (me). The Sanskrit uses careful scholarly romanization (IAST). Every word is a real noun for something truly in the picture — never a faked label.</p></div></div>
+      <div class="q reveal"><button>Which six languages? <span class="plus">+</span></button><div class="a"><p>English, German (Deutsch), Romanian (Română), Spanish (Español), Italian (Italiano), and Sanskrit — each in its own fixed color throughout the book.</p></div></div>
+      <div class="q reveal"><button>Can I print it or gift it? <span class="plus">+</span></button><div class="a"><p>Absolutely. Print as many copies as your own family needs, and it makes a beautiful gift for new parents, grandparents, and multilingual homes.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDING -->
+<section class="sec tint found">
+  <div class="wrap reveal">
+    <span class="badge">First edition · founding readers</span>
+    <h2 style="margin-top:16px">Be one of the first families to hold it.</h2>
+    <p class="soft" style="max-width:56ch;margin:10px auto 0">This book was made by hand, by one father, for one little girl — and now for yours. There are no thousand-review counts here yet, because you're early. What there is: real craft, six real languages, and a promise that if it's not something you treasure, you pay nothing.</p>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="sec final">
+  <div class="wrap reveal">
+    <h2>Give your child the whole world — by name.</h2>
+    <p class="soft" style="max-width:48ch;margin:12px auto 24px">Six languages. 45 painted scenes. One quiet book you'll read together for years.</p>
+    <a class="btn" href="#offer" style="font-size:1.1rem;padding:16px 34px">Get My Beautiful World — $12 <span class="price-strike">$19</span></a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Made with love in Ojai, California · part of the Edenverse.<br/><a href="book-viewer.html">View the book prototype</a> · <a href="https://github.com/SacredRebel/my-beautiful-world">GitHub</a></div>
+</footer>
+
+<div id="msticky">
+  <div class="p">$12 <small>$19</small></div>
+  <a class="btn sm" href="#offer">Get the book</a>
+</div>
+
+<script>
+/* ===== CONFIG: paste the Gumroad product URL here when live, and the buy buttons become a real store ===== */
+var GUMROAD_URL = "";
+/* Optional: paste a Zapier catch-hook or Formspree URL to capture launch emails for real */
+var LAUNCH_LIST_ENDPOINT = "";
+
+/* top bar on scroll */
+var bar=document.getElementById('bar');
+addEventListener('scroll',function(){(scrollY>560?bar.classList.add('show'):bar.classList.remove('show'));});
+
+/* reveal on scroll */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+/* word rotator */
+var WORDS=[
+{en:'moon',de:'Mond',ro:'lună',es:'luna',it:'luna',sa:'candra'},
+{en:'lion',de:'Löwe',ro:'leu',es:'león',it:'leone',sa:'siṃha'},
+{en:'hand',de:'Hand',ro:'mână',es:'mano',it:'mano',sa:'hasta'},
+{en:'home',de:'Zuhause',ro:'acasă',es:'casa',it:'casa',sa:'gṛha'},
+{en:'tree',de:'Baum',ro:'copac',es:'árbol',it:'albero',sa:'vṛkṣa'}
+];
+var COLORS={en:'#2b6cb0',de:'#2f855a',ro:'#b7791f',es:'#c53030',it:'#c05621',sa:'#6b46c1'};
+var LABELS={en:'English',de:'Deutsch',ro:'Română',es:'Español',it:'Italiano',sa:'Sanskrit'};
+var wi=0;
+function paintWord(){var w=WORDS[wi];document.getElementById('demoWord').textContent=w.en;var g=document.getElementById('demoGrid');g.innerHTML='';['en','de','ro','es','it','sa'].forEach(function(k){var s=document.createElement('span');s.className='wchip';s.style.color=COLORS[k];s.innerHTML='<span class="wlab" style="color:'+COLORS[k]+'">'+LABELS[k]+'</span>'+w[k];g.appendChild(s);});wi=(wi+1)%WORDS.length;}
+paintWord();setInterval(paintWord,2600);
+
+/* faq */
+document.querySelectorAll('.q>button').forEach(function(b){b.addEventListener('click',function(){var q=b.parentElement;var a=q.querySelector('.a');var open=q.classList.toggle('open');a.style.maxHeight=open?a.scrollHeight+'px':0;});});
+
+/* buy mode: if GUMROAD_URL set, turn every CTA into a real buy button */
+function wireBuy(){
+  if(!GUMROAD_URL) return;
+  document.querySelectorAll('a[href="#offer"]').forEach(function(a){a.setAttribute('href',GUMROAD_URL);a.setAttribute('target','_blank');});
+  var area=document.getElementById('buyArea');
+  area.innerHTML='<a class="btn" style="font-size:1.1rem;padding:16px 34px" href="'+GUMROAD_URL+'" target="_blank">Get the book — $12</a>';
+}
+wireBuy();
+
+/* email capture */
+var f=document.getElementById('capForm');
+if(f){f.addEventListener('submit',function(e){e.preventDefault();var em=document.getElementById('capEmail').value.trim();if(!em) return;try{var list=JSON.parse(localStorage.getItem('mbw_list')||'[]');list.push({email:em,at:Date.now()});localStorage.setItem('mbw_list',JSON.stringify(list));}catch(x){}if(LAUNCH_LIST_ENDPOINT){try{fetch(LAUNCH_LIST_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:'landing'})});}catch(x){}}f.style.display='none';document.getElementById('capOk').style.display='block';});}
+</script>
 </body>
 </html>
