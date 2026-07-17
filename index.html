@@ -4,9 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>My Beautiful World — A First-Words Picture Book in Six Languages</title>
-<meta name="description" content="A hand-painted first-words picture book in six languages: English, German, Romanian, Spanish, Italian, and Sanskrit. 45 painted scenes, 270 gentle words, every picture labeled and color-coded. Made by a father for his daughter." />
+<meta name="description" content="A hand-painted first-words picture book in six languages: English, German, Romanian, Spanish, Italian, and Sanskrit. 49 painted pages, 137 first words across 6 chapters, every picture labeled and color-coded. Made by a father for his daughter — the first book in a growing series." />
 <meta property="og:title" content="My Beautiful World — A First-Words Book in Six Languages" />
-<meta property="og:description" content="45 hand-painted scenes. 270 first words. English, Deutsch, Romana, Espanol, Italiano and Sanskrit. Instant PDF. Made by a father for his daughter." />
+<meta property="og:description" content="49 hand-painted pages. 137 first words. English, Deutsch, Română, Español, Italiano and Sanskrit. Instant PDF. The first book in a growing series." />
 <meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,6 +16,7 @@
 --cream:#FDF8EF;--paper:#FBF3E4;--paper2:#F6EBD6;--ink:#3A322E;--ink-soft:#6f655d;--line:#e7d9bf;
 --gold:#C6A15B;--gold-deep:#a9863f;
 --en:#2b6cb0;--de:#2f855a;--ro:#b7791f;--es:#c53030;--it:#c05621;--sa:#6b46c1;
+--dusk-1:#1c2540;--dusk-2:#2a3358;--dusk-3:#3b3a63;--star:#f6ecd0;
 --r:20px;--shadow:0 18px 50px -22px rgba(58,50,46,.38);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -29,48 +30,52 @@ a{color:inherit;text-decoration:none}
 section{position:relative}
 .soft{color:var(--ink-soft)}
 
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;background:var(--gold);color:#fff;font-family:Nunito;font-weight:800;border:none;cursor:pointer;padding:14px 26px;border-radius:999px;font-size:1rem;box-shadow:0 10px 24px -10px rgba(169,134,63,.8);transition:transform .15s ease,box-shadow .15s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 16px 30px -12px rgba(169,134,63,.9)}
+.btn.sm{padding:10px 20px;font-size:.9rem}
+.btn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(246,236,208,.5);box-shadow:none}
+.btn.ghost.dark{color:var(--ink);border-color:var(--line)}
+.price-strike{color:inherit;text-decoration:line-through;font-weight:700;margin-left:.5em;font-size:.85em;opacity:.6}
+
 /* top bar */
 #bar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:12px min(4vw,26px);background:rgba(253,248,239,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transform:translateY(-110%);transition:transform .35s ease}
 #bar.show{transform:translateY(0)}
 #bar .bn{font-family:Fraunces;font-weight:600;font-size:1.02rem}
 #bar .bn small{color:var(--gold-deep)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;background:var(--gold);color:#fff;font-family:Nunito;font-weight:800;border:none;cursor:pointer;padding:14px 26px;border-radius:999px;font-size:1rem;box-shadow:0 10px 24px -10px rgba(169,134,63,.8);transition:transform .15s ease,box-shadow .15s ease}
-.btn:hover{transform:translateY(-2px);box-shadow:0 16px 30px -12px rgba(169,134,63,.9)}
-.btn.sm{padding:10px 20px;font-size:.9rem}
-.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);box-shadow:none}
-.price-strike{color:var(--ink-soft);text-decoration:line-through;font-weight:700;margin-left:.5em;font-size:.85em;opacity:.7}
 
-/* hero */
-.hero{padding:120px 0 40px;position:relative}
-.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 15% 10%,rgba(198,161,91,.16),transparent 60%),radial-gradient(50% 45% at 90% 20%,rgba(107,70,193,.10),transparent 60%);pointer-events:none}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center;position:relative}
-.hero h1{font-size:clamp(2.3rem,5.4vw,3.7rem);margin:16px 0 18px}
-.hero h1 em{font-style:normal;color:var(--gold-deep)}
-.hero p.lead{font-size:1.16rem;max-width:38ch;color:var(--ink-soft)}
-.pills{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 26px}
-.pill{font-weight:800;font-size:.74rem;color:#fff;padding:5px 13px;border-radius:999px;letter-spacing:.02em}
-.cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
-.microtrust{display:flex;flex-wrap:wrap;gap:14px;margin-top:20px;font-size:.86rem;color:var(--ink-soft);font-weight:700}
-.microtrust span{display:inline-flex;align-items:center;gap:6px}
-.dotg{width:7px;height:7px;border-radius:50%;background:var(--gold)}
+/* ===== HERO — living world at dusk ===== */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:96px 0 70px;overflow:hidden;
+background:radial-gradient(120% 90% at 50% 12%,#3b3a63 0%,var(--dusk-2) 42%,var(--dusk-1) 100%)}
+#sky{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
+.hero .wrap{position:relative;z-index:3}
+.world-wrap{position:relative;width:min(360px,72vw);margin:0 auto 6px;filter:drop-shadow(0 30px 50px rgba(0,0,0,.35));will-change:transform}
+.world-wrap .glow{position:absolute;inset:-22% -22% -12% -22%;border-radius:50%;
+background:radial-gradient(circle at 50% 42%,rgba(224,178,102,.55),rgba(224,178,102,.14) 45%,transparent 68%);
+animation:breathe 6s ease-in-out infinite;z-index:0}
+.world-wrap svg{position:relative;z-index:1;display:block;width:100%;height:auto;animation:float 8s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.06);opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
-/* hero art / book mock */
-.book-mock{position:relative;aspect-ratio:4/3;border-radius:var(--r);background:
-radial-gradient(80% 60% at 25% 20%,rgba(198,161,91,.30),transparent 60%),
-radial-gradient(70% 70% at 80% 80%,rgba(43,108,176,.18),transparent 60%),
-linear-gradient(140deg,#fbf0da,#f4e3c6);
-box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden;display:flex;align-items:center;justify-content:center}
-.book-mock .haze{position:absolute;inset:0;background:radial-gradient(40% 40% at 60% 35%,rgba(197,48,48,.10),transparent 60%),radial-gradient(45% 45% at 30% 75%,rgba(47,133,90,.14),transparent 60%)}
-.mock-inner{position:relative;text-align:center;padding:24px}
-.mock-inner .mtitle{font-family:Fraunces;font-weight:600;font-size:clamp(1.4rem,3.6vw,2rem);color:var(--ink);opacity:.9}
-.mock-inner .msub{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);font-weight:800;margin-top:6px}
-.plates{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
-.plate{background:rgba(255,255,255,.82);border:1px solid rgba(58,50,46,.08);padding:7px 14px;border-radius:16px 20px 15px 22px;font-weight:800;font-size:.82rem;box-shadow:0 6px 14px -8px rgba(58,50,46,.4);transform:rotate(var(--rot,-2deg))}
-.slot-note{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);opacity:.55;font-weight:800}
+.hero .eyebrow{color:#e7c98a}
+.hero h1{font-size:clamp(2.15rem,5.4vw,3.7rem);color:#fdf6e6;margin:14px auto 16px;max-width:16ch}
+.hero h1 em{font-style:normal;color:#e8b968}
+.hero .lead{font-size:clamp(1.02rem,2.4vw,1.2rem);color:#d8cdb9;max-width:47ch;margin:0 auto 22px}
+.hero .pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 auto 24px;max-width:560px}
+.pill{font-weight:800;font-size:.72rem;color:#fff;padding:5px 13px;border-radius:999px;letter-spacing:.02em}
+.hero .cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center}
+.hero .microtrust{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;margin-top:22px;font-size:.84rem;color:#c9bda6;font-weight:700}
+.hero .microtrust span{display:inline-flex;align-items:center;gap:7px}
+.dotg{width:7px;height:7px;border-radius:50%;background:var(--gold);flex:0 0 auto}
+.scrollhint{position:absolute;bottom:22px;left:0;right:0;z-index:3;text-align:center;color:#bcae94;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:800;animation:hint 2.4s ease-in-out infinite}
+@keyframes hint{0%,100%{opacity:.45;transform:translateY(0)}50%{opacity:1;transform:translateY(5px)}}
+.dusk-divider{position:absolute;left:0;right:0;bottom:-1px;z-index:2;line-height:0}
+.dusk-divider svg{width:100%;height:70px;display:block}
 
 /* word demo */
-.worddemo{padding:46px 0}
-.worddemo .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:34px 26px;text-align:center;box-shadow:var(--shadow)}
+.worddemo{padding:56px 0 40px;background:var(--cream)}
+.worddemo .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:34px 26px;text-align:center;box-shadow:var(--shadow);max-width:640px;margin:0 auto;position:relative;overflow:hidden}
+.worddemo .card::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--en),var(--de),var(--ro),var(--es),var(--it),var(--sa))}
 .worddemo .en-word{font-family:Fraunces;font-size:clamp(2rem,6vw,3rem);color:var(--ink);font-weight:600}
 .wgrid{display:flex;flex-wrap:wrap;gap:10px 14px;justify-content:center;margin-top:18px}
 .wchip{font-weight:800;font-size:1.02rem;transition:opacity .3s}
@@ -79,33 +84,41 @@ box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden;display:fl
 /* generic section */
 .sec{padding:64px 0}
 .sec h2{font-size:clamp(1.7rem,4vw,2.5rem);margin-bottom:10px}
-.sec .kick{max-width:52ch}
+.sec .kick{max-width:54ch}
 .sec.tint{background:linear-gradient(180deg,var(--paper),var(--cream))}
 
 /* story */
-.story{background:linear-gradient(160deg,#fbf1dc,#f7ead2)}
-.story .inner{max-width:760px;margin:0 auto;text-align:center}
+.story{background:linear-gradient(160deg,#fbf1dc,#f7ead2);overflow:hidden}
+.story .inner{max-width:760px;margin:0 auto;text-align:center;position:relative;z-index:2}
 .story p{font-size:1.16rem;margin-top:16px;color:#4a4038}
 .story p.big{font-family:Fraunces;font-size:clamp(1.5rem,3.6vw,2rem);color:var(--ink);font-weight:500;line-height:1.3}
 .sig{margin-top:22px;font-family:Fraunces;font-style:italic;font-size:1.15rem;color:var(--gold-deep)}
+.blob{position:absolute;border-radius:46% 54% 60% 40%/48% 42% 58% 52%;filter:blur(2px);opacity:.5;z-index:1;pointer-events:none}
 
-/* inside grid */
+/* inside grid — colored per language */
 .feat{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:32px}
-.fcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 22px}
+.fcard{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:16px;padding:22px}
+.feat .fcard:nth-child(1){border-left-color:var(--en)}
+.feat .fcard:nth-child(2){border-left-color:var(--de)}
+.feat .fcard:nth-child(3){border-left-color:var(--ro)}
+.feat .fcard:nth-child(4){border-left-color:var(--es)}
+.feat .fcard:nth-child(5){border-left-color:var(--it)}
+.feat .fcard:nth-child(6){border-left-color:var(--sa)}
 .fcard b{font-family:Fraunces;font-weight:600;font-size:1.12rem;display:block;margin-bottom:4px}
 .fcard span{font-size:.98rem;color:var(--ink-soft)}
 
 /* gallery */
 .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
-.scene{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--paper);position:relative}
-.scene .art{aspect-ratio:4/3;position:relative;display:flex;align-items:center;justify-content:center;padding:18px}
+.scene{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--paper);position:relative;transition:transform .25s}
+.scene:hover{transform:translateY(-4px)}
+.scene .art{aspect-ratio:4/3;overflow:hidden;background:linear-gradient(135deg,#F3EAD6,#E9DCC0);position:relative}
+.scene .art img{width:100%;height:100%;object-fit:cover;display:block}
+.chtag{position:absolute;top:10px;left:10px;z-index:2;color:#fff;font-weight:800;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;box-shadow:0 4px 12px -4px rgba(0,0,0,.5)}
 .scene .cap{padding:12px 16px 16px;border-top:1px solid var(--line)}
 .scene .cap b{font-family:Fraunces;font-weight:600;font-size:1.05rem}
 .scene .cap span{font-size:.8rem;color:var(--ink-soft);display:block}
-.six{display:flex;flex-wrap:wrap;gap:5px 9px;justify-content:center}
-.six b{font-size:.78rem;font-weight:800}
 
-/* why / two col lists */
+/* who for */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px}
 .lcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px}
 .lcard h3{font-size:1.2rem;margin-bottom:12px}
@@ -123,8 +136,9 @@ box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden;display:fl
 /* offer */
 .offer{background:linear-gradient(160deg,#2f2a26,#443a30);color:#f6ecd9}
 .offer h2{color:#fff}
-.offerbox{max-width:620px;margin:26px auto 0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:34px 30px;text-align:center}
-.priceline{display:flex;align-items:baseline;justify-content:center;gap:10px;margin:6px 0 4px}
+.offerbox{max-width:620px;margin:26px auto 0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:34px 30px;text-align:center;position:relative;overflow:hidden}
+.offerbox::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--en),var(--de),var(--ro),var(--es),var(--it),var(--sa))}
+.priceline{display:flex;align-items:baseline;justify-content:center;gap:10px;margin:10px 0 4px}
 .priceline .now{font-family:Fraunces;font-size:3.2rem;font-weight:700;color:#fff}
 .priceline .was{color:#cdbfa6;text-decoration:line-through;font-weight:700;font-size:1.2rem}
 .incl{text-align:left;max-width:420px;margin:22px auto 0}
@@ -132,14 +146,33 @@ box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden;display:fl
 .incl .ck{color:var(--gold);font-weight:900}
 .guar{margin-top:22px;font-size:.94rem;color:#d9cdb4}
 .guar b{color:#fff}
-
-/* capture */
 .capture{max-width:480px;margin:0 auto}
 .cform{display:flex;gap:10px;margin-top:8px}
 .cform input{flex:1;padding:15px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-family:Nunito;font-weight:600;font-size:1rem;outline:none}
 .cform input::placeholder{color:#cdbfa6}
 .cnote{font-size:.82rem;color:#cdbfa6;margin-top:10px}
 .ok{display:none;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:16px;margin-top:10px;font-weight:700;color:#fff}
+
+/* give-back band */
+.give{background:linear-gradient(135deg,#f6ecd6,#f3e2c4 55%,#efe0ec);overflow:hidden}
+.give .wrap{position:relative;z-index:2;max-width:820px;text-align:center}
+.give h2{font-size:clamp(1.6rem,3.8vw,2.3rem);margin-bottom:12px}
+.give p{font-size:1.1rem;color:#4a4038;max-width:60ch;margin:0 auto}
+.give .heart{font-size:1.7rem;margin-bottom:6px}
+
+/* coming next */
+.next{background:linear-gradient(180deg,var(--cream),var(--paper))}
+.ngrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:30px}
+.ncard{--c:var(--gold);background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 22px 22px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.ncard::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--c)}
+.ncard .tag{display:inline-block;font-weight:800;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--c);padding:4px 11px;border-radius:999px;margin-bottom:12px}
+.ncard h3{font-size:1.28rem;color:var(--ink)}
+.ncard p{font-size:.98rem;color:var(--ink-soft);margin-top:6px}
+.platform{margin-top:28px;background:linear-gradient(135deg,#2f2a26,#413a4e);color:#f2e9da;border-radius:18px;padding:30px 28px;text-align:center;position:relative;overflow:hidden}
+.platform::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--en),var(--de),var(--ro),var(--es),var(--it),var(--sa))}
+.platform .eyebrow{color:var(--gold)}
+.platform h3{color:#fff;font-size:clamp(1.35rem,3vw,1.7rem);margin:8px auto 10px;max-width:24ch}
+.platform p{color:#d9cdb9;max-width:60ch;margin:0 auto;font-size:1.02rem}
 
 /* faq */
 .faq{max-width:760px;margin:30px auto 0}
@@ -150,11 +183,9 @@ box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden;display:fl
 .q .a{max-height:0;overflow:hidden;transition:max-height .3s ease}
 .q .a p{padding:0 20px 18px;color:var(--ink-soft)}
 
-/* founding */
+/* founding + final */
 .found{text-align:center}
 .found .badge{display:inline-block;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:8px 18px;font-weight:800;font-size:.82rem;color:var(--gold-deep);letter-spacing:.04em;text-transform:uppercase}
-
-/* final */
 .final{background:linear-gradient(160deg,#fbf1dc,#f4e3c6);text-align:center}
 .final h2{font-size:clamp(1.9rem,4.6vw,2.9rem)}
 
@@ -170,18 +201,22 @@ footer a{color:var(--gold-deep);font-weight:700}
 .reveal.in{opacity:1;transform:none}
 
 @media(max-width:820px){
-.hero{padding:96px 0 20px}
-.hero-grid{grid-template-columns:1fr;gap:34px}
-.book-mock{order:-1}
+.hero{padding:88px 0 64px}
 .feat{grid-template-columns:1fr}
 .gal{grid-template-columns:1fr 1fr}
 .split{grid-template-columns:1fr}
+.ngrid{grid-template-columns:1fr}
 #msticky{display:flex}
 body{padding-bottom:70px}
-.cta-row{flex-direction:column;align-items:stretch}
-.cta-row .btn{width:100%}
+.hero .cta-row{flex-direction:column;align-items:stretch}
+.hero .cta-row .btn{width:100%}
 }
 @media(max-width:520px){.gal{grid-template-columns:1fr}.cform{flex-direction:column}}
+
+@media(prefers-reduced-motion:reduce){
+.world-wrap svg,.world-wrap .glow,.scrollhint{animation:none}
+.reveal{opacity:1;transform:none;transition:none}
+}
 </style>
 </head>
 <body>
@@ -191,40 +226,68 @@ body{padding-bottom:70px}
   <a class="btn sm" href="#offer">Get the book — $12</a>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div class="reveal in">
-      <div class="eyebrow">A first-words picture book · six languages</div>
-      <h1>Your child's first words, in the <em>six languages</em> of their world.</h1>
-      <p class="lead">45 hand-painted scenes. 270 gentle words. Every picture labeled, every word color-coded — so a small child learns to name the whole world at once.</p>
-      <div class="pills">
-        <span class="pill" style="background:var(--en)">English</span>
-        <span class="pill" style="background:var(--de)">Deutsch</span>
-        <span class="pill" style="background:var(--ro)">Română</span>
-        <span class="pill" style="background:var(--es)">Español</span>
-        <span class="pill" style="background:var(--it)">Italiano</span>
-        <span class="pill" style="background:var(--sa)">Sanskrit</span>
-      </div>
-      <div class="cta-row">
-        <a class="btn" href="#offer" id="heroCta">Get the book — $12 <span class="price-strike">$19</span></a>
-        <a class="btn ghost" href="#story">Read the story</a>
-      </div>
-      <div class="microtrust">
-        <span><i class="dotg"></i>Instant PDF</span>
-        <span><i class="dotg"></i>Print at home</span>
-        <span><i class="dotg"></i>45 painted scenes</span>
-        <span><i class="dotg"></i>Ages 0–5</span>
-      </div>
+<!-- ===== HERO — a small world at dusk ===== -->
+<section class="hero" id="top">
+  <canvas id="sky"></canvas>
+  <div class="wrap">
+    <div class="world-wrap" id="world">
+      <div class="glow"></div>
+      <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="planet" cx="42%" cy="38%" r="72%">
+            <stop offset="0%" stop-color="#F4CE8C"/>
+            <stop offset="46%" stop-color="#E0A85E"/>
+            <stop offset="100%" stop-color="#B87A3C"/>
+          </radialGradient>
+          <linearGradient id="canopy" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#5b9e63"/>
+            <stop offset="100%" stop-color="#2f6b3c"/>
+          </linearGradient>
+          <clipPath id="globe"><circle cx="160" cy="168" r="120"/></clipPath>
+        </defs>
+        <circle cx="160" cy="168" r="120" fill="url(#planet)"/>
+        <g clip-path="url(#globe)">
+          <path d="M40 236 Q100 196 168 224 Q236 252 288 214 L288 300 L40 300 Z" fill="#c98f4d" opacity=".55"/>
+          <path d="M40 258 Q120 224 196 250 Q252 268 288 246 L288 300 L40 300 Z" fill="#a9723a" opacity=".5"/>
+          <rect x="150" y="150" width="12" height="60" rx="5" fill="#7b4f2e"/>
+          <circle cx="156" cy="132" r="34" fill="url(#canopy)"/>
+          <circle cx="132" cy="146" r="24" fill="url(#canopy)"/>
+          <circle cx="182" cy="146" r="26" fill="url(#canopy)"/>
+          <circle cx="146" cy="128" r="4.4" fill="#d1483f"/>
+          <circle cx="170" cy="140" r="4.4" fill="#d1483f"/>
+          <circle cx="160" cy="118" r="4.4" fill="#d1483f"/>
+          <circle cx="134" cy="150" r="4" fill="#e0b34a"/>
+          <circle cx="184" cy="150" r="4" fill="#e0b34a"/>
+        </g>
+        <circle cx="160" cy="168" r="120" fill="none" stroke="rgba(255,244,214,.5)" stroke-width="1.5"/>
+      </svg>
     </div>
-    <div class="book-mock reveal in">
-      <img src="assets/img/moon_stars.jpg" alt="Real spread from the book: the moon and stars night sky, labeled in six languages" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
-      <div class="plates" style="position:absolute;bottom:14px;left:0;right:0;margin:0;z-index:2">
-        <span class="plate" style="--rot:-3deg;color:var(--en)">moon</span>
-        <span class="plate" style="--rot:2deg;color:var(--ro)">lună</span>
-        <span class="plate" style="--rot:-1deg;color:var(--sa)">candra</span>
-      </div>
+
+    <div class="eyebrow">A first-words picture book · six languages</div>
+    <h1>Your child's first words, in the <em>six languages</em> of their world.</h1>
+    <p class="lead">49 hand-painted pages. 137 gentle first words across six warm chapters. Every picture labeled, every word color-coded — so a small child learns to name the whole world at once.</p>
+    <div class="pills">
+      <span class="pill" style="background:var(--en)">English</span>
+      <span class="pill" style="background:var(--de)">Deutsch</span>
+      <span class="pill" style="background:var(--ro)">Română</span>
+      <span class="pill" style="background:var(--es)">Español</span>
+      <span class="pill" style="background:var(--it)">Italiano</span>
+      <span class="pill" style="background:var(--sa)">Sanskrit</span>
     </div>
+    <div class="cta-row">
+      <a class="btn" href="#offer" id="heroCta">Get the book — $12 <span class="price-strike">$19</span></a>
+      <a class="btn ghost" href="#story">Read the story</a>
+    </div>
+    <div class="microtrust">
+      <span><i class="dotg"></i>Instant PDF</span>
+      <span><i class="dotg"></i>Print at home</span>
+      <span><i class="dotg"></i>137 first words</span>
+      <span><i class="dotg"></i>Ages 0–5</span>
+    </div>
+  </div>
+  <div class="scrollhint">scroll ↓</div>
+  <div class="dusk-divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0 40 C240 8 480 8 720 34 C960 60 1200 60 1440 30 L1440 70 L0 70 Z" fill="#FDF8EF"/></svg>
   </div>
 </section>
 
@@ -241,11 +304,13 @@ body{padding-bottom:70px}
 
 <!-- STORY -->
 <section class="sec story" id="story">
+  <span class="blob" style="width:220px;height:220px;background:#e7c98a;top:-40px;left:-60px"></span>
+  <span class="blob" style="width:180px;height:180px;background:#9fc39a;bottom:-50px;right:-40px"></span>
   <div class="wrap inner reveal">
     <div class="eyebrow">Made by a father, for his daughter</div>
     <p class="big">I couldn't find it anywhere. So I painted it myself.</p>
     <p>My little girl is growing up between languages — the ones her family speaks, the ones her roots carry. I wanted her very first book to hold all of them at once. Not an app. Not flashcards that beep. Something warm she could hold in her lap.</p>
-    <p>I searched, and that book didn't exist. So over many months I made it — scene by scene. A lion. Our kitchen. Our dog, Leo. The night sky. And on every picture I labeled each thing in six languages, each language in its own color, so she could learn the whole world by name.</p>
+    <p>I searched, and that book didn't exist. So over many months I made it — page by page. A lion. Our kitchen. Our dog, Leo. The night sky. And on every picture I labeled each thing in six languages, each language in its own color, so she could learn the whole world by name.</p>
     <p>This is that book. I made it for her. Now I'm sharing it with your family too.</p>
     <div class="sig">— from one parent to another</div>
   </div>
@@ -257,8 +322,8 @@ body{padding-bottom:70px}
     <div class="eyebrow reveal">What's inside</div>
     <h2 class="reveal">A whole small world — painted, named, and ready to read tonight.</h2>
     <div class="feat">
-      <div class="fcard reveal"><b>45 hand-painted scenes</b><span>Six warm chapters — the body, nature, animals, home, the sky, and her wider world.</span></div>
-      <div class="fcard reveal"><b>~270 first words</b><span>Real nouns a child can point to and name — the true way first words are learned.</span></div>
+      <div class="fcard reveal"><b>49 hand-painted pages</b><span>Six warm chapters — the body, nature &amp; plants, animals, the sky &amp; elements, home &amp; daily life, and the world outside.</span></div>
+      <div class="fcard reveal"><b>137 first words</b><span>Real nouns a child can point to and name — the true way first words are learned.</span></div>
       <div class="fcard reveal"><b>Six languages on every label</b><span>English · Deutsch · Română · Español · Italiano · Sanskrit — together on one page.</span></div>
       <div class="fcard reveal"><b>A color for each language</b><span>The learning thread that never changes, so the eye learns the pattern without effort.</span></div>
       <div class="fcard reveal"><b>Instant PDF</b><span>Yours the moment you buy. Read it on any screen or print it at home.</span></div>
@@ -272,14 +337,14 @@ body{padding-bottom:70px}
   <div class="wrap">
     <div class="eyebrow reveal">Inside the book</div>
     <h2 class="reveal">Six chapters. One beautiful world.</h2>
-    <p class="kick soft reveal">Every scene is a full watercolor painting with its parts gently labeled in all six languages.</p>
+    <p class="kick soft reveal">Every scene is a full watercolor painting with its parts gently labeled in all six languages — one color per language, all the way through.</p>
     <div class="gal">
-      <div class="scene reveal"><div class="art" style="aspect-ratio:4/3;overflow:hidden;padding:0"><img src="assets/img/hand.jpg" alt="Chapter 1 spread — a child's hand, labeled in six languages" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" /></div><div class="cap"><b>Chapter 1 — My Body</b><span>eye · ear · hand · foot…</span></div></div>
-      <div class="scene reveal"><div class="art" style="aspect-ratio:4/3;overflow:hidden;padding:0"><img src="assets/img/oak_tree.jpg" alt="Chapter 2 spread — the oak tree, labeled in six languages" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" /></div><div class="cap"><b>Chapter 2 — Nature</b><span>leaf · flower · river · mountain…</span></div></div>
-      <div class="scene reveal"><div class="art" style="aspect-ratio:4/3;overflow:hidden;padding:0"><img src="assets/img/animal1.jpg" alt="Chapter 3 spread — the lion, labeled in six languages" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" /></div><div class="cap"><b>Chapter 3 — Animals</b><span>lion · bird · horse · dog…</span></div></div>
-      <div class="scene reveal"><div class="art" style="aspect-ratio:4/3;overflow:hidden;padding:0"><img src="assets/img/kitchen.jpg" alt="Chapter 4 spread — the kitchen, labeled in six languages" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" /></div><div class="cap"><b>Chapter 4 — My Home</b><span>spoon · bed · door · window…</span></div></div>
-      <div class="scene reveal"><div class="art" style="aspect-ratio:4/3;overflow:hidden;padding:0"><img src="assets/img/sunset.jpg" alt="Chapter 5 spread — the sunset sky, labeled in six languages" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" /></div><div class="cap"><b>Chapter 5 — Sky & Weather</b><span>sun · moon · cloud · rain…</span></div></div>
-      <div class="scene reveal"><div class="art" style="aspect-ratio:4/3;overflow:hidden;padding:0"><img src="assets/img/boat.jpg" alt="Chapter 6 spread — the boat, labeled in six languages" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" /></div><div class="cap"><b>Chapter 6 — Her World</b><span>car · boat · music · ceremony…</span></div></div>
+      <div class="scene reveal"><div class="art"><span class="chtag" style="background:var(--en)">Ch. 1</span><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/hand.jpg" alt="Chapter 1 spread — a child's hand, labeled in six languages" loading="lazy" /></div><div class="cap"><b>My Body</b><span>eye · ear · hand · foot…</span></div></div>
+      <div class="scene reveal"><div class="art"><span class="chtag" style="background:var(--de)">Ch. 2</span><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/oak_tree.jpg" alt="Chapter 2 spread — the oak tree, labeled in six languages" loading="lazy" /></div><div class="cap"><b>Nature &amp; Plants</b><span>tree · leaf · river · mountain…</span></div></div>
+      <div class="scene reveal"><div class="art"><span class="chtag" style="background:var(--ro)">Ch. 3</span><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/animal1.jpg" alt="Chapter 3 spread — the lion, labeled in six languages" loading="lazy" /></div><div class="cap"><b>Animals</b><span>lion · bird · horse · dog…</span></div></div>
+      <div class="scene reveal"><div class="art"><span class="chtag" style="background:var(--es)">Ch. 4</span><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/sunset.jpg" alt="Chapter 4 spread — the sky, labeled in six languages" loading="lazy" /></div><div class="cap"><b>The Sky &amp; Elements</b><span>sun · moon · cloud · rain…</span></div></div>
+      <div class="scene reveal"><div class="art"><span class="chtag" style="background:var(--it)">Ch. 5</span><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/kitchen.jpg" alt="Chapter 5 spread — the home, labeled in six languages" loading="lazy" /></div><div class="cap"><b>Home &amp; Daily Life</b><span>spoon · bed · door · window…</span></div></div>
+      <div class="scene reveal"><div class="art"><span class="chtag" style="background:var(--sa)">Ch. 6</span><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/boat.jpg" alt="Chapter 6 spread — the world outside, labeled in six languages" loading="lazy" /></div><div class="cap"><b>The World Outside</b><span>car · boat · music · ceremony…</span></div></div>
     </div>
     <p class="center soft reveal" style="margin-top:22px;font-size:.82rem">These are real pages from the book — every painting carries its six-language labels right in the scene.</p>
   </div>
@@ -308,7 +373,7 @@ body{padding-bottom:70px}
   </div>
 </section>
 
-<!-- WHY DIFFERENT / COLOR SYSTEM -->
+<!-- COLOR SYSTEM -->
 <section class="sec tint">
   <div class="wrap">
     <div class="eyebrow reveal">The six-language system</div>
@@ -334,8 +399,8 @@ body{padding-bottom:70px}
       <div class="priceline"><span class="now">$12</span><span class="was">$19</span></div>
       <div class="soft" style="color:#cdbfa6;font-weight:700;font-size:.86rem">Founding-reader price for the first edition</div>
       <div class="incl">
-        <div><span class="ck">✓</span> 45 hand-painted scenes across 6 chapters</div>
-        <div><span class="ck">✓</span> ~270 first words in six languages</div>
+        <div><span class="ck">✓</span> 49 hand-painted pages across six chapters</div>
+        <div><span class="ck">✓</span> 137 first words in six languages</div>
         <div><span class="ck">✓</span> Instant PDF — read on any screen or print at home</div>
         <div><span class="ck">✓</span> Yours forever — no subscription, no app</div>
       </div>
@@ -356,16 +421,49 @@ body{padding-bottom:70px}
   </div>
 </section>
 
+<!-- GIVE-BACK / MISSION -->
+<section class="sec give">
+  <span class="blob" style="width:200px;height:200px;background:var(--sa);opacity:.18;top:-40px;right:-30px"></span>
+  <span class="blob" style="width:170px;height:170px;background:var(--de);opacity:.16;bottom:-40px;left:-30px"></span>
+  <div class="wrap reveal">
+    <div class="heart">🌱</div>
+    <div class="eyebrow" style="color:var(--gold-deep)">Why it matters</div>
+    <h2>Every book plants the next one.</h2>
+    <p>This is a labor of love, not a big publisher. A part of every copy of <em>My Beautiful World</em> goes straight into painting the next book in the series — new scenes, new words, new ways for little hands to learn. When you buy this book for your child, you help bring the whole world of books to life.</p>
+  </div>
+</section>
+
+<!-- COMING NEXT -->
+<section class="sec next">
+  <div class="wrap">
+    <div class="eyebrow center reveal">The series is growing</div>
+    <h2 class="center reveal">Where My Beautiful World goes next.</h2>
+    <p class="kick soft center reveal" style="margin:0 auto">The first book teaches a child to <em>name</em> the world. The ones that follow help them feel it, count it, build with it — and slowly, gently, turn inward.</p>
+    <div class="ngrid">
+      <div class="ncard reveal" style="--c:var(--sa)"><span class="tag">Coming next</span><h3>Emotions &amp; Expressions</h3><p>The faces and feelings of being human — joy, wonder, calm, courage — named and painted in all six languages.</p></div>
+      <div class="ncard reveal" style="--c:var(--en)"><span class="tag">In the works</span><h3>Numbers &amp; Shapes</h3><p>First numbers, counting, and the simple shapes that quietly build the whole world.</p></div>
+      <div class="ncard reveal" style="--c:var(--it)"><span class="tag">In the works</span><h3>Tools &amp; Making Things</h3><p>The tools we build and fix with — and the first quiet joy of solving a little problem.</p></div>
+      <div class="ncard reveal" style="--c:var(--gold)"><span class="tag">On the horizon</span><h3>Focus &amp; Stillness</h3><p>First breaths and tiny meditations — helping little ones find calm, focus, and their own inner quiet.</p></div>
+    </div>
+    <div class="platform reveal">
+      <div class="eyebrow">Part of something bigger</div>
+      <h3>A lifelong learning path — starting with a single word.</h3>
+      <p>Each book is one step on a larger journey we're building: from a child's very first words toward focus, creativity, and the fuller reach of who they can become. <em>My Beautiful World</em> is step one.</p>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="sec">
   <div class="wrap">
     <div class="eyebrow center reveal">Questions</div>
     <h2 class="center reveal">Everything a careful parent asks first.</h2>
     <div class="faq">
-      <div class="q reveal"><button>What exactly do I get? <span class="plus">+</span></button><div class="a"><p>A downloadable PDF of the full book — 45 painted scenes, ~270 words in six languages. You can read it on any phone, tablet, or computer, or print it at home or a print shop.</p></div></div>
+      <div class="q reveal"><button>What exactly do I get? <span class="plus">+</span></button><div class="a"><p>A downloadable PDF of the full book — 49 painted pages, 137 first words in six languages across six chapters. You can read it on any phone, tablet, or computer, or print it at home or a print shop.</p></div></div>
       <div class="q reveal"><button>What ages is it for? <span class="plus">+</span></button><div class="a"><p>Made for ages 0–5. Babies love the colors and your voice; toddlers point and name; older children start to read the words themselves. It grows with them.</p></div></div>
-      <div class="q reveal"><button>Are the translations accurate? <span class="plus">+</span></button><div class="a"><p>Yes. The Romanian is verified by a native speaker (me). The Sanskrit uses careful scholarly romanization (IAST). Every word is a real noun for something truly in the picture — never a faked label.</p></div></div>
+      <div class="q reveal"><button>Are the translations accurate? <span class="plus">+</span></button><div class="a"><p>Yes. The Romanian is verified by a native speaker. The Sanskrit uses careful scholarly romanization (IAST). Every word is a real noun for something truly in the picture — never a faked label.</p></div></div>
       <div class="q reveal"><button>Which six languages? <span class="plus">+</span></button><div class="a"><p>English, German (Deutsch), Romanian (Română), Spanish (Español), Italian (Italiano), and Sanskrit — each in its own fixed color throughout the book.</p></div></div>
+      <div class="q reveal"><button>Is this part of a series? <span class="plus">+</span></button><div class="a"><p>Yes — this is the first book. More are on the way (Emotions &amp; Expressions, Numbers &amp; Shapes, and more), and a part of every sale goes toward creating them. Buy this one and you're helping the whole series grow.</p></div></div>
       <div class="q reveal"><button>Can I print it or gift it? <span class="plus">+</span></button><div class="a"><p>Absolutely. Print as many copies as your own family needs, and it makes a beautiful gift for new parents, grandparents, and multilingual homes.</p></div></div>
     </div>
   </div>
@@ -384,7 +482,7 @@ body{padding-bottom:70px}
 <section class="sec final">
   <div class="wrap reveal">
     <h2>Give your child the whole world — by name.</h2>
-    <p class="soft" style="max-width:48ch;margin:12px auto 24px">Six languages. 45 painted scenes. One quiet book you'll read together for years.</p>
+    <p class="soft" style="max-width:48ch;margin:12px auto 24px">Six languages. 49 painted pages. One quiet book you'll read together for years — and the first of many.</p>
     <a class="btn" href="#offer" style="font-size:1.1rem;padding:16px 34px">Get My Beautiful World — $12 <span class="price-strike">$19</span></a>
   </div>
 </section>
@@ -398,21 +496,18 @@ body{padding-bottom:70px}
   <a class="btn sm" href="#offer">Get the book</a>
 </div>
 
+<!-- Gumroad overlay (activates when you paste your product link below) -->
+<script src="https://gumroad.com/js/gumroad.js"></script>
 <script>
-/* ===== CONFIG: paste the Gumroad product URL here when live, and the buy buttons become a real store ===== */
-var GUMROAD_URL = "";
-/* Optional: paste a Zapier catch-hook or Formspree URL to capture launch emails for real */
+var GUMROAD_PERMALINK = "";
 var LAUNCH_LIST_ENDPOINT = "";
 
-/* top bar on scroll */
 var bar=document.getElementById('bar');
 addEventListener('scroll',function(){(scrollY>560?bar.classList.add('show'):bar.classList.remove('show'));});
 
-/* reveal on scroll */
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-/* word rotator */
 var WORDS=[
 {en:'moon',de:'Mond',ro:'lună',es:'luna',it:'luna',sa:'candra'},
 {en:'lion',de:'Löwe',ro:'leu',es:'león',it:'leone',sa:'siṃha'},
@@ -426,21 +521,52 @@ var wi=0;
 function paintWord(){var w=WORDS[wi];document.getElementById('demoWord').textContent=w.en;var g=document.getElementById('demoGrid');g.innerHTML='';['en','de','ro','es','it','sa'].forEach(function(k){var s=document.createElement('span');s.className='wchip';s.style.color=COLORS[k];s.innerHTML='<span class="wlab" style="color:'+COLORS[k]+'">'+LABELS[k]+'</span>'+w[k];g.appendChild(s);});wi=(wi+1)%WORDS.length;}
 paintWord();setInterval(paintWord,2600);
 
-/* faq */
 document.querySelectorAll('.q>button').forEach(function(b){b.addEventListener('click',function(){var q=b.parentElement;var a=q.querySelector('.a');var open=q.classList.toggle('open');a.style.maxHeight=open?a.scrollHeight+'px':0;});});
 
-/* buy mode: if GUMROAD_URL set, turn every CTA into a real buy button */
 function wireBuy(){
-  if(!GUMROAD_URL) return;
-  document.querySelectorAll('a[href="#offer"]').forEach(function(a){a.setAttribute('href',GUMROAD_URL);a.setAttribute('target','_blank');});
+  if(!GUMROAD_PERMALINK) return;
+  var href=GUMROAD_PERMALINK+(GUMROAD_PERMALINK.indexOf('?')>-1?'&':'?')+'wanted=true';
+  document.querySelectorAll('a[href="#offer"]').forEach(function(a){a.classList.add('gumroad-button');a.setAttribute('href',href);});
   var area=document.getElementById('buyArea');
-  area.innerHTML='<a class="btn" style="font-size:1.1rem;padding:16px 34px" href="'+GUMROAD_URL+'" target="_blank">Get the book — $12</a>';
+  area.innerHTML='<a class="btn gumroad-button" style="font-size:1.1rem;padding:16px 34px" href="'+href+'">Get the book — $12</a>'+
+                 '<div class="cnote" style="color:#cdbfa6">Secure checkout · instant PDF · 30-day promise</div>';
+  if(window.GumroadOverlay&&window.GumroadOverlay.wire){try{window.GumroadOverlay.wire();}catch(e){}}
 }
 wireBuy();
 
-/* email capture */
 var f=document.getElementById('capForm');
-if(f){f.addEventListener('submit',function(e){e.preventDefault();var em=document.getElementById('capEmail').value.trim();if(!em) return;try{var list=JSON.parse(localStorage.getItem('mbw_list')||'[]');list.push({email:em,at:Date.now()});localStorage.setItem('mbw_list',JSON.stringify(list));}catch(x){}if(LAUNCH_LIST_ENDPOINT){try{fetch(LAUNCH_LIST_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:'landing'})});}catch(x){}}f.style.display='none';document.getElementById('capOk').style.display='block';});}
+if(f){f.addEventListener('submit',function(e){e.preventDefault();var em=document.getElementById('capEmail').value.trim();if(!em||em.indexOf('@')<1) return;
+  if(LAUNCH_LIST_ENDPOINT){try{fetch(LAUNCH_LIST_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:'landing'})});}catch(x){}}
+  f.style.display='none';document.getElementById('capOk').style.display='block';});}
+
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cv=document.getElementById('sky'), ctx=cv.getContext('2d'), W,H,dpr;
+  var stars=[], motes=[];
+  function size(){dpr=Math.min(window.devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);build();}
+  function build(){
+    stars=[];var n=Math.round(W*H/9000);
+    for(var i=0;i<n;i++){stars.push({x:Math.random()*W,y:Math.random()*H*0.82,r:Math.random()*1.3+0.2,t:Math.random()*6.28,s:Math.random()*0.9+0.2});}
+    motes=[];var cx=W/2, cy=H*0.42, base=Math.min(W,H)*0.30;
+    for(var j=0;j<7;j++){motes.push({a:Math.random()*6.28,rad:base+j*10+Math.random()*14,sp:(0.0016+Math.random()*0.0016)*(j%2?1:-1),sz:2.2+Math.random()*2.2,leaf:j%2===0});}
+  }
+  var mx=0,my=0,tx=0,ty=0;
+  addEventListener('mousemove',function(e){mx=(e.clientX/window.innerWidth-0.5);my=(e.clientY/window.innerHeight-0.5);},{passive:true});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    var cx=W/2, cy=H*0.42;
+    for(var i=0;i<stars.length;i++){var s=stars[i];s.t+=0.02*s.s;var tw=0.4+0.6*(0.5+0.5*Math.sin(s.t));ctx.globalAlpha=tw;ctx.fillStyle='#f6ecd0';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,6.28);ctx.fill();}
+    ctx.globalAlpha=1;
+    for(var j=0;j<motes.length;j++){var m=motes[j];if(!reduce)m.a+=m.sp;var x=cx+Math.cos(m.a)*m.rad*1.15+mx*14, y=cy+Math.sin(m.a)*m.rad*0.72+my*10;ctx.save();ctx.translate(x,y);ctx.rotate(m.a);ctx.globalAlpha=.85;ctx.fillStyle=m.leaf?'#8fbf7f':'#e6c07a';if(m.leaf){ctx.beginPath();ctx.ellipse(0,0,m.sz*1.7,m.sz*0.8,0,0,6.28);ctx.fill();}else{ctx.beginPath();ctx.arc(0,0,m.sz*0.7,0,6.28);ctx.fill();}ctx.restore();}
+    ctx.globalAlpha=1;
+    requestAnimationFrame(draw);
+  }
+  var world=document.getElementById('world');
+  function tick(){tx+=(mx-tx)*0.06;ty+=(my-ty)*0.06;if(world)world.style.transform='translate('+(tx*16)+'px,'+(ty*12)+'px)';requestAnimationFrame(tick);}
+  size();addEventListener('resize',size);
+  if(reduce){draw();} else {draw();tick();}
+  if(!reduce){addEventListener('scroll',function(){var y=scrollY;if(world&&y<window.innerHeight){world.style.opacity=Math.max(0,1-y/(window.innerHeight*0.9));}},{passive:true});}
+})();
 </script>
 </body>
 </html>
