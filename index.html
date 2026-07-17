@@ -326,12 +326,31 @@ body{padding-bottom:70px}
 </section>
 
 <!-- WORD DEMO -->
-<section class="worddemo">
+<style>
+.worddemo .wxcardwrap{max-width:780px;margin:0 auto;text-align:center}
+.wxtitle{font-family:Fraunces,serif;font-weight:600;font-size:clamp(1.3rem,3.4vw,1.95rem);line-height:1.2;margin:2px 0 8px}
+.wxsub{color:#6b6357;font-size:.98rem;margin:0 auto 16px;max-width:540px}
+.wxlangs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:20px}
+.wxchip{font-family:Nunito,sans-serif;font-weight:800;font-size:.92rem;padding:8px 16px;border-radius:999px;border:2px solid #e4dccb;background:#fff;color:#7a7264;cursor:pointer;transition:.2s;line-height:1}
+.wxchip:hover{border-color:var(--c);color:var(--c)}
+.wxchip.on{color:#fff}
+.wxgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
+.wxcard{background:linear-gradient(180deg,#fffdf8,#fbf4e7);border:1px solid #efe6d3;border-radius:16px;padding:16px 10px;min-height:94px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;opacity:0;transform:translateY(8px);transition:opacity .42s ease,transform .42s ease;box-shadow:0 8px 20px -16px rgba(58,50,46,.5)}
+.wxcard.show{opacity:1;transform:none}
+.wxen{font-size:.68rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#a99f8c}
+.wxtr{font-family:Fraunces,serif;font-weight:600;font-size:1.5rem;line-height:1.15}
+.wxnote{margin-top:18px;font-size:.86rem;color:#8a8272;font-style:italic}
+@media(max-width:520px){.wxgrid{grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:9px}.wxtr{font-size:1.28rem}.wxcard{min-height:84px;padding:13px 8px}}
+</style>
+<section class="worddemo" id="explore">
   <div class="wrap">
-    <div class="card reveal">
-      <div class="eyebrow" style="margin-bottom:10px">One word · six languages</div>
-      <div class="en-word" id="demoWord">moon</div>
-      <div class="wgrid" id="demoGrid"></div>
+    <div class="card reveal wxcardwrap">
+      <div class="eyebrow" style="margin-bottom:4px">Try it — pick a language</div>
+      <h2 class="wxtitle">The same little words — in your language and in English.</h2>
+      <p class="wxsub">Tap a language and watch every word become it. Each one keeps its own colour, on every page of the book.</p>
+      <div class="wxlangs" id="wxLangs"></div>
+      <div class="wxgrid" id="wxGrid"></div>
+      <p class="wxnote" id="wxNote"></p>
     </div>
   </div>
 </section>
@@ -542,18 +561,18 @@ addEventListener('scroll',function(){(scrollY>560?bar.classList.add('show'):bar.
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-var WORDS=[
-{en:'moon',de:'Mond',ro:'lună',es:'luna',it:'luna',sa:'candra'},
-{en:'lion',de:'Löwe',ro:'leu',es:'león',it:'leone',sa:'siṃha'},
-{en:'hand',de:'Hand',ro:'mână',es:'mano',it:'mano',sa:'hasta'},
-{en:'home',de:'Zuhause',ro:'acasă',es:'casa',it:'casa',sa:'gṛha'},
-{en:'tree',de:'Baum',ro:'copac',es:'árbol',it:'albero',sa:'vṛkṣa'}
-];
-var COLORS={en:'#2b6cb0',de:'#2f855a',ro:'#b7791f',es:'#c53030',it:'#c05621',sa:'#6b46c1'};
-var LABELS={en:'English',de:'Deutsch',ro:'Română',es:'Español',it:'Italiano',sa:'Sanskrit'};
-var wi=0;
-function paintWord(){var w=WORDS[wi];document.getElementById('demoWord').textContent=w.en;var g=document.getElementById('demoGrid');g.innerHTML='';['en','de','ro','es','it','sa'].forEach(function(k){var s=document.createElement('span');s.className='wchip';s.style.color=COLORS[k];s.innerHTML='<span class="wlab" style="color:'+COLORS[k]+'">'+LABELS[k]+'</span>'+w[k];g.appendChild(s);});wi=(wi+1)%WORDS.length;}
-paintWord();setInterval(paintWord,2600);
+var WX=[{"en": "moon", "de": "Mond", "ro": "lună", "es": "luna", "it": "luna"}, {"en": "sun", "de": "Sonne", "ro": "soare", "es": "sol", "it": "sole"}, {"en": "star", "de": "Stern", "ro": "stea", "es": "estrella", "it": "stella"}, {"en": "rainbow", "de": "Regenbogen", "ro": "curcubeu", "es": "arcoíris", "it": "arcobaleno"}, {"en": "heart", "de": "Herz", "ro": "inimă", "es": "corazón", "it": "cuore"}, {"en": "dog", "de": "Hund", "ro": "câine", "es": "perro", "it": "cane"}, {"en": "cat", "de": "Katze", "ro": "pisică", "es": "gato", "it": "gatto"}, {"en": "butterfly", "de": "Schmetterling", "ro": "fluture", "es": "mariposa", "it": "farfalla"}, {"en": "owl", "de": "Eule", "ro": "bufniță", "es": "búho", "it": "gufo"}, {"en": "bear", "de": "Bär", "ro": "urs", "es": "oso", "it": "orso"}, {"en": "lion", "de": "Löwe", "ro": "leu", "es": "león", "it": "leone"}, {"en": "whale", "de": "Wal", "ro": "balenă", "es": "ballena", "it": "balena"}, {"en": "leaf", "de": "Blatt", "ro": "frunză", "es": "hoja", "it": "foglia"}, {"en": "apple", "de": "Apfel", "ro": "măr", "es": "manzana", "it": "mela"}, {"en": "book", "de": "Buch", "ro": "carte", "es": "libro", "it": "libro"}, {"en": "love", "de": "Liebe", "ro": "dragoste", "es": "amor", "it": "amore"}];
+var WXC={"en": "#2b6cb0", "de": "#2f855a", "ro": "#b7791f", "es": "#c53030", "it": "#c05621"};
+var WXL={"en": "English", "de": "Deutsch", "ro": "Română", "es": "Español", "it": "Italiano"};
+var wxOrder=['en','de','ro','es','it'];
+var wxActive='en';
+(function(){var n=(navigator.language||'en').slice(0,2).toLowerCase();if(wxOrder.indexOf(n)>-1)wxActive=n;})();
+function wxNoteText(k){return WXL[k]+' — always shown in this colour, on every page.';}
+function wxBuildLangs(){var w=document.getElementById('wxLangs');if(!w)return;w.innerHTML='';wxOrder.forEach(function(k){var b=document.createElement('button');b.type='button';b.className='wxchip'+(k===wxActive?' on':'');b.textContent=WXL[k];b.style.setProperty('--c',WXC[k]);if(k===wxActive){b.style.background=WXC[k];b.style.borderColor=WXC[k];b.style.color='#fff';}b.addEventListener('click',function(){wxSet(k);});w.appendChild(b);});}
+function wxBuildGrid(){var g=document.getElementById('wxGrid');if(!g)return;g.innerHTML='';var cards=[];WX.forEach(function(w,i){var c=document.createElement('div');c.className='wxcard';c.style.transitionDelay=(i*22)+'ms';var top=(wxActive!=='en')?'<div class="wxen">'+w.en+'</div>':'';c.innerHTML=top+'<div class="wxtr" style="color:'+WXC[wxActive]+'">'+w[wxActive]+'</div>';g.appendChild(c);cards.push(c);});requestAnimationFrame(function(){requestAnimationFrame(function(){cards.forEach(function(c){c.classList.add('show');});});});}
+function wxSet(k){if(k===wxActive)return;wxActive=k;wxBuildLangs();wxBuildGrid();var nt=document.getElementById('wxNote');if(nt)nt.textContent=wxNoteText(k);}
+wxBuildLangs();wxBuildGrid();
+var _wxn=document.getElementById('wxNote');if(_wxn)_wxn.textContent=wxNoteText(wxActive);
 
 document.querySelectorAll('.q>button').forEach(function(b){b.addEventListener('click',function(){var q=b.parentElement;var a=q.querySelector('.a');var open=q.classList.toggle('open');a.style.maxHeight=open?a.scrollHeight+'px':0;});});
 
