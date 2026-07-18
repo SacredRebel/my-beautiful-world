@@ -227,6 +227,24 @@ body{padding-bottom:70px}
 .world-wrap::after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;z-index:2;
  background:radial-gradient(circle at 38% 30%,rgba(255,246,222,.3),transparent 44%)}
 
+
+/* full-bleed painted-scene ribbon */
+.strip{position:relative;overflow:hidden;background:var(--cream);padding:6px 0 30px}
+.strip::before,.strip::after{content:"";position:absolute;top:0;bottom:0;width:14vw;z-index:2;pointer-events:none}
+.strip::before{left:0;background:linear-gradient(90deg,var(--cream),transparent)}
+.strip::after{right:0;background:linear-gradient(270deg,var(--cream),transparent)}
+.striprow{display:flex;gap:14px;width:max-content;animation:stripslide 60s linear infinite}
+.strip:hover .striprow{animation-play-state:paused}
+.strip img{height:154px;width:224px;object-fit:cover;border-radius:14px;border:1px solid var(--line);box-shadow:0 14px 30px -20px rgba(58,50,46,.65)}
+@keyframes stripslide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:600px){.strip img{height:112px;width:164px}}
+@media(prefers-reduced-motion:reduce){.striprow{animation:none}}
+
+/* picture-led feature cards */
+.fcard{display:grid;grid-template-columns:66px 1fr;gap:15px;align-items:center}
+.fthumb{width:66px;height:66px;object-fit:cover;border-radius:13px;border:1px solid var(--line);display:block}
+@media(max-width:420px){.fcard{grid-template-columns:52px 1fr;gap:12px}.fthumb{width:52px;height:52px}}
+
 /* peekable gallery tiles */
 .gal .scene.peekable{cursor:pointer}
 .gal .scene.peekable:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
@@ -387,18 +405,22 @@ body{padding-bottom:70px}
   </div>
 </section>
 
+<div class="strip" aria-hidden="true">
+  <div class="striprow"><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/oak_tree.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/animal1.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/sunset.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/kitchen.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/hand.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/boat.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/moon_stars.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/animal3.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/music.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/animal5.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/oak_tree.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/animal1.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/sunset.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/kitchen.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/hand.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/boat.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/moon_stars.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/animal3.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/music.jpg" alt="" loading="lazy" /><img src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/animal5.jpg" alt="" loading="lazy" /></div>
+</div>
+
 <!-- WHAT'S INSIDE -->
 <section class="sec">
   <div class="wrap">
     <div class="eyebrow reveal">What's inside</div>
     <h2 class="reveal">A whole small world — painted, named, and ready to read tonight.</h2>
     <div class="feat">
-      <div class="fcard reveal"><b>45 illustrated pages</b><span>Six warm chapters — the body, nature &amp; plants, animals, the sky &amp; elements, home &amp; daily life, and the world outside.</span></div>
-      <div class="fcard reveal"><b>274 first words</b><span>Real nouns a child can point to and name — the true way first words are learned.</span></div>
-      <div class="fcard reveal"><b>Six languages on every label</b><span>English · Deutsch · Română · Español · Italiano · Sanskrit — together on one page.</span></div>
-      <div class="fcard reveal"><b>A color for each language</b><span>The learning thread that never changes, so the eye learns the pattern without effort.</span></div>
-      <div class="fcard reveal"><b>Instant PDF</b><span>Yours the moment you buy. Read it on any screen or print it at home.</span></div>
-      <div class="fcard reveal"><b>A keepsake, not a subscription</b><span>Buy it once. It's yours forever — to read, print, and pass down.</span></div>
+      <div class="fcard reveal"><img class="fthumb" src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/oak_tree.jpg" alt="" loading="lazy" /><b>45 illustrated pages</b><span>Six warm chapters — the body, nature &amp; plants, animals, the sky &amp; elements, home &amp; daily life, and the world outside.</span></div>
+      <div class="fcard reveal"><img class="fthumb" src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/hand.jpg" alt="" loading="lazy" /><b>274 first words</b><span>Real nouns a child can point to and name — the true way first words are learned.</span></div>
+      <div class="fcard reveal"><img class="fthumb" src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/moon_stars.jpg" alt="" loading="lazy" /><b>Six languages on every label</b><span>English · Deutsch · Română · Español · Italiano · Sanskrit — together on one page.</span></div>
+      <div class="fcard reveal"><img class="fthumb" src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/animal1.jpg" alt="" loading="lazy" /><b>A color for each language</b><span>The learning thread that never changes, so the eye learns the pattern without effort.</span></div>
+      <div class="fcard reveal"><img class="fthumb" src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/kitchen.jpg" alt="" loading="lazy" /><b>Instant PDF</b><span>Yours the moment you buy. Read it on any screen or print it at home.</span></div>
+      <div class="fcard reveal"><img class="fthumb" src="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/boat.jpg" alt="" loading="lazy" /><b>A keepsake, not a subscription</b><span>Buy it once. It's yours forever — to read, print, and pass down.</span></div>
     </div>
   </div>
 </section>
