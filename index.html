@@ -349,7 +349,11 @@ body{padding-bottom:70px}
 .wxcard.show{opacity:1;transform:none}
 .wxen{font-size:.68rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#a99f8c}
 .wxtr{font-family:Fraunces,serif;font-weight:600;font-size:1.5rem;line-height:1.15}
-.wxnote{margin-top:18px;font-size:.86rem;color:#8a8272;font-style:italic}
+.wxnote{margin-top:18px;font-size:.86rem;color:#8a8272;font-style:italic;min-height:1.2em}
+.wxcard{cursor:default}
+.wxcard:hover{transform:translateY(-3px);box-shadow:0 14px 26px -18px rgba(58,50,46,.65)}
+.wxtr.sa{font-style:italic;letter-spacing:.01em}
+.wxlangs{margin-bottom:22px}
 @media(max-width:520px){.wxgrid{grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:9px}.wxtr{font-size:1.28rem}.wxcard{min-height:84px;padding:13px 8px}}
 </style>
 <section class="worddemo" id="explore">
@@ -579,15 +583,17 @@ addEventListener('scroll',function(){(scrollY>560?bar.classList.add('show'):bar.
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-var WX=[{"en": "moon", "de": "Mond", "ro": "lună", "es": "luna", "it": "luna"}, {"en": "sun", "de": "Sonne", "ro": "soare", "es": "sol", "it": "sole"}, {"en": "star", "de": "Stern", "ro": "stea", "es": "estrella", "it": "stella"}, {"en": "rainbow", "de": "Regenbogen", "ro": "curcubeu", "es": "arcoíris", "it": "arcobaleno"}, {"en": "heart", "de": "Herz", "ro": "inimă", "es": "corazón", "it": "cuore"}, {"en": "dog", "de": "Hund", "ro": "câine", "es": "perro", "it": "cane"}, {"en": "cat", "de": "Katze", "ro": "pisică", "es": "gato", "it": "gatto"}, {"en": "butterfly", "de": "Schmetterling", "ro": "fluture", "es": "mariposa", "it": "farfalla"}, {"en": "owl", "de": "Eule", "ro": "bufniță", "es": "búho", "it": "gufo"}, {"en": "bear", "de": "Bär", "ro": "urs", "es": "oso", "it": "orso"}, {"en": "lion", "de": "Löwe", "ro": "leu", "es": "león", "it": "leone"}, {"en": "whale", "de": "Wal", "ro": "balenă", "es": "ballena", "it": "balena"}, {"en": "leaf", "de": "Blatt", "ro": "frunză", "es": "hoja", "it": "foglia"}, {"en": "apple", "de": "Apfel", "ro": "măr", "es": "manzana", "it": "mela"}, {"en": "book", "de": "Buch", "ro": "carte", "es": "libro", "it": "libro"}, {"en": "love", "de": "Liebe", "ro": "dragoste", "es": "amor", "it": "amore"}];
-var WXC={"en": "#2b6cb0", "de": "#2f855a", "ro": "#b7791f", "es": "#c53030", "it": "#c05621"};
-var WXL={"en": "English", "de": "Deutsch", "ro": "Română", "es": "Español", "it": "Italiano"};
-var wxOrder=['en','de','ro','es','it'];
+var WX=[{"en": "moon", "de": "Mond", "ro": "lună", "es": "luna", "it": "luna", "sa": "candra"}, {"en": "sun", "de": "Sonne", "ro": "soare", "es": "sol", "it": "sole", "sa": "sūrya"}, {"en": "star", "de": "Stern", "ro": "stea", "es": "estrella", "it": "stella", "sa": "tārā"}, {"en": "light", "de": "Licht", "ro": "lumină", "es": "luz", "it": "luce", "sa": "jyotis"}, {"en": "water", "de": "Wasser", "ro": "apă", "es": "agua", "it": "acqua", "sa": "jala"}, {"en": "fire", "de": "Feuer", "ro": "foc", "es": "fuego", "it": "fuoco", "sa": "agni"}, {"en": "earth", "de": "Erde", "ro": "pământ", "es": "tierra", "it": "terra", "sa": "pṛthivī"}, {"en": "tree", "de": "Baum", "ro": "copac", "es": "árbol", "it": "albero", "sa": "vṛkṣa"}, {"en": "leaf", "de": "Blatt", "ro": "frunză", "es": "hoja", "it": "foglia", "sa": "parṇa"}, {"en": "river", "de": "Fluss", "ro": "râu", "es": "río", "it": "fiume", "sa": "nadī"}, {"en": "mountain", "de": "Berg", "ro": "munte", "es": "montaña", "it": "montagna", "sa": "parvata"}, {"en": "heart", "de": "Herz", "ro": "inimă", "es": "corazón", "it": "cuore", "sa": "hṛdaya"}, {"en": "hand", "de": "Hand", "ro": "mână", "es": "mano", "it": "mano", "sa": "hasta"}, {"en": "house", "de": "Haus", "ro": "casă", "es": "casa", "it": "casa", "sa": "gṛha"}, {"en": "lion", "de": "Löwe", "ro": "leu", "es": "león", "it": "leone", "sa": "siṃha"}, {"en": "elephant", "de": "Elefant", "ro": "elefant", "es": "elefante", "it": "elefante", "sa": "gaja"}];
+var WXC={"en": "#2b6cb0", "de": "#2f855a", "ro": "#b7791f", "es": "#c53030", "it": "#c05621", "sa": "#6b46c1"};
+var WXL={"en": "English", "de": "Deutsch", "ro": "Română", "es": "Español", "it": "Italiano", "sa": "Sanskrit"};
+var wxOrder=['en','de','ro','es','it','sa'];
 var wxActive='en';
-(function(){var n=(navigator.language||'en').slice(0,2).toLowerCase();if(wxOrder.indexOf(n)>-1)wxActive=n;})();
-function wxNoteText(k){return WXL[k]+' — always shown in this colour, on every page.';}
+(function(){var n=(navigator.language||'en').slice(0,2).toLowerCase();if(wxOrder.indexOf(n)>-1&&n!=='sa')wxActive=n;})();
+function wxNoteText(k){
+ if(k==='sa')return 'Sanskrit is written in IAST romanisation \u2014 so it can be read aloud without knowing the script.';
+ return WXL[k]+' \u2014 always shown in this colour, on every page.';}
 function wxBuildLangs(){var w=document.getElementById('wxLangs');if(!w)return;w.innerHTML='';wxOrder.forEach(function(k){var b=document.createElement('button');b.type='button';b.className='wxchip'+(k===wxActive?' on':'');b.textContent=WXL[k];b.style.setProperty('--c',WXC[k]);if(k===wxActive){b.style.background=WXC[k];b.style.borderColor=WXC[k];b.style.color='#fff';}b.addEventListener('click',function(){wxSet(k);});w.appendChild(b);});}
-function wxBuildGrid(){var g=document.getElementById('wxGrid');if(!g)return;g.innerHTML='';var cards=[];WX.forEach(function(w,i){var c=document.createElement('div');c.className='wxcard';c.style.transitionDelay=(i*22)+'ms';var top=(wxActive!=='en')?'<div class="wxen">'+w.en+'</div>':'';c.innerHTML=top+'<div class="wxtr" style="color:'+WXC[wxActive]+'">'+w[wxActive]+'</div>';g.appendChild(c);cards.push(c);});requestAnimationFrame(function(){requestAnimationFrame(function(){cards.forEach(function(c){c.classList.add('show');});});});}
+function wxBuildGrid(){var g=document.getElementById('wxGrid');if(!g)return;g.innerHTML='';var cards=[];WX.forEach(function(w,i){var c=document.createElement('div');c.className='wxcard';c.style.transitionDelay=(i*22)+'ms';var top=(wxActive!=='en')?'<div class="wxen">'+w.en+'</div>':'';var cls='wxtr'+(wxActive==='sa'?' sa':'');c.innerHTML=top+'<div class="'+cls+'" style="color:'+WXC[wxActive]+'">'+w[wxActive]+'</div>';g.appendChild(c);cards.push(c);});requestAnimationFrame(function(){requestAnimationFrame(function(){cards.forEach(function(c){c.classList.add('show');});});});}
 function wxSet(k){if(k===wxActive)return;wxActive=k;wxBuildLangs();wxBuildGrid();var nt=document.getElementById('wxNote');if(nt)nt.textContent=wxNoteText(k);}
 wxBuildLangs();wxBuildGrid();
 var _wxn=document.getElementById('wxNote');if(_wxn)_wxn.textContent=wxNoteText(wxActive);
