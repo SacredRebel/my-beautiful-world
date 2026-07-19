@@ -331,6 +331,14 @@ body{padding-bottom:70px}
 <meta property="og:image" content="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/cover.jpg" />
 <meta name="twitter:image" content="https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/cover.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
+<style>
+.pwgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:9px;margin-top:4px}
+.pwcard{background:rgba(127,127,127,.12);border:1px solid rgba(127,127,127,.26);border-radius:12px;padding:9px 7px;text-align:center}
+.pwen{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;opacity:.6;margin-bottom:2px}
+.pwmain{font-family:Fraunces,serif;font-weight:600;font-size:1.02rem;line-height:1.25}
+.pwdev{font-style:normal;opacity:.8;font-size:.86em;margin-left:3px}
+@media(max-width:520px){.pwgrid{grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:7px}.pwmain{font-size:.92rem}}
+</style>
 </head>
 <body>
 <div id="langbar" role="group" aria-label="Choose language"></div>
@@ -819,23 +827,26 @@ cur=pick; apply(pick); paintBar();
 (function(){
   var base='https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/img/';
   var CH=[
-    {t:'My Body',c:'#2b6cb0',imgs:['hand.jpg']},
-    {t:'Nature & Plants',c:'#2f855a',imgs:['oak_tree.jpg']},
-    {t:'Animals',c:'#b7791f',imgs:['animal1.jpg','animal2.jpg','animal3.jpg','animal4.jpg','animal5.jpg','animal6.jpg']},
-    {t:'My Home',c:'#c53030',imgs:['kitchen.jpg']},
-    {t:'Sky & Weather',c:'#c05621',imgs:['sunset.jpg','moon_stars.jpg']},
-    {t:'The World Outside',c:'#6b46c1',imgs:['boat.jpg','music.jpg']}
+    {t:"My Body",c:'#2b6cb0',img:'hand.jpg',pt:"The Hand",pg:4},
+    {t:"Nature & Plants",c:'#2f855a',img:'oak_tree.jpg',pt:"The Oak Tree",pg:8},
+    {t:"Animals",c:'#b7791f',img:'animal1.jpg',pt:"The Lion",pg:15},
+    {t:"My Home",c:'#c53030',img:'kitchen.jpg',pt:"The Kitchen",pg:22},
+    {t:"Sky & Weather",c:'#c05621',img:'moon_stars.jpg',pt:"The Night Sky",pg:33},
+    {t:"The World Outside",c:'#6b46c1',img:'boat.jpg',pt:"The Boat",pg:42}
   ];
+  var PW=[[["finger", "Finger", "deget", "dedo", "dito", "aṅguli", "अङ्गुलि"], ["palm", "Handfläche", "palmă", "palma", "palmo", "karatala", "करतल"], ["hand", "Hand", "mână", "mano", "mano", "hasta", "हस्त"], ["thumb", "Daumen", "degetul mare", "pulgar", "pollice", "aṅguṣṭha", "अङ्गुष्ठ"], ["nail", "Nagel", "unghie", "uña", "unghia", "nakha", "नख"], ["wrist", "Handgelenk", "încheietură", "muñeca", "polso", "maṇibandha", "मणिबन्ध"]], [["leaf", "Blatt", "frunză", "hoja", "foglia", "parṇa", "पर्ण"], ["acorn", "Eichel", "ghindă", "bellota", "ghianda", "phala", "फल"], ["branch", "Ast", "creangă", "rama", "ramo", "śākhā", "शाखा"], ["trunk", "Stamm", "trunchi", "tronco", "tronco", "skandha", "स्कन्ध"], ["bark", "Rinde", "scoarță", "corteza", "corteccia", "valkala", "वल्कल"], ["root", "Wurzel", "rădăcină", "raíz", "radice", "mūla", "मूल"]], [["mane", "Mähne", "coamă", "melena", "criniera", "keśara", "केशर"], ["whisker", "Schnurrhaar", "mustață", "bigote", "baffo", "śmaśru", "श्मश्रु"], ["muzzle", "Schnauze", "bot", "hocico", "muso", "mukhāgra", "मुखाग्र"], ["fang", "Fangzahn", "colț", "colmillo", "zanna", "daṃṣṭrā", "दंष्ट्रा"], ["roar", "Gebrüll", "răget", "rugido", "ruggito", "garjana", "गर्जन"], ["claw", "Kralle", "gheară", "garra", "artiglio", "nakhara", "नखर"]], [["spoon", "Löffel", "lingură", "cuchara", "cucchiaio", "darvī", "दर्वी"], ["cup", "Tasse", "cană", "taza", "tazza", "cakora", "चकोर"], ["plate", "Teller", "farfurie", "plato", "piatto", "sthālī", "स्थाली"], ["bowl", "Schüssel", "bol", "cuenco", "ciotola", "pātra", "पात्र"], ["fork", "Gabel", "furculiță", "tenedor", "forchetta", "triśūlikā", "त्रिशूलिका"], ["knife", "Messer", "cuțit", "cuchillo", "coltello", "churikā", "छुरिका"]], [["moon", "Mond", "lună", "luna", "luna", "candra", "चन्द्र"], ["night", "Nacht", "noapte", "noche", "notte", "rātri", "रात्रि"], ["crescent", "Mondsichel", "semilună", "media luna", "mezzaluna", "ardhacandra", "अर्धचन्द्र"], ["darkness", "Dunkelheit", "întuneric", "oscuridad", "oscurità", "tamas", "तमस्"], ["star", "Stern", "stea", "estrella", "stella", "tārā", "तारा"], ["moonlight", "Mondlicht", "lumina lunii", "luz de luna", "chiaro di luna", "candrikā", "चन्द्रिका"]], [["sail", "Segel", "velă", "vela", "vela", "vāta-vastra", "वातवस्त्र"], ["rope", "Seil", "frânghie", "cuerda", "corda", "rajju", "रज्जु"], ["mast", "Mast", "catarg", "mástil", "albero", "kūpa-daṇḍa", "कूपदण्ड"], ["wave", "Welle", "val", "ola", "onda", "taraṅga", "तरङ्ग"], ["anchor", "Anker", "ancoră", "ancla", "ancora", "laṅgara", "लङ्गर"], ["wood", "Holz", "lemn", "madera", "legno", "dāru", "दारु"]]];
+  var sel=0;
   var LANGS=[['English','#2b6cb0'],['Deutsch','#2f855a'],['Română','#b7791f'],['Español','#c53030'],['Italiano','#c05621'],['Sanskrit','#6b46c1']];
   var pk=document.getElementById('peek');
   var $=function(id){return document.getElementById(id);};
   var pkImg=$('pkImg'),pkTitle=$('pkTitle'),pkIdx=$('pkIdx'),pkDot=$('pkDot'),pkCount=$('pkCount'),pkPills=$('pkPills'),pkWord=$('pkWord'),pkNote=$('pkNote'),pkPrev=$('pkPrev'),pkNext=$('pkNext');
   var cur=0,imgi=0,order=[];
   function shuffle(n){var a=[],i,j,t;for(i=0;i<n;i++)a.push(i);for(i=a.length-1;i>0;i--){j=Math.floor(Math.random()*(i+1));t=a[i];a[i]=a[j];a[j]=t;}return a;}
-  function renderImg(){var ch=CH[cur];pkImg.src=base+ch.imgs[order[imgi]];var multi=ch.imgs.length>1;pkPrev.style.display=pkNext.style.display=multi?'block':'none';pkCount.textContent=multi?('Page '+(imgi+1)+' of '+ch.imgs.length+' · a random one from this chapter'):'A sample page from this chapter';}
+  function renderImg(){var ch=CH[cur];pkImg.src=base+ch.img;pkPrev.style.display=pkNext.style.display='none';pkCount.textContent=ch.pt+' \u00b7 page '+ch.pg+' of 45';}
+  function renderWords(){var ws=PW[cur],h='',k,w,dev,en;for(k=0;k<ws.length;k++){w=ws[k];dev=(sel===5)?' <i class="pwdev">'+w[6]+'</i>':'';en=(sel===0)?'':'<div class="pwen">'+w[0]+'</div>';h+='<div class="pwcard">'+en+'<div class="pwmain" style="color:'+LANGS[sel][1]+'">'+w[sel]+dev+'</div></div>';}pkWord.innerHTML='<div class="pwgrid">'+h+'</div>';}
   function buildPills(){pkPills.innerHTML='';LANGS.forEach(function(l,i){var b=document.createElement('button');b.className='lpill';b.style.background=l[1];b.innerHTML='<small>'+l[0]+'</small>';b.addEventListener('click',function(){spot(i);});pkPills.appendChild(b);});}
-  function spot(i){var p=pkPills.querySelectorAll('.lpill');p.forEach(function(el,j){el.classList.toggle('on',j===i);});pkWord.style.color=LANGS[i][1];pkWord.textContent=LANGS[i][0];pkNote.textContent='On every page, '+LANGS[i][0]+' always appears in this same color — the learning thread that never changes.';}
-  function open(ci){cur=ci;var ch=CH[cur];order=shuffle(ch.imgs.length);imgi=0;pkTitle.textContent=ch.t;pkIdx.textContent='Chapter '+(cur+1)+' of 6';pkDot.style.background=ch.c;buildPills();spot(0);renderImg();pk.classList.add('open');document.body.style.overflow='hidden';}
+  function spot(i){sel=i;var p=pkPills.querySelectorAll('.lpill');p.forEach(function(el,j){el.classList.toggle('on',j===i);});renderWords();pkNote.textContent=(i===5)?'Sanskrit is shown in romanisation and in Devanagari \u2014 always in this same colour.':('On every page, '+LANGS[i][0]+' always appears in this same colour \u2014 the learning thread that never changes.');}
+  function open(ci){cur=ci;var ch=CH[cur];order=[0];imgi=0;pkTitle.textContent=ch.t;pkIdx.textContent='Chapter '+(cur+1)+' of 6';pkDot.style.background=ch.c;buildPills();spot(0);renderImg();pk.classList.add('open');document.body.style.overflow='hidden';}
   function close(){pk.classList.remove('open');document.body.style.overflow='';}
   pkPrev.addEventListener('click',function(){imgi=(imgi-1+order.length)%order.length;renderImg();});
   pkNext.addEventListener('click',function(){imgi=(imgi+1)%order.length;renderImg();});
