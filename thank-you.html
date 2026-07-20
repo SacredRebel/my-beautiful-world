@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Thank you \u2014 My Beautiful World</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{--cream:#FDF8EF;--ink:#3A322E;--gold:#C6A15B;--line:#EFE6D3;--soft:#6b6357}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Nunito,system-ui,sans-serif;line-height:1.6;
+ background-image:radial-gradient(1100px 520px at 50% -10%,#fffaf1,transparent)}
+.wrap{max-width:640px;margin:0 auto;padding:44px 22px 70px;text-align:center}
+.mark{font-size:2.6rem;line-height:1;margin-bottom:14px}
+h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(1.7rem,5vw,2.5rem);line-height:1.15;margin:0 0 12px}
+.lead{color:var(--soft);font-size:1.04rem;margin:0 auto 26px;max-width:46ch}
+.btn{display:inline-block;background:var(--gold);color:#fff;text-decoration:none;font-weight:800;
+ padding:17px 34px;border-radius:999px;font-size:1.06rem;box-shadow:0 18px 34px -18px rgba(198,161,91,.9);transition:.18s}
+.btn:hover{transform:translateY(-2px)}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 22px;margin:32px 0 0;text-align:left;
+ box-shadow:0 22px 46px -34px rgba(58,50,46,.5)}
+.card h2{font-family:Fraunces,serif;font-weight:600;font-size:1.16rem;margin:0 0 14px}
+ol{margin:0;padding-left:20px}
+ol li{margin-bottom:9px;color:#4a4038}
+.note{margin-top:26px;font-size:.9rem;color:var(--soft)}
+.note a{color:#b08444}
+.langs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:30px}
+.langs button{border:1px solid var(--line);background:#fff;color:#8a8272;font-family:Nunito,sans-serif;font-weight:800;
+ font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;padding:7px 13px;border-radius:999px;cursor:pointer;transition:.16s}
+.langs button.on{background:var(--gold);border-color:var(--gold);color:#fff}
+.foot{margin-top:38px;font-size:.84rem;color:#9a9182}
+.foot a{color:#9a9182}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="langs" id="langs"></div>
+  <div class="mark">\u{1F49B}</div>
+  <h1 data-t="h1">Thank you \u2014 your book is ready.</h1>
+  <p class="lead" data-t="lead">Your payment went through. Your copy of <em>My Beautiful World</em> is waiting for you now.</p>
+
+  <a class="btn" id="dl" href="https://whop.com/joined/eden-verse/downloads-3HhpQRaiTkAHyy/app/" data-t="btn">Open your book</a>
+
+  <div class="card">
+    <h2 data-t="h2">How to find it, now and always</h2>
+    <ol>
+      <li data-t="s1">Click the button above.</li>
+      <li data-t="s2">Sign in with the same email you used at checkout.</li>
+      <li data-t="s3">Your book is under <strong>Downloads</strong> \u2014 open it or save the PDF to your device.</li>
+    </ol>
+    <p class="note" data-t="acct">We created a free account for you with that email, so you can come back and download the book again any time, on any device. Nothing to pay, ever again.</p>
+  </div>
+
+  <p class="note" data-t="help">Trouble finding it? Email <a href="mailto:edenverse88@gmail.com">edenverse88@gmail.com</a> and I will send the file straight over.</p>
+
+  <p class="foot"><a href="/" data-t="back">\u2190 Back to the book</a></p>
+</div>
+
+<script>
+var T={
+ h1:{de:"Danke \u2014 dein Buch ist bereit.",ro:"Mul\u021bumesc \u2014 cartea ta este gata.",es:"Gracias: tu libro est\u00e1 listo.",it:"Grazie \u2014 il tuo libro \u00e8 pronto."},
+ lead:{de:"Deine Zahlung ist angekommen. Dein Exemplar von <em>Meine sch\u00f6ne Welt</em> wartet jetzt auf dich.",
+   ro:"Plata ta a trecut. Exemplarul t\u0103u din <em>Lumea mea frumoas\u0103</em> te a\u0219teapt\u0103 acum.",
+   es:"Tu pago se ha realizado. Tu ejemplar de <em>Mi mundo hermoso</em> ya te espera.",
+   it:"Il pagamento \u00e8 andato a buon fine. La tua copia di <em>Il mio bel mondo</em> ti aspetta."},
+ btn:{de:"Buch \u00f6ffnen",ro:"Deschide cartea",es:"Abre tu libro",it:"Apri il tuo libro"},
+ h2:{de:"So findest du es \u2014 jetzt und immer",ro:"Cum o g\u0103se\u0219ti, acum \u0219i oric\u00e2nd",es:"C\u00f3mo encontrarlo, ahora y siempre",it:"Come trovarlo, ora e sempre"},
+ s1:{de:"Klick auf den Button oben.",ro:"Apas\u0103 butonul de mai sus.",es:"Haz clic en el bot\u00f3n de arriba.",it:"Clicca il pulsante qui sopra."},
+ s2:{de:"Melde dich mit derselben E-Mail an, die du beim Kauf verwendet hast.",ro:"Autentific\u0103-te cu acela\u0219i email folosit la cump\u0103rare.",es:"Inicia sesi\u00f3n con el mismo correo que usaste al pagar.",it:"Accedi con la stessa email usata al momento dell\u2019acquisto."},
+ s3:{de:"Dein Buch liegt unter <strong>Downloads</strong> \u2014 \u00f6ffne es oder speichere die PDF auf deinem Ger\u00e4t.",ro:"Cartea ta este la <strong>Downloads</strong> \u2014 deschide-o sau salveaz\u0103 PDF-ul pe dispozitiv.",es:"Tu libro est\u00e1 en <strong>Downloads</strong>: \u00e1brelo o guarda el PDF en tu dispositivo.",it:"Il tuo libro \u00e8 in <strong>Downloads</strong> \u2014 aprilo o salva il PDF sul tuo dispositivo."},
+ acct:{de:"Wir haben dir mit dieser E-Mail ein kostenloses Konto angelegt, damit du das Buch jederzeit und auf jedem Ger\u00e4t erneut herunterladen kannst. Nie wieder etwas zu bezahlen.",
+   ro:"Am creat un cont gratuit cu acel email, ca s\u0103 po\u021bi desc\u0103rca cartea oric\u00e2nd, pe orice dispozitiv. Nu mai pl\u0103te\u0219ti niciodat\u0103.",
+   es:"Hemos creado una cuenta gratuita con ese correo para que puedas descargar el libro cuando quieras, en cualquier dispositivo. Sin volver a pagar.",
+   it:"Abbiamo creato un account gratuito con quella email, cos\u00ec puoi riscaricare il libro quando vuoi, su qualsiasi dispositivo. Senza pagare mai pi\u00f9."},
+ help:{de:'Du findest es nicht? Schreib an <a href="mailto:edenverse88@gmail.com">edenverse88@gmail.com</a> und ich schicke dir die Datei direkt.',
+   ro:'Nu o g\u0103se\u0219ti? Scrie la <a href="mailto:edenverse88@gmail.com">edenverse88@gmail.com</a> \u0219i \u00ee\u021bi trimit fi\u0219ierul direct.',
+   es:'\u00bfNo lo encuentras? Escribe a <a href="mailto:edenverse88@gmail.com">edenverse88@gmail.com</a> y te env\u00edo el archivo directamente.',
+   it:'Non lo trovi? Scrivi a <a href="mailto:edenverse88@gmail.com">edenverse88@gmail.com</a> e ti mando il file direttamente.'},
+ back:{de:"\u2190 Zur\u00fcck zum Buch",ro:"\u2190 \u00cenapoi la carte",es:"\u2190 Volver al libro",it:"\u2190 Torna al libro"}
+};
+var LANGS=[['en','EN'],['de','DE'],['ro','RO'],['es','ES'],['it','IT']];
+var ORIG={},cur='en';
+document.querySelectorAll('[data-t]').forEach(function(el){ORIG[el.getAttribute('data-t')]=el.innerHTML;});
+function apply(l){
+  cur=l;
+  document.querySelectorAll('[data-t]').forEach(function(el){
+    var k=el.getAttribute('data-t');
+    el.innerHTML=(l!=='en'&&T[k]&&T[k][l])?T[k][l]:ORIG[k];
+  });
+  document.documentElement.setAttribute('lang',l);
+  paint();
+}
+function paint(){
+  var b=document.getElementById('langs');b.innerHTML='';
+  LANGS.forEach(function(x){
+    var t=document.createElement('button');t.type='button';t.textContent=x[1];
+    if(x[0]===cur)t.className='on';
+    t.addEventListener('click',function(){apply(x[0]);});
+    b.appendChild(t);
+  });
+}
+var pick='en';
+try{var s=localStorage.getItem('mbw_lang'); if(s)pick=s;}catch(e){}
+if(pick==='en'){var nv=(navigator.language||'en').slice(0,2).toLowerCase();
+  for(var i=0;i<LANGS.length;i++){if(LANGS[i][0]===nv){pick=nv;break;}}}
+apply(pick);
+</script>
+</body>
+</html>
