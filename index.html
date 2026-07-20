@@ -343,6 +343,12 @@ body{padding-bottom:70px}
 .dlbtn{display:block;margin:14px auto 8px;max-width:320px;text-align:center;font-size:1rem}
 .dlnote{display:block;font-size:.82rem;opacity:.75;font-style:italic}
 </style>
+<style>
+.buydone{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;background:rgba(28,24,20,.72);backdrop-filter:blur(6px);padding:20px}
+.buydone-card{background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:30px 26px;max-width:460px;text-align:center;box-shadow:0 40px 80px -40px rgba(0,0,0,.7)}
+.buydone-card h3{font-family:Fraunces,serif;font-size:1.5rem;margin:0 0 10px;color:var(--ink)}
+.buydone-card p{margin:0 0 16px;color:#6b6357;font-size:.95rem;line-height:1.55}
+</style>
 </head>
 <body>
 <div id="langbar" role="group" aria-label="Choose language"></div>
@@ -631,10 +637,9 @@ body{padding-bottom:70px}
   <a class="btn sm" href="#offer">Get early access</a>
 </div>
 
-<!-- Gumroad overlay (activates when you paste your product link below) -->
-<script src="https://gumroad.com/js/gumroad.js"></script>
+<!-- Paddle checkout (activates automatically once the Paddle env vars are set) -->
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 <script>
-var GUMROAD_PERMALINK = "";
 var LAUNCH_LIST_ENDPOINT = "/api/subscribe";
 
 var bar=document.getElementById('bar');
@@ -660,16 +665,75 @@ var _wxn=document.getElementById('wxNote');if(_wxn)_wxn.textContent=wxNoteText(w
 
 document.querySelectorAll('.q>button').forEach(function(b){b.addEventListener('click',function(){var q=b.parentElement;var a=q.querySelector('.a');var open=q.classList.toggle('open');a.style.maxHeight=open?a.scrollHeight+'px':0;});});
 
-function wireBuy(){
-  if(!GUMROAD_PERMALINK) return;
-  var href=GUMROAD_PERMALINK+(GUMROAD_PERMALINK.indexOf('?')>-1?'&':'?')+'wanted=true';
-  document.querySelectorAll('a[href="#offer"]').forEach(function(a){a.classList.add('gumroad-button');a.setAttribute('href',href);});
-  var area=document.getElementById('buyArea');
-  area.innerHTML='<a class="btn gumroad-button" style="font-size:1.1rem;padding:16px 34px" href="'+href+'">Get early access — $12</a>'+
-                 '<div class="cnote" style="color:#cdbfa6">Secure checkout · instant PDF · 30-day promise</div>';
-  if(window.GumroadOverlay&&window.GumroadOverlay.wire){try{window.GumroadOverlay.wire();}catch(e){}}
+/* ---- Paddle checkout ----------------------------------------------------
+   Stays in email-capture mode until PADDLE_CLIENT_TOKEN + PADDLE_PRICE_ID
+   are set in Vercel. Nothing here needs editing by hand. */
+var PADDLE_READY = false;
+
+function openCheckout(e){
+  if(e) e.preventDefault();
+  if(!PADDLE_READY) return;
+  try{
+    Paddle.Checkout.open({
+      items: [{ priceId: window.__PADDLE_PRICE_ID, quantity: 1 }],
+      settings: {
+        displayMode: 'overlay',
+        theme: 'light',
+        locale: (document.documentElement.getAttribute('lang') || 'en'),
+        successUrl: location.origin + location.pathname + '?purchase=done'
+      }
+    });
+  }catch(err){ console.error('checkout failed', err); }
 }
-wireBuy();
+
+function wireBuy(){
+  document.querySelectorAll('a[href="#offer"]').forEach(function(a){
+    a.addEventListener('click', openCheckout);
+  });
+  var area = document.getElementById('buyArea');
+  if(area){
+    area.innerHTML = '<a class="btn" style="font-size:1.1rem;padding:16px 34px" href="#offer">Get the book \u2014 $12 <span class="price-strike">$19</span></a>' +
+                     '<div class="cnote" style="color:#cdbfa6">Secure checkout \u00b7 instant PDF \u00b7 30-day promise</div>';
+    area.querySelector('a').addEventListener('click', openCheckout);
+  }
+}
+
+/* pull public config from the server so no keys live in this file */
+fetch('/api/config').then(function(r){return r.json();}).then(function(c){
+  if(!c || !c.ok || !c.clientToken || !c.priceId) return;   /* not configured yet */
+  window.__PADDLE_PRICE_ID = c.priceId;
+  if(c.environment === 'sandbox' && window.Paddle && Paddle.Environment) Paddle.Environment.set('sandbox');
+  Paddle.Initialize({ token: c.clientToken });
+  PADDLE_READY = true;
+  wireBuy();
+}).catch(function(){ /* stay in email-capture mode */ });
+
+/* ---- after a successful purchase, unlock the download ---- */
+(function(){
+  var q = new URLSearchParams(location.search);
+  var txn = q.get('_ptxn') || q.get('txn');
+  if(!txn) return;
+  var box = document.createElement('div');
+  box.className = 'buydone';
+  box.innerHTML = '<div class="buydone-card"><h3>Thank you \u2014 your book is ready.</h3>' +
+                  '<p id="dlMsg">Preparing your download\u2026</p>' +
+                  '<div id="dlWrap"></div></div>';
+  document.body.appendChild(box);
+  fetch('/api/download?txn=' + encodeURIComponent(txn))
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      var msg = document.getElementById('dlMsg'), wrap = document.getElementById('dlWrap');
+      if(j && j.ok && j.url){
+        msg.textContent = 'Your link is ready. It stays active for 15 minutes \u2014 save the file somewhere safe.';
+        wrap.innerHTML = '<a class="btn" href="' + j.url + '">Download My Beautiful World</a>';
+      } else {
+        msg.textContent = (j && j.message) || 'We could not prepare your download. Please email edenverse88@gmail.com and I will send it straight over.';
+      }
+    })
+    .catch(function(){
+      document.getElementById('dlMsg').textContent = 'We could not prepare your download. Please email edenverse88@gmail.com and I will send it straight over.';
+    });
+})();
 
 var f=document.getElementById('capForm');
 if(f){f.addEventListener('submit',function(e){e.preventDefault();
