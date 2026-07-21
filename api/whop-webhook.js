@@ -72,9 +72,9 @@ function verify(headers, raw, secret) {
 
   for (const key of keyCandidates(secret)) {
     for (const p of payloads) {
-      const mac = crypto.createHmac('sha256', key).update(p);
-      const b64 = mac.copy().digest('base64');
-      const hex = mac.digest('hex');
+      const digest = crypto.createHmac('sha256', key).update(p).digest();
+      const b64 = digest.toString('base64');
+      const hex = digest.toString('hex');
       for (const g of given) {
         if (g === b64 || g === hex) {
           console.log('whop signature matched scheme:',
