@@ -1,7 +1,7 @@
 // Shared email bodies for transactional sends via Resend.
-const COVER = 'https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/cover.jpg';
+const COVER = 'https://library.edenverse.earth/assets/cover.jpg';
 const DOWNLOAD = 'https://whop.com/joined/eden-verse/downloads-3HhpQRaiTkAHyy/app/';
-const SAMPLE = 'https://raw.githubusercontent.com/SacredRebel/my-beautiful-world/main/assets/My-Beautiful-World-Sample.pdf';
+const SAMPLE = 'https://library.edenverse.earth/assets/My-Beautiful-World-Sample.pdf';
 const CHECKOUT = 'https://whop.com/checkout/plan_vcHU3P33oWwsa/';
 
 function shell(inner) {
