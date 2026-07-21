@@ -53,7 +53,8 @@ exports.bookDelivery = function () {
         '<strong>1.</strong> Click the button above.<br><strong>2.</strong> Sign in with this email address &mdash; the one you used at checkout.<br><strong>3.</strong> Your book is under <strong>Downloads</strong>. Open it, or save the PDF to your device.<br><br>' +
         'A free account was created for you with this email, so you can download the book again whenever you like, on any device. There is nothing more to pay, ever.') +
       para('A gentle suggestion for the first read: do not try to read every language. Pick the one your child hears at home, point at a picture, and say the word. That is the whole method.') +
-      para('If anything goes wrong, just reply to this email and I will help.')
+      para('If anything goes wrong, just reply to this email and I will help.') +
+      para('Edenverse is the small studio behind this book &mdash; a family project from Ojai, California. <em>My Beautiful World</em> is the first in a growing series.')
     ),
     text: `Thank you - your book is ready.
 
@@ -70,6 +71,8 @@ A free account was created for you with this email, so you can download the book
 A gentle suggestion for the first read: do not try to read every language. Pick the one your child hears at home, point at a picture, and say the word.
 
 If anything goes wrong, just reply to this email.
+
+Edenverse is the small studio behind this book - a family project from Ojai, California. My Beautiful World is the first in a growing series.
 
 edenverse.earth`
   };
