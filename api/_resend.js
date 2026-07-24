@@ -59,6 +59,25 @@ exports.addContact = async function (email, segmentId) {
   return false;
 };
 
+// Resend does not return contact properties as bare values. It returns them
+// wrapped: { interests: { value: "series", type: "string" } }. Reading the
+// wrapper directly with String() yields "[object Object]", which then gets
+// written back as a tag. This unwraps whichever shape comes back.
+function propValue(props, name) {
+  const raw = props && props[name];
+  if (raw === null || raw === undefined) return '';
+  if (typeof raw === 'object') {
+    const v = raw.value;
+    return v === null || v === undefined ? '' : String(v);
+  }
+  return String(raw);
+}
+
+// Values that must never survive into the stored tag list: "none" is the
+// property's own fallback, and "[object object]" is the residue of the bug
+// above - listing it here repairs any contact already carrying it.
+const JUNK = ['none', '[object object]', 'undefined', 'null'];
+
 // Records what a contact has put their hand up for, in the "interests" contact
 // property. The free plan caps us at 3 segments, so interest is tracked as a
 // property rather than a segment per list.
@@ -75,16 +94,14 @@ exports.tagInterest = async function (email, tag) {
   try {
     const g = await req('GET', '/contacts/' + key);
     const c = (g.json && (g.json.data || g.json)) || {};
-    const props = c.properties || {};
-    existing = String(props.interests || '');
+    existing = propValue(c.properties, 'interests');
   } catch (e) {
     console.warn('resend contact read error', e.message);
   }
 
   const tags = existing.split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
   if (tags.indexOf(clean) === -1) tags.push(clean);
-  // "none" is the property fallback; drop it the moment there is a real interest
-  const merged = tags.filter((t) => t !== 'none').join(',');
+  const merged = tags.filter((t) => JUNK.indexOf(t) === -1).join(',');
   if (merged === existing) return true;
 
   try {
