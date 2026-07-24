@@ -58,7 +58,7 @@ section{position:relative}
 background:radial-gradient(120% 90% at 50% 12%,#3b3a63 0%,var(--dusk-2) 42%,var(--dusk-1) 100%)}
 #sky{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
 .hero .wrap{position:relative;z-index:3}
-.world-wrap{position:relative;width:min(560px,88vw);margin:0 auto 10px;filter:drop-shadow(0 30px 50px rgba(0,0,0,.35));will-change:transform}
+.world-wrap{position:relative;width:min(700px,92vw);margin:0 auto 10px;filter:drop-shadow(0 30px 50px rgba(0,0,0,.35));will-change:transform}
 .world-wrap .glow{position:absolute;inset:-16% -12% -14% -12%;border-radius:34px;
 background:radial-gradient(ellipse at 50% 46%,rgba(224,178,102,.5),rgba(224,178,102,.13) 48%,transparent 70%);
 animation:breathe 6s ease-in-out infinite;z-index:0}
@@ -130,7 +130,7 @@ animation:breathe 6s ease-in-out infinite;z-index:0}
 .scene:hover{transform:translateY(-4px)}
 .scene .art{aspect-ratio:4/3;overflow:hidden;background:linear-gradient(135deg,#F3EAD6,#E9DCC0);position:relative}
 .scene .art img{width:100%;height:100%;object-fit:cover;display:block}
-.chtag{position:absolute;top:10px;left:10px;z-index:2;color:#fff;font-weight:800;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;box-shadow:0 4px 12px -4px rgba(0,0,0,.5)}
+.scene .cap .chtag{display:inline-block;vertical-align:2px;margin-right:9px;color:#fff;font-weight:800;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px;box-shadow:0 3px 9px -4px rgba(0,0,0,.45)}
 .scene .cap{padding:12px 16px 16px;border-top:1px solid var(--line)}
 .scene .cap b{font-family:Fraunces;font-weight:600;font-size:1.05rem}
 .scene .cap span{font-size:.8rem;color:var(--ink-soft);display:block}
@@ -239,7 +239,7 @@ body{padding-bottom:70px}
 }
 
 /* ===== painted hero world (drops into the existing 3D rig) ===== */
-.world-wrap .world-photo{position:relative;z-index:1;display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:14px;background:#fdf6e6;
+.world-wrap .world-photo{position:relative;z-index:1;display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:14px;background:#fdf6e6;
  box-shadow:0 0 0 1px rgba(255,244,214,.30), 0 26px 60px -20px rgba(0,0,0,.62);
  animation:float 8s ease-in-out infinite}
 .world-wrap::after{content:"";position:absolute;inset:0;border-radius:14px;pointer-events:none;z-index:2;
@@ -510,12 +510,12 @@ footer a{color:inherit}
     <h2 class="reveal">Six chapters. One beautiful world.</h2>
     <p class="kick soft reveal">Every scene is a full watercolor-style illustration with its parts gently labeled in all six languages — one color per language, all the way through.</p>
     <div class="gal">
-      <div class="scene reveal"><div class="art"><span class="chtag" style="background:var(--en)">Ch. 1</span><img src="/assets/pages/hand.jpg" width="1000" height="750" alt="The Hand — page 4 of the book, every part labelled in all six languages" loading="lazy" decoding="async" /></div><div class="cap"><b>My Body</b><span>eye &middot; ear &middot; hand &middot; foot&hellip;</span><em class="pgref">The Hand &middot; page 4</em></div></div>
-      <div class="scene reveal"><div class="art"><span class="chtag" style="background:var(--de)">Ch. 2</span><img src="/assets/pages/oak.jpg" width="1000" height="750" alt="The Oak Tree — page 8 of the book, every part labelled in all six languages" loading="lazy" decoding="async" /></div><div class="cap"><b>Nature &amp; Plants</b><span>tree &middot; leaf &middot; river &middot; mountain&hellip;</span><em class="pgref">The Oak Tree &middot; page 8</em></div></div>
-      <div class="scene reveal"><div class="art"><span class="chtag" style="background:var(--ro)">Ch. 3</span><img src="/assets/pages/lion.jpg" width="1000" height="750" alt="The Lion — page 15 of the book, every part labelled in all six languages" loading="lazy" decoding="async" /></div><div class="cap"><b>Animals</b><span>lion &middot; bird &middot; horse &middot; dog&hellip;</span><em class="pgref">The Lion &middot; page 15</em></div></div>
-      <div class="scene reveal"><div class="art"><span class="chtag" style="background:var(--es)">Ch. 4</span><img src="/assets/pages/kitchen.jpg" width="1000" height="750" alt="The Kitchen — page 22 of the book, every part labelled in all six languages" loading="lazy" decoding="async" /></div><div class="cap"><b>My Home</b><span>spoon &middot; bed &middot; door &middot; window&hellip;</span><em class="pgref">The Kitchen &middot; page 22</em></div></div>
-      <div class="scene reveal"><div class="art"><span class="chtag" style="background:var(--it)">Ch. 5</span><img src="/assets/pages/night.jpg" width="1000" height="750" alt="The Night Sky — page 33 of the book, every part labelled in all six languages" loading="lazy" decoding="async" /></div><div class="cap"><b>Sky &amp; Weather</b><span>sun &middot; moon &middot; cloud &middot; rain&hellip;</span><em class="pgref">The Night Sky &middot; page 33</em></div></div>
-      <div class="scene reveal"><div class="art"><span class="chtag" style="background:var(--sa)">Ch. 6</span><img src="/assets/pages/boat.jpg" width="1000" height="750" alt="The Boat — page 42 of the book, every part labelled in all six languages" loading="lazy" decoding="async" /></div><div class="cap"><b>The World Outside</b><span>car &middot; boat &middot; music &middot; ceremony&hellip;</span><em class="pgref">The Boat &middot; page 42</em></div></div>
+      <div class="scene reveal"><div class="art"><img src="/assets/pages/hand.jpg" width="1000" height="750" alt="The Hand — page 4 of the book, every part labelled in all six languages" loading="lazy" decoding="async" /></div><div class="cap"><span class="chtag" style="background:var(--en)">Ch. 1</span><b>My Body</b><span>eye &middot; ear &middot; hand &middot; foot&hellip;</span><em class="pgref">The Hand &middot; page 4</em></div></div>
+      <div class="scene reveal"><div class="art"><img src="/assets/pages/oak.jpg" width="1000" height="750" alt="The Oak Tree — page 8 of the book, every part labelled in all six languages" loading="lazy" decoding="async" /></div><div class="cap"><span class="chtag" style="background:var(--de)">Ch. 2</span><b>Nature &amp; Plants</b><span>tree &middot; leaf &middot; river &middot; mountain&hellip;</span><em class="pgref">The Oak Tree &middot; page 8</em></div></div>
+      <div class="scene reveal"><div class="art"><img src="/assets/pages/lion.jpg" width="1000" height="750" alt="The Lion — page 15 of the book, every part labelled in all six languages" loading="lazy" decoding="async" /></div><div class="cap"><span class="chtag" style="background:var(--ro)">Ch. 3</span><b>Animals</b><span>lion &middot; bird &middot; horse &middot; dog&hellip;</span><em class="pgref">The Lion &middot; page 15</em></div></div>
+      <div class="scene reveal"><div class="art"><img src="/assets/pages/kitchen.jpg" width="1000" height="750" alt="The Kitchen — page 22 of the book, every part labelled in all six languages" loading="lazy" decoding="async" /></div><div class="cap"><span class="chtag" style="background:var(--es)">Ch. 4</span><b>My Home</b><span>spoon &middot; bed &middot; door &middot; window&hellip;</span><em class="pgref">The Kitchen &middot; page 22</em></div></div>
+      <div class="scene reveal"><div class="art"><img src="/assets/pages/night.jpg" width="1000" height="750" alt="The Night Sky — page 33 of the book, every part labelled in all six languages" loading="lazy" decoding="async" /></div><div class="cap"><span class="chtag" style="background:var(--it)">Ch. 5</span><b>Sky &amp; Weather</b><span>sun &middot; moon &middot; cloud &middot; rain&hellip;</span><em class="pgref">The Night Sky &middot; page 33</em></div></div>
+      <div class="scene reveal"><div class="art"><img src="/assets/pages/boat.jpg" width="1000" height="750" alt="The Boat — page 42 of the book, every part labelled in all six languages" loading="lazy" decoding="async" /></div><div class="cap"><span class="chtag" style="background:var(--sa)">Ch. 6</span><b>The World Outside</b><span>car &middot; boat &middot; music &middot; ceremony&hellip;</span><em class="pgref">The Boat &middot; page 42</em></div></div>
     </div>
     <p class="center soft reveal" style="margin-top:22px;font-size:.82rem">These are real pages, straight out of the book — nothing staged. Tap any one to look closer.</p>
   </div>
@@ -585,7 +585,7 @@ footer a{color:inherit}
             <input type="email" id="capEmail" placeholder="your email" required />
             <button class="btn" type="submit">Send me 3 free pages</button>
           </form>
-          <div class="ok" id="capOk">💛 You're on the list — here are your 3 free pages.<a class="btn dlbtn" id="capDl" href="https://library.edenverse.earth/assets/My-Beautiful-World-Sample.pdf" download>Download your 3 free pages</a><span class="dlnote">The Face · The Lion · The Night Sky — real pages from the book.</span></div>
+          <div class="ok" id="capOk">💛 You're on the list — here are your 3 free pages.<a class="btn dlbtn" id="capDl" href="https://library.edenverse.earth/assets/My-Beautiful-World-Sample.pdf" target="_blank" rel="noopener" download>Download your 3 free pages</a><span class="dlnote">The Face · The Lion · The Night Sky — real pages from the book.</span></div>
           <div class="cnote">No spam, ever. Just your free pages and one note when the book is live.</div>
         </div>
       </div>
@@ -615,10 +615,10 @@ footer a{color:inherit}
     <h2 class="center reveal">Where My Beautiful World goes next.</h2>
     <p data-i18n-html="path" class="kick soft center reveal" style="margin:0 auto">The first book teaches a child to <em>name</em> the world. The ones that follow help them feel it, count it, build with it — and slowly, gently, turn inward.</p>
     <div class="shelf">
-      <div class="book3d reveal" style="--c:var(--sa)"><div class="cover"><span class="spinchip">Coming next</span><img src="/assets/img/cover-emotions.jpg" alt="Emotions and Expressions — next book cover" loading="lazy" /><div class="titleplate"><div class="tt">Emotions &amp; Expressions</div></div></div><div class="status">Coming next<b>Emotions &amp; Expressions</b></div></div>
-      <div class="book3d reveal" style="--c:var(--en)"><div class="cover"><span class="spinchip">In the works</span><img src="/assets/img/cover-numbers.jpg" alt="Numbers and Shapes — next book cover" loading="lazy" /><div class="titleplate"><div class="tt">Numbers &amp; Shapes</div></div></div><div class="status">In the works<b>Numbers &amp; Shapes</b></div></div>
-      <div class="book3d reveal" style="--c:var(--it)"><div class="cover"><span class="spinchip">In the works</span><img src="/assets/img/cover-tools.jpg" alt="Tools and Making Things — next book cover" loading="lazy" /><div class="titleplate"><div class="tt">Tools &amp; Making Things</div></div></div><div class="status">In the works<b>Tools &amp; Making Things</b></div></div>
-      <div class="book3d reveal" style="--c:var(--gold)"><div class="cover"><span class="spinchip">On the horizon</span><img src="/assets/img/cover-focus.jpg" alt="Focus and Stillness — next book cover" loading="lazy" /><div class="titleplate"><div class="tt">Focus &amp; Stillness</div></div></div><div class="status">On the horizon<b>Focus &amp; Stillness</b></div></div>
+      <div class="book3d reveal" style="--c:var(--sa)"><div class="cover"><span class="spinchip">Coming next</span><img src="/assets/img/cover-emotions.jpg" alt="Emotions and Expressions — next book cover" loading="lazy" /><div class="titleplate"><div class="tt">Emotions &amp; Expressions</div></div></div></div>
+      <div class="book3d reveal" style="--c:var(--en)"><div class="cover"><span class="spinchip">In the works</span><img src="/assets/img/cover-numbers.jpg" alt="Numbers and Shapes — next book cover" loading="lazy" /><div class="titleplate"><div class="tt">Numbers &amp; Shapes</div></div></div></div>
+      <div class="book3d reveal" style="--c:var(--it)"><div class="cover"><span class="spinchip">In the works</span><img src="/assets/img/cover-tools.jpg" alt="Tools and Making Things — next book cover" loading="lazy" /><div class="titleplate"><div class="tt">Tools &amp; Making Things</div></div></div></div>
+      <div class="book3d reveal" style="--c:var(--gold)"><div class="cover"><span class="spinchip">On the horizon</span><img src="/assets/img/cover-focus.jpg" alt="Focus and Stillness — next book cover" loading="lazy" /><div class="titleplate"><div class="tt">Focus &amp; Stillness</div></div></div></div>
     </div>
     <div class="platform reveal">
       <div class="eyebrow">Part of something bigger</div>
