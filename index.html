@@ -10,6 +10,13 @@
 <meta property="og:type" content="website" />
 <!-- Pinterest domain verification - Eden Education account -->
 <meta name="p:domain_verify" content="b4c7a33e1e718460d96b3e9747e2d149"/>
+<!-- Pinterest Tag - Eden Education (Tag ID 2613187513702) -->
+<script>
+!function(e){if(!window.pintrk){window.pintrk=function(){window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var n=window.pintrk;n.queue=[],n.version="3.0";var t=document.createElement("script");t.async=!0,t.src=e;var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");
+pintrk('load','2613187513702');
+pintrk('page');
+</script>
+<noscript><img height="1" width="1" style="display:none;" alt="" src="https://ct.pinterest.com/v3/?event=init&tid=2613187513702&noscript=1" /></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -715,6 +722,17 @@ function wireBuy(){
 }
 wireBuy();
 
+/* ---- Pinterest: purchase intent. Fires when a buy button sends the visitor
+   to Whop checkout. Not a sale - the sale is tracked on /thank-you.html ---- */
+document.addEventListener('click', function(e){
+  var t = e.target; while(t && t.nodeType !== 1) t = t.parentNode;
+  var a = (t && t.closest) ? t.closest('a[href^="https://whop.com/checkout/"]') : null;
+  if(!a) return;
+  if(typeof pintrk === 'function'){
+    pintrk('track','addtocart',{value:12.00,currency:'USD',order_quantity:1,product_name:'My Beautiful World'});
+  }
+});
+
 var f=document.getElementById('capForm');
 if(f){f.addEventListener('submit',function(e){e.preventDefault();
   var em=document.getElementById('capEmail').value.trim();
@@ -724,7 +742,8 @@ if(f){f.addEventListener('submit',function(e){e.preventDefault();
   fetch(LAUNCH_LIST_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:'landing',lang:(document.documentElement.getAttribute('lang')||'en')})})
    .then(function(r){return r.json().catch(function(){return {ok:r.ok};});})
    .then(function(j){
-     if(j&&j.ok){f.style.display='none';document.getElementById('capOk').style.display='block';}
+     if(j&&j.ok){f.style.display='none';document.getElementById('capOk').style.display='block';
+       if(typeof pintrk==='function'){pintrk('set',{em:em});pintrk('track','lead',{lead_type:'Newsletter signup'});}}
      else{btn.disabled=false;btn.textContent=old;
        var c=document.querySelector('.cnote');
        if(c)c.textContent=(j&&j.message)?j.message:'That didn\u2019t go through \u2014 please try again in a moment.';}
