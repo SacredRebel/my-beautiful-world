@@ -1,6 +1,6 @@
 // Shared email bodies for transactional sends via Resend.
 const COVER = 'https://library.edenverse.earth/assets/cover.jpg';
-const DOWNLOAD = 'https://whop.com/joined/eden-verse/downloads-3HhpQRaiTkAHyy/app/';
+const DOWNLOAD = 'https://whop.com/joined/eden-verse/my-beautiful-world-3HhpQRaiTkAHyy/app/';
 const SAMPLE = 'https://library.edenverse.earth/assets/My-Beautiful-World-Sample.pdf';
 const CHECKOUT = 'https://whop.com/checkout/plan_vcHU3P33oWwsa/';
 
@@ -50,7 +50,7 @@ exports.bookDelivery = function () {
       lead('Your copy of <em>My Beautiful World</em> is waiting for you now.') +
       btn(DOWNLOAD, 'Open your book') +
       card('How to find it, now and always',
-        '<strong>1.</strong> Click the button above.<br><strong>2.</strong> Sign in with this email address &mdash; the one you used at checkout.<br><strong>3.</strong> Your book is under <strong>Downloads</strong>. Open it, or save the PDF to your device.<br><br>' +
+        '<strong>1.</strong> Click the button above.<br><strong>2.</strong> Sign in with this email address &mdash; the one you used at checkout. There is no password to invent.<br><strong>3.</strong> In the menu down the left-hand side, click <strong>My-Beautiful-World</strong>.<br><strong>4.</strong> Open <strong>My-Beautiful-World.pdf</strong> and save it to your device.<br><br>' +
         'A free account was created for you with this email, so you can download the book again whenever you like, on any device. There is nothing more to pay, ever.') +
       para('A gentle suggestion for the first read: do not try to read every language. Pick the one your child hears at home, point at a picture, and say the word. That is the whole method.') +
       para('If anything goes wrong, just reply to this email and I will help.') +
@@ -63,8 +63,9 @@ Your copy of My Beautiful World is waiting for you now.
 Open your book: ${DOWNLOAD}
 
 1. Click the link above.
-2. Sign in with this email address - the one you used at checkout.
-3. Your book is under "Downloads". Open it, or save the PDF to your device.
+2. Sign in with this email address - the one you used at checkout. There is no password to invent.
+3. In the menu down the left-hand side, click "My-Beautiful-World".
+4. Open "My-Beautiful-World.pdf" and save it to your device.
 
 A free account was created for you with this email, so you can download the book again whenever you like, on any device.
 
@@ -73,6 +74,44 @@ A gentle suggestion for the first read: do not try to read every language. Pick 
 If anything goes wrong, just reply to this email.
 
 Edenverse is the small studio behind this book - a family project from Ojai, California. My Beautiful World is the first in a growing series.
+
+edenverse.earth`
+  };
+};
+
+// Confirmation for the two waitlists on the thank-you page. These people have
+// already bought, so there is no pitch here and no sample attached - it is a
+// receipt for putting their hand up, nothing more.
+exports.waitlistConfirm = function (list) {
+  const print = list === 'print';
+
+  const title = print ? 'You are on the print list.' : 'You are on the list.';
+  const sub = print
+    ? 'I will write to you when the printed edition is real.'
+    : 'I will write to you when the next book is ready.';
+  const body = print
+    ? 'A printed copy is something a lot of people ask for, and it is being worked on. It is not ready, and I will not put it on sale before it is. When there is a real book and a real price, you will hear before anyone else.'
+    : 'The next book is <em>Emotions &amp; Expressions</em>, and it is in research right now. After that come Numbers &amp; Shapes, Tools &amp; Making Things, and Focus &amp; Stillness. A part of every copy sold goes straight into making the next one.';
+
+  const textBody = print
+    ? 'A printed copy is something a lot of people ask for, and it is being worked on. It is not ready, and I will not put it on sale before it is. When there is a real book and a real price, you will hear before anyone else.'
+    : 'The next book is Emotions & Expressions, and it is in research right now. After that come Numbers & Shapes, Tools & Making Things, and Focus & Stillness. A part of every copy sold goes straight into making the next one.';
+
+  return {
+    subject: print ? 'You are on the print list \u{1F49B}' : 'You are on the list \u{1F49B}',
+    html: shell(
+      h1(title) +
+      lead(sub) +
+      para(body) +
+      para('I do not send much, and I only send when there is something real to say. If you would rather not hear from me, just reply and say so.')
+    ),
+    text: `${title}
+
+${sub}
+
+${textBody}
+
+I do not send much, and I only send when there is something real to say. If you would rather not hear from me, just reply and say so.
 
 edenverse.earth`
   };

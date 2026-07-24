@@ -18,92 +18,326 @@ pintrk('page');
 <noscript><img height="1" width="1" style="display:none;" alt="" src="https://ct.pinterest.com/v3/?event=init&tid=2613187513702&noscript=1" /></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
-:root{--cream:#FDF8EF;--ink:#3A322E;--gold:#C6A15B;--line:#EFE6D3;--soft:#6b6357}
+:root{
+  --cream:#FDF8EF;--ink:#3A322E;--gold:#C6A15B;--gold-dk:#A8823F;
+  --line:#EFE6D3;--soft:#6b6357;--mute:#9a9182;--leaf:#6E8B6A;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--cream);color:var(--ink);font-family:Nunito,system-ui,sans-serif;line-height:1.6;
- background-image:radial-gradient(1100px 520px at 50% -10%,#fffaf1,transparent)}
-.wrap{max-width:640px;margin:0 auto;padding:44px 22px 70px;text-align:center}
-.mark{font-size:2.6rem;line-height:1;margin-bottom:14px}
-h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(1.7rem,5vw,2.5rem);line-height:1.15;margin:0 0 12px}
-.lead{color:var(--soft);font-size:1.04rem;margin:0 auto 26px;max-width:46ch}
-.btn{display:inline-block;background:var(--gold);color:#fff;text-decoration:none;font-weight:800;
- padding:17px 34px;border-radius:999px;font-size:1.06rem;box-shadow:0 18px 34px -18px rgba(198,161,91,.9);transition:.18s}
-.btn:hover{transform:translateY(-2px)}
-.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 22px;margin:32px 0 0;text-align:left;
- box-shadow:0 22px 46px -34px rgba(58,50,46,.5)}
-.card h2{font-family:Fraunces,serif;font-weight:600;font-size:1.16rem;margin:0 0 14px}
-ol{margin:0;padding-left:20px}
-ol li{margin-bottom:9px;color:#4a4038}
-.note{margin-top:26px;font-size:.9rem;color:var(--soft)}
-.note a{color:#b08444}
-.langs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:30px}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Nunito,system-ui,sans-serif;line-height:1.65;
+ background-image:radial-gradient(1100px 520px at 50% -10%,#fffaf1,transparent);-webkit-font-smoothing:antialiased}
+.wrap{max-width:660px;margin:0 auto;padding:34px 22px 70px}
+
+.langs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:34px}
 .langs button{border:1px solid var(--line);background:#fff;color:#8a8272;font-family:Nunito,sans-serif;font-weight:800;
  font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;padding:7px 13px;border-radius:999px;cursor:pointer;transition:.16s}
 .langs button.on{background:var(--gold);border-color:var(--gold);color:#fff}
-.foot{margin-top:38px;font-size:.84rem;color:#9a9182}
-.foot a{color:#9a9182}
+
+.hero{text-align:center;margin-bottom:38px}
+.mark{font-size:2.6rem;line-height:1;margin-bottom:14px}
+h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(1.75rem,5.4vw,2.5rem);line-height:1.14;margin:0 0 14px}
+.lead{color:var(--soft);font-size:1.06rem;margin:0 auto;max-width:46ch}
+
+.eyebrow{font-size:.7rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dk);margin:0 0 8px}
+h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.32rem;line-height:1.25;margin:0 0 10px}
+.sub{color:var(--soft);font-size:.97rem;margin:0 0 18px}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px 24px;margin:0 0 22px;
+ box-shadow:0 22px 46px -34px rgba(58,50,46,.5)}
+.card.hi{border-color:#E4CFA2;box-shadow:0 26px 54px -30px rgba(198,161,91,.55)}
+
+.btn{display:inline-block;background:var(--gold);color:#fff;text-decoration:none;font-weight:800;
+ padding:17px 30px;border-radius:999px;font-size:1.06rem;text-align:center;
+ box-shadow:0 18px 34px -18px rgba(198,161,91,.95);transition:.18s;border:0;cursor:pointer;font-family:Nunito,sans-serif}
+.btn:hover{transform:translateY(-2px)}
+.btn.block{display:block;width:100%}
+.btn.ghost{background:#fff;color:var(--gold-dk);border:1px solid #E4CFA2;box-shadow:none;font-size:.95rem;padding:13px 22px}
+
+.steps{counter-reset:s;list-style:none;margin:22px 0 0;padding:0}
+.steps li{counter-increment:s;position:relative;padding:0 0 0 44px;margin:0 0 16px;color:#4a4038;font-size:.98rem}
+.steps li:last-child{margin-bottom:0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:29px;height:29px;border-radius:50%;
+ background:var(--gold);color:#fff;font-weight:800;font-size:.86rem;display:flex;align-items:center;justify-content:center}
+.pill{display:inline-block;background:#FBF4E6;border:1px solid var(--line);border-radius:7px;
+ padding:1px 8px;font-weight:700;font-size:.9em;white-space:nowrap}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0 14px;text-align:center}
+.stat b{display:block;font-family:Fraunces,serif;font-weight:600;font-size:1.5rem;color:var(--gold-dk);line-height:1.1}
+.stat span{display:block;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.langline{text-align:center;font-size:.88rem;color:var(--soft);border-top:1px solid var(--line);padding-top:14px;margin:0}
+
+.series{list-style:none;margin:0 0 18px;padding:0}
+.series li{display:flex;align-items:baseline;gap:11px;padding:11px 0;border-bottom:1px solid #F6EFE1;font-size:.97rem}
+.series li:last-child{border-bottom:0}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--leaf);flex:0 0 8px;transform:translateY(-2px)}
+.dot.soon{background:var(--gold)}
+.dot.later{background:#DCD3C2}
+.series .t{font-weight:700}
+.series .st{margin-left:auto;font-size:.8rem;color:var(--mute);white-space:nowrap;padding-left:10px}
+
+form.cap{display:flex;gap:8px;margin:16px 0 0;flex-wrap:wrap}
+form.cap input{flex:1 1 200px;min-width:0;border:1px solid var(--line);background:#FFFDF9;border-radius:999px;
+ padding:14px 18px;font-family:Nunito,sans-serif;font-size:.97rem;color:var(--ink)}
+form.cap input:focus{outline:0;border-color:var(--gold)}
+form.cap button{flex:0 0 auto}
+.ok{color:var(--leaf);font-size:.92rem;margin:12px 0 0;display:none}
+.err{color:#b4553f;font-size:.92rem;margin:12px 0 0;display:none}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0}
+.tile{display:block;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:16px;
+ padding:17px 18px;transition:.16s;color:var(--ink)}
+.tile:hover{border-color:#E4CFA2;transform:translateY(-2px)}
+.tile b{display:block;font-size:.97rem;margin-bottom:3px}
+.tile span{display:block;font-size:.85rem;color:var(--soft);line-height:1.45}
+
+.note{font-size:.9rem;color:var(--soft);margin:16px 0 0}
+.note a{color:var(--gold-dk)}
+.divider{height:1px;background:var(--line);margin:38px 0;border:0}
+.foot{margin-top:34px;text-align:center;font-size:.84rem;color:var(--mute);line-height:1.7}
+.foot a{color:var(--mute)}
+
+@media(max-width:520px){
+  .grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr);gap:16px 10px}
+  .series li{flex-wrap:wrap}
+  .series .st{margin-left:19px;padding-left:0}
+  .card{padding:22px 18px}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
+
   <div class="langs" id="langs"></div>
-  <div class="mark">💛</div>
-  <h1 data-t="h1">Thank you — your book is ready.</h1>
-  <p class="lead" data-t="lead">Your payment went through. Your copy of <em>My Beautiful World</em> is waiting for you now.</p>
 
-  <a class="btn" id="dl" href="https://whop.com/joined/eden-verse/downloads-3HhpQRaiTkAHyy/app/" data-t="btn">Open your book</a>
-
-  <div class="card">
-    <h2 data-t="h2">How to find it, now and always</h2>
-    <ol>
-      <li data-t="s1">Click the button above.</li>
-      <li data-t="s2">Sign in with the same email you used at checkout.</li>
-      <li data-t="s3">Your book is under <strong>Downloads</strong> — open it or save the PDF to your device.</li>
-    </ol>
-    <p class="note" data-t="acct">We created a free account for you with that email, so you can come back and download the book again any time, on any device. Nothing to pay, ever again.</p>
+  <div class="hero">
+    <div class="mark">💛</div>
+    <h1 data-t="h1">Thank you — the book is yours.</h1>
+    <p class="lead" data-t="lead">Your payment went through. <em>My Beautiful World</em> is waiting in your account, and it stays there for good.</p>
   </div>
 
-  <p class="note" data-t="studio" style="margin-top:22px">Edenverse is the small studio behind this book — a family project from Ojai, California. <em>My Beautiful World</em> is the first in a growing series.</p>
-  <p class="note" data-t="help">Trouble finding it? Email <a href="mailto:edenverse88@gmail.com">edenverse88@gmail.com</a> and I will send the file straight over.</p>
+  <!-- 1. GET THE BOOK -->
+  <div class="card hi">
+    <p class="eyebrow" data-t="e1">Step one</p>
+    <h2 data-t="s1h">Open your book</h2>
+    <a class="btn block" id="dl" href="https://whop.com/joined/eden-verse/my-beautiful-world-3HhpQRaiTkAHyy/app/" data-t="btn">Get the book →</a>
+    <ol class="steps">
+      <li data-t="st1">Click the gold button above. It opens your account.</li>
+      <li data-t="st2">Sign in with the same email you used at checkout. The account is already made — there is no password to invent.</li>
+      <li data-t="st3">In the menu down the left-hand side, click <span class='pill'>My-Beautiful-World</span>.</li>
+      <li data-t="st4">Open <span class='pill'>My-Beautiful-World.pdf</span> and save it to your device. Download it as many times as you like, on as many devices as you like.</li>
+    </ol>
+    <p class="note" data-t="inbox">The same link is sitting in your inbox. If it is not there, look in spam.</p>
+    <p class="note" data-t="help">Stuck anywhere at all? Write to <a href="mailto:edenverse88@gmail.com">edenverse88@gmail.com</a> and I will send the file straight over.</p>
+  </div>
 
-  <p class="foot"><a href="/" data-t="back">← Back to the book</a></p>
+  <hr class="divider" />
+
+  <!-- 2. HOW TO READ IT -->
+  <div class="card">
+    <p class="eyebrow" data-t="e2">Before you start</p>
+    <h2 data-t="s2h">How to read it</h2>
+    <p class="sub" data-t="s2lead">It is not a book you read cover to cover. It is a book you point at.</p>
+    <ol class="steps">
+      <li data-t="m1">Do not read every language. Pick one or two and stay there a while.</li>
+      <li data-t="m2">Point first, then say the word. The finger does half the teaching.</li>
+      <li data-t="m3">Let the colours do the sorting. Each language keeps its own colour on every page, so a child learns which sound belongs to which language long before they can read a letter.</li>
+      <li data-t="m4">Stop when they stop. Two minutes a day beats twenty minutes once.</li>
+    </ol>
+    <div class="stats">
+      <div class="stat"><b>45</b><span data-t="k1">pages</span></div>
+      <div class="stat"><b>274</b><span data-t="k2">first words</span></div>
+      <div class="stat"><b>6</b><span data-t="k3">chapters</span></div>
+      <div class="stat"><b>6</b><span data-t="k4">languages</span></div>
+    </div>
+    <p class="langline" data-t="langlist">English · German · Romanian · Spanish · Italian · Sanskrit</p>
+  </div>
+
+  <!-- 3. THE SERIES -->
+  <div class="card">
+    <p class="eyebrow" data-t="e3">What comes next</p>
+    <h2 data-t="s3h">The rest of the series</h2>
+    <p class="sub" data-t="s3lead">My Beautiful World is the first. Here is the honest state of what follows.</p>
+    <ul class="series">
+      <li><span class="dot"></span><span class="t" data-t="i1t">My Beautiful World</span><span class="st" data-t="i1s">Yours now</span></li>
+      <li><span class="dot soon"></span><span class="t">Emotions &amp; Expressions</span><span class="st" data-t="i2s">Coming next — in research</span></li>
+      <li><span class="dot later"></span><span class="t">Numbers &amp; Shapes</span><span class="st" data-t="i3s">In the works</span></li>
+      <li><span class="dot later"></span><span class="t">Tools &amp; Making Things</span><span class="st" data-t="i4s">In the works</span></li>
+      <li><span class="dot later"></span><span class="t">Focus &amp; Stillness</span><span class="st" data-t="i5s">On the horizon</span></li>
+    </ul>
+    <p class="sub" data-t="fund" style="margin-bottom:0">A part of every copy sold goes straight into making the next one.</p>
+    <p class="note" data-t="seriesq" style="font-weight:700;color:var(--ink)">Want to know when the next one is ready?</p>
+    <form class="cap" id="fSeries" novalidate>
+      <input type="email" id="eSeries" placeholder="your email" data-tph="seriesph" autocomplete="email" />
+      <button class="btn" type="submit" data-t="seriesbtn">Keep me posted</button>
+    </form>
+    <p class="ok" id="okSeries" data-t="seriesok">You are on the list. I only write when there is something real to say.</p>
+    <p class="err" id="errSeries"></p>
+  </div>
+
+  <!-- 4. PRINT EDITION -->
+  <div class="card">
+    <p class="eyebrow" data-t="e4">Asked for often</p>
+    <h2 data-t="s4h">The printed edition</h2>
+    <p class="sub" data-t="s4body">A lot of people want a real book they can put into a child's hands. I am working on it. It is not ready, and I will not sell it before it is — printing 45 pages in full colour costs meaningfully more than the PDF, and I would rather show you the true price than take a pre-order on a guess. Leave your email and you will hear first.</p>
+    <form class="cap" id="fPrint" novalidate>
+      <input type="email" id="ePrint" placeholder="your email" data-tph="printph" autocomplete="email" />
+      <button class="btn" type="submit" data-t="printbtn">Tell me when it prints</button>
+    </form>
+    <p class="ok" id="okPrint" data-t="printok">Noted. You will hear before anyone else.</p>
+    <p class="err" id="errPrint"></p>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- 5. THE UMBRELLA -->
+  <div class="card">
+    <p class="eyebrow" data-t="e5">Where this came from</p>
+    <h2 data-t="s5h">The wider Edenverse</h2>
+    <p class="sub" data-t="s5lead">The book came out of a small studio in Ojai, California. Here is the rest of it.</p>
+    <div class="grid">
+      <a class="tile" href="https://whop.com/joined/eden-verse/" target="_blank" rel="noopener">
+        <b data-t="t1t">Eden Backyard Starter Kit</b><span data-t="t1d">Growing food at home, from the first seed.</span>
+      </a>
+      <a class="tile" href="https://edenverse.earth" target="_blank" rel="noopener">
+        <b data-t="t2t">edenverse.earth</b><span data-t="t2d">The main house. Everything under one roof.</span>
+      </a>
+      <a class="tile" href="https://library.edenverse.earth/" target="_blank" rel="noopener">
+        <b data-t="t3t">The Library</b><span data-t="t3d">Where the books live. Samples, and whatever ships next.</span>
+      </a>
+      <a class="tile" href="https://whop.com/joined/eden-verse/" target="_blank" rel="noopener">
+        <b data-t="t4t">Your account</b><span data-t="t4d">Everything you own, in one place, forever.</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 6. FOLLOW -->
+  <div class="card">
+    <p class="eyebrow" data-t="e6">Stay close</p>
+    <h2 data-t="s6h">Come along</h2>
+    <p class="sub" data-t="s6lead">New pages, new words and the odd look behind the scenes go up here first.</p>
+    <div class="grid">
+      <a class="tile" href="https://www.pinterest.com/Eden_Education/" target="_blank" rel="noopener">
+        <b data-t="f1t">Pinterest — Eden Education</b><span data-t="f1d">The books, page by page.</span>
+      </a>
+      <a class="tile" href="https://www.pinterest.com/edenverse88/" target="_blank" rel="noopener">
+        <b data-t="f2t">Pinterest — Edenverse</b><span data-t="f2d">The land, the garden, the wider work.</span>
+      </a>
+      <a class="tile" href="https://www.instagram.com/edenverse._/" target="_blank" rel="noopener">
+        <b data-t="f3t">Instagram</b><span data-t="f3d">Day to day, in pictures.</span>
+      </a>
+      <a class="tile" href="mailto:edenverse88@gmail.com">
+        <b data-t="f4t">Just write to me</b><span data-t="f4d">I read every message myself.</span>
+      </a>
+    </div>
+  </div>
+
+  <p class="foot">
+    <span data-t="foot1">Made for one little girl, then made properly so that other people's children could have it too. Ojai, California.</span><br /><br />
+    <a href="/" data-t="back">← Back to the book</a><br /><br />
+    <a href="https://edenverse.earth/terms" target="_blank" rel="noopener">Terms</a> ·
+    <a href="https://edenverse.earth/privacy" target="_blank" rel="noopener">Privacy</a> ·
+    <a href="https://edenverse.earth/refund" target="_blank" rel="noopener">Refunds</a>
+  </p>
+
 </div>
 
 <script>
 var T={
- h1:{de:"Danke \u2014 dein Buch ist bereit.",ro:"Mul\u021bumesc \u2014 cartea ta este gata.",es:"Gracias: tu libro est\u00e1 listo.",it:"Grazie \u2014 il tuo libro \u00e8 pronto."},
- lead:{de:"Deine Zahlung ist angekommen. Dein Exemplar von <em>Meine sch\u00f6ne Welt</em> wartet jetzt auf dich.",
-   ro:"Plata ta a trecut. Exemplarul t\u0103u din <em>Lumea mea frumoas\u0103</em> te a\u0219teapt\u0103 acum.",
-   es:"Tu pago se ha realizado. Tu ejemplar de <em>Mi mundo hermoso</em> ya te espera.",
-   it:"Il pagamento \u00e8 andato a buon fine. La tua copia di <em>Il mio bel mondo</em> ti aspetta."},
- btn:{de:"Buch \u00f6ffnen",ro:"Deschide cartea",es:"Abre tu libro",it:"Apri il tuo libro"},
- h2:{de:"So findest du es \u2014 jetzt und immer",ro:"Cum o g\u0103se\u0219ti, acum \u0219i oric\u00e2nd",es:"C\u00f3mo encontrarlo, ahora y siempre",it:"Come trovarlo, ora e sempre"},
- s1:{de:"Klick auf den Button oben.",ro:"Apas\u0103 butonul de mai sus.",es:"Haz clic en el bot\u00f3n de arriba.",it:"Clicca il pulsante qui sopra."},
- s2:{de:"Melde dich mit derselben E-Mail an, die du beim Kauf verwendet hast.",ro:"Autentific\u0103-te cu acela\u0219i email folosit la cump\u0103rare.",es:"Inicia sesi\u00f3n con el mismo correo que usaste al pagar.",it:"Accedi con la stessa email usata al momento dell\u2019acquisto."},
- s3:{de:"Dein Buch liegt unter <strong>Downloads</strong> \u2014 \u00f6ffne es oder speichere die PDF auf deinem Ger\u00e4t.",ro:"Cartea ta este la <strong>Downloads</strong> \u2014 deschide-o sau salveaz\u0103 PDF-ul pe dispozitiv.",es:"Tu libro est\u00e1 en <strong>Downloads</strong>: \u00e1brelo o guarda el PDF en tu dispositivo.",it:"Il tuo libro \u00e8 in <strong>Downloads</strong> \u2014 aprilo o salva il PDF sul tuo dispositivo."},
- acct:{de:"Wir haben dir mit dieser E-Mail ein kostenloses Konto angelegt, damit du das Buch jederzeit und auf jedem Ger\u00e4t erneut herunterladen kannst. Nie wieder etwas zu bezahlen.",
-   ro:"Am creat un cont gratuit cu acel email, ca s\u0103 po\u021bi desc\u0103rca cartea oric\u00e2nd, pe orice dispozitiv. Nu mai pl\u0103te\u0219ti niciodat\u0103.",
-   es:"Hemos creado una cuenta gratuita con ese correo para que puedas descargar el libro cuando quieras, en cualquier dispositivo. Sin volver a pagar.",
-   it:"Abbiamo creato un account gratuito con quella email, cos\u00ec puoi riscaricare il libro quando vuoi, su qualsiasi dispositivo. Senza pagare mai pi\u00f9."},
- help:{de:'Du findest es nicht? Schreib an <a href="mailto:edenverse88@gmail.com">edenverse88@gmail.com</a> und ich schicke dir die Datei direkt.',
-   ro:'Nu o g\u0103se\u0219ti? Scrie la <a href="mailto:edenverse88@gmail.com">edenverse88@gmail.com</a> \u0219i \u00ee\u021bi trimit fi\u0219ierul direct.',
-   es:'\u00bfNo lo encuentras? Escribe a <a href="mailto:edenverse88@gmail.com">edenverse88@gmail.com</a> y te env\u00edo el archivo directamente.',
-   it:'Non lo trovi? Scrivi a <a href="mailto:edenverse88@gmail.com">edenverse88@gmail.com</a> e ti mando il file direttamente.'},
- studio:{de:"Edenverse ist das kleine Studio hinter diesem Buch \u2014 ein Familienprojekt aus Ojai, Kalifornien. <em>Meine sch\u00f6ne Welt</em> ist das erste einer wachsenden Reihe.",ro:"Edenverse este micul studio din spatele acestei c\u0103r\u021bi \u2014 un proiect de familie din Ojai, California. <em>Lumea mea frumoas\u0103</em> este prima dintr-o serie \u00een cre\u0219tere.",es:"Edenverse es el peque\u00f1o estudio detr\u00e1s de este libro, un proyecto familiar de Ojai, California. <em>Mi mundo hermoso</em> es el primero de una serie en crecimiento.",it:"Edenverse \u00e8 il piccolo studio dietro questo libro \u2014 un progetto di famiglia da Ojai, California. <em>Il mio bel mondo</em> \u00e8 il primo di una serie in crescita."},
- back:{de:"\u2190 Zur\u00fcck zum Buch",ro:"\u2190 \u00cenapoi la carte",es:"\u2190 Volver al libro",it:"\u2190 Torna al libro"}
+h1:{de:"Danke — das Buch gehört jetzt dir.",ro:"Mulțumesc — cartea este a ta.",es:"Gracias: el libro ya es tuyo.",it:"Grazie — il libro è tuo."},
+lead:{de:"Deine Zahlung ist angekommen. <em>Meine schöne Welt</em> wartet in deinem Konto auf dich, und bleibt dort für immer.",ro:"Plata a trecut. <em>Lumea mea frumoasă</em> te așteaptă în contul tău și rămâne acolo pentru totdeauna.",es:"Tu pago se ha realizado. <em>Mi mundo hermoso</em> te espera en tu cuenta, y se queda ahí para siempre.",it:"Il pagamento è andato a buon fine. <em>Il mio bel mondo</em> ti aspetta nel tuo account, e ci resta per sempre."},
+
+e1:{de:"Schritt eins",ro:"Pasul unu",es:"Paso uno",it:"Primo passo"},
+s1h:{de:"Öffne dein Buch",ro:"Deschide cartea",es:"Abre tu libro",it:"Apri il tuo libro"},
+btn:{de:"Zum Buch →",ro:"Ia cartea →",es:"Consigue el libro →",it:"Prendi il libro →"},
+st1:{de:"Klick auf den goldenen Button oben. Er öffnet dein Konto.",ro:"Apasă butonul auriu de mai sus. Îți deschide contul.",es:"Haz clic en el botón dorado de arriba. Abre tu cuenta.",it:"Clicca il pulsante dorato qui sopra. Apre il tuo account."},
+st2:{de:"Melde dich mit derselben E-Mail an, die du beim Kauf benutzt hast. Das Konto besteht bereits — du musst kein Passwort erfinden.",ro:"Autentifică-te cu același email folosit la cumpărare. Contul există deja — nu trebuie să inventezi nicio parolă.",es:"Inicia sesión con el mismo correo que usaste al pagar. La cuenta ya está creada: no tienes que inventar ninguna contraseña.",it:"Accedi con la stessa email usata al momento dell'acquisto. L'account esiste già — non devi inventare nessuna password."},
+st3:{de:"Klick im Menü an der linken Seite auf <span class='pill'>My-Beautiful-World</span>.",ro:"În meniul din partea stângă, apasă pe <span class='pill'>My-Beautiful-World</span>.",es:"En el menú de la izquierda, haz clic en <span class='pill'>My-Beautiful-World</span>.",it:"Nel menu sul lato sinistro, clicca su <span class='pill'>My-Beautiful-World</span>."},
+st4:{de:"Öffne <span class='pill'>My-Beautiful-World.pdf</span> und speichere es auf deinem Gerät. Lade es so oft herunter, wie du möchtest, auf so vielen Geräten, wie du möchtest.",ro:"Deschide <span class='pill'>My-Beautiful-World.pdf</span> și salvează-l pe dispozitiv. Descarcă-l de câte ori vrei, pe câte dispozitive vrei.",es:"Abre <span class='pill'>My-Beautiful-World.pdf</span> y guárdalo en tu dispositivo. Descárgalo tantas veces como quieras, en tantos dispositivos como quieras.",it:"Apri <span class='pill'>My-Beautiful-World.pdf</span> e salvalo sul tuo dispositivo. Scaricalo quante volte vuoi, su quanti dispositivi vuoi."},
+inbox:{de:"Derselbe Link liegt in deinem Postfach. Falls nicht, schau im Spam nach.",ro:"Același link este și în inboxul tău. Dacă nu e acolo, caută în spam.",es:"El mismo enlace está en tu bandeja de entrada. Si no está, mira en spam.",it:"Lo stesso link è nella tua casella di posta. Se non c'è, controlla lo spam."},
+help:{de:"Irgendwo hängen geblieben? Schreib an <a href='mailto:edenverse88@gmail.com'>edenverse88@gmail.com</a> und ich schicke dir die Datei direkt.",ro:"Te-ai blocat undeva? Scrie la <a href='mailto:edenverse88@gmail.com'>edenverse88@gmail.com</a> și îți trimit fișierul direct.",es:"¿Te has quedado atascado? Escribe a <a href='mailto:edenverse88@gmail.com'>edenverse88@gmail.com</a> y te envío el archivo directamente.",it:"Bloccato da qualche parte? Scrivi a <a href='mailto:edenverse88@gmail.com'>edenverse88@gmail.com</a> e ti mando il file direttamente."},
+
+e2:{de:"Bevor du anfängst",ro:"Înainte să începi",es:"Antes de empezar",it:"Prima di iniziare"},
+s2h:{de:"Wie man es liest",ro:"Cum se citește",es:"Cómo leerlo",it:"Come leggerlo"},
+s2lead:{de:"Es ist kein Buch, das man von vorne bis hinten liest. Es ist ein Buch, auf das man zeigt.",ro:"Nu e o carte pe care o citești din scoarță în scoarță. E o carte spre care arăți cu degetul.",es:"No es un libro que se lea de principio a fin. Es un libro que se señala.",it:"Non è un libro da leggere dall'inizio alla fine. È un libro da indicare."},
+m1:{de:"Lies nicht alle Sprachen. Nimm eine oder zwei und bleib eine Weile dabei.",ro:"Nu citi toate limbile. Alege una sau două și rămâi acolo o vreme.",es:"No leas todos los idiomas. Elige uno o dos y quédate ahí un tiempo.",it:"Non leggere tutte le lingue. Scegline una o due e restaci per un po'."},
+m2:{de:"Erst zeigen, dann das Wort sagen. Der Finger übernimmt die halbe Arbeit.",ro:"Arată întâi, apoi spune cuvântul. Degetul face jumătate din treabă.",es:"Primero señala, luego di la palabra. El dedo hace la mitad del trabajo.",it:"Prima indica, poi di' la parola. Il dito fa metà del lavoro."},
+m3:{de:"Lass die Farben sortieren. Jede Sprache behält auf jeder Seite ihre eigene Farbe, so lernt ein Kind, welcher Klang zu welcher Sprache gehört, lange bevor es einen Buchstaben lesen kann.",ro:"Lasă culorile să facă ordinea. Fiecare limbă își păstrează culoarea pe fiecare pagină, așa că un copil învață ce sunet aparține cărei limbi cu mult înainte să poată citi o literă.",es:"Deja que los colores ordenen. Cada idioma mantiene su color en todas las páginas, así un niño aprende qué sonido pertenece a qué idioma mucho antes de saber leer una letra.",it:"Lascia che siano i colori a fare ordine. Ogni lingua mantiene il suo colore su ogni pagina, così un bambino impara quale suono appartiene a quale lingua molto prima di saper leggere una lettera."},
+m4:{de:"Hör auf, wenn sie aufhören. Zwei Minuten am Tag sind mehr wert als einmal zwanzig.",ro:"Oprește-te când se opresc ei. Două minute pe zi bat douăzeci de minute o dată.",es:"Para cuando ellos paren. Dos minutos al día valen más que veinte una sola vez.",it:"Fermati quando si fermano loro. Due minuti al giorno valgono più di venti minuti una volta sola."},
+k1:{de:"Seiten",ro:"pagini",es:"páginas",it:"pagine"},
+k2:{de:"erste Wörter",ro:"primele cuvinte",es:"primeras palabras",it:"prime parole"},
+k3:{de:"Kapitel",ro:"capitole",es:"capítulos",it:"capitoli"},
+k4:{de:"Sprachen",ro:"limbi",es:"idiomas",it:"lingue"},
+langlist:{de:"Englisch · Deutsch · Rumänisch · Spanisch · Italienisch · Sanskrit",ro:"Engleză · Germană · Română · Spaniolă · Italiană · Sanscrită",es:"Inglés · Alemán · Rumano · Español · Italiano · Sánscrito",it:"Inglese · Tedesco · Rumeno · Spagnolo · Italiano · Sanscrito"},
+
+e3:{de:"Was als Nächstes kommt",ro:"Ce urmează",es:"Lo que viene después",it:"Cosa arriva dopo"},
+s3h:{de:"Der Rest der Reihe",ro:"Restul seriei",es:"El resto de la serie",it:"Il resto della serie"},
+s3lead:{de:"Meine schöne Welt ist das erste. Hier der ehrliche Stand dessen, was folgt.",ro:"Lumea mea frumoasă este prima. Iată starea reală a ceea ce urmează.",es:"Mi mundo hermoso es el primero. Este es el estado real de lo que viene.",it:"Il mio bel mondo è il primo. Ecco lo stato reale di ciò che seguirà."},
+i1t:{de:"Meine schöne Welt",ro:"Lumea mea frumoasă",es:"Mi mundo hermoso",it:"Il mio bel mondo"},
+i1s:{de:"Jetzt deins",ro:"A ta acum",es:"Ya es tuyo",it:"Già tuo"},
+i2s:{de:"Als Nächstes — in Recherche",ro:"Următoarea — în cercetare",es:"La siguiente — en investigación",it:"La prossima — in ricerca"},
+i3s:{de:"In Arbeit",ro:"În lucru",es:"En preparación",it:"In lavorazione"},
+i4s:{de:"In Arbeit",ro:"În lucru",es:"En preparación",it:"In lavorazione"},
+i5s:{de:"Am Horizont",ro:"La orizont",es:"En el horizonte",it:"All'orizzonte"},
+fund:{de:"Ein Teil von jedem verkauften Exemplar fließt direkt in das nächste Buch.",ro:"O parte din fiecare exemplar vândut merge direct în realizarea următoarei cărți.",es:"Una parte de cada ejemplar vendido va directamente a hacer el siguiente.",it:"Una parte di ogni copia venduta va direttamente a realizzare il libro successivo."},
+seriesq:{de:"Willst du wissen, wann das nächste fertig ist?",ro:"Vrei să afli când e gata următoarea?",es:"¿Quieres saber cuándo estará listo el siguiente?",it:"Vuoi sapere quando sarà pronto il prossimo?"},
+seriesph:{de:"deine E-Mail",ro:"emailul tău",es:"tu correo",it:"la tua email"},
+seriesbtn:{de:"Halt mich auf dem Laufenden",ro:"Ține-mă la curent",es:"Avísame",it:"Tienimi aggiornato"},
+seriesok:{de:"Du stehst auf der Liste. Ich schreibe nur, wenn es wirklich etwas zu sagen gibt.",ro:"Ești pe listă. Îți scriu doar când am ceva real de spus.",es:"Estás en la lista. Solo escribiré cuando haya algo real que contar.",it:"Sei nella lista. Scriverò solo quando ci sarà qualcosa di reale da dire."},
+
+e4:{de:"Oft gefragt",ro:"Întrebare frecventă",es:"Se pregunta a menudo",it:"Chiesto spesso"},
+s4h:{de:"Die gedruckte Ausgabe",ro:"Ediția tipărită",es:"La edición impresa",it:"L'edizione stampata"},
+s4body:{de:"Viele wollen ein echtes Buch, das man einem Kind in die Hand geben kann. Ich arbeite daran. Es ist noch nicht fertig, und ich verkaufe es nicht, bevor es das ist — 45 Seiten in Vollfarbe zu drucken kostet deutlich mehr als das PDF, und ich zeige dir lieber den echten Preis, als eine Vorbestellung auf gut Glück anzunehmen. Lass deine E-Mail da und du hörst als Erste davon.",ro:"Mulți vor o carte adevărată, pe care s-o poată pune în mâna unui copil. Lucrez la ea. Nu e gata și n-o vând înainte să fie — tipărirea a 45 de pagini color costă considerabil mai mult decât PDF-ul, și prefer să-ți arăt prețul real decât să iau o precomandă pe ghicite. Lasă-ți emailul și afli primul.",es:"Mucha gente quiere un libro de verdad que se le pueda dar a un niño. Estoy en ello. No está listo y no lo venderé antes de que lo esté: imprimir 45 páginas a todo color cuesta bastante más que el PDF, y prefiero enseñarte el precio real que aceptar una reserva a ciegas. Deja tu correo y te enterarás el primero.",it:"In molti vogliono un libro vero, da mettere in mano a un bambino. Ci sto lavorando. Non è pronto e non lo venderò prima che lo sia — stampare 45 pagine a colori costa parecchio più del PDF, e preferisco mostrarti il prezzo reale piuttosto che accettare un preordine alla cieca. Lascia la tua email e lo saprai per primo."},
+printph:{de:"deine E-Mail",ro:"emailul tău",es:"tu correo",it:"la tua email"},
+printbtn:{de:"Sag mir Bescheid",ro:"Anunță-mă",es:"Avísame cuando salga",it:"Avvisami quando esce"},
+printok:{de:"Notiert. Du hörst es vor allen anderen.",ro:"Notat. Afli înaintea tuturor.",es:"Anotado. Te enterarás antes que nadie.",it:"Annotato. Lo saprai prima di tutti."},
+
+e5:{de:"Woher das kommt",ro:"De unde vine",es:"De dónde viene",it:"Da dove viene"},
+s5h:{de:"Das größere Edenverse",ro:"Edenverse, mai pe larg",es:"El Edenverse más amplio",it:"L'Edenverse più ampio"},
+s5lead:{de:"Das Buch ist in einem kleinen Studio in Ojai, Kalifornien entstanden. Hier ist der Rest davon.",ro:"Cartea a ieșit dintr-un studio mic din Ojai, California. Iată și restul.",es:"El libro salió de un pequeño estudio en Ojai, California. Aquí está el resto.",it:"Il libro è nato in un piccolo studio a Ojai, California. Ecco il resto."},
+t1d:{de:"Essen zu Hause anbauen, vom ersten Samen an.",ro:"Cultivarea hranei acasă, de la prima sămânță.",es:"Cultivar comida en casa, desde la primera semilla.",it:"Coltivare cibo in casa, dal primo seme."},
+t2d:{de:"Das Haupthaus. Alles unter einem Dach.",ro:"Casa principală. Totul sub un singur acoperiș.",es:"La casa principal. Todo bajo un mismo techo.",it:"La casa principale. Tutto sotto un unico tetto."},
+t3t:{de:"Die Bibliothek",ro:"Biblioteca",es:"La Biblioteca",it:"La Biblioteca"},
+t3d:{de:"Wo die Bücher wohnen. Leseproben und alles, was als Nächstes erscheint.",ro:"Acolo unde stau cărțile. Mostre și tot ce apare în continuare.",es:"Donde viven los libros. Muestras y todo lo que salga después.",it:"Dove vivono i libri. Anteprime e tutto ciò che uscirà."},
+t4t:{de:"Dein Konto",ro:"Contul tău",es:"Tu cuenta",it:"Il tuo account"},
+t4d:{de:"Alles, was dir gehört, an einem Ort, für immer.",ro:"Tot ce deții, într-un singur loc, pentru totdeauna.",es:"Todo lo que tienes, en un solo lugar, para siempre.",it:"Tutto ciò che possiedi, in un unico posto, per sempre."},
+
+e6:{de:"Bleib in der Nähe",ro:"Rămâi aproape",es:"Quédate cerca",it:"Resta vicino"},
+s6h:{de:"Komm mit",ro:"Vino alături",es:"Acompáñanos",it:"Vieni con noi"},
+s6lead:{de:"Neue Seiten, neue Wörter und der eine oder andere Blick hinter die Kulissen erscheinen hier zuerst.",ro:"Pagini noi, cuvinte noi și câte o privire în culise apar mai întâi aici.",es:"Las páginas nuevas, las palabras nuevas y alguna mirada entre bastidores se publican aquí primero.",it:"Nuove pagine, nuove parole e qualche sguardo dietro le quinte compaiono prima qui."},
+f1d:{de:"Die Bücher, Seite für Seite.",ro:"Cărțile, pagină cu pagină.",es:"Los libros, página a página.",it:"I libri, pagina per pagina."},
+f2d:{de:"Das Land, der Garten, die größere Arbeit.",ro:"Pământul, grădina, munca mai largă.",es:"La tierra, el huerto, el trabajo más amplio.",it:"La terra, l'orto, il lavoro più ampio."},
+f3d:{de:"Tag für Tag, in Bildern.",ro:"Zi de zi, în imagini.",es:"El día a día, en imágenes.",it:"Giorno per giorno, in immagini."},
+f4t:{de:"Schreib mir einfach",ro:"Scrie-mi pur și simplu",es:"Escríbeme sin más",it:"Scrivimi e basta"},
+f4d:{de:"Ich lese jede Nachricht selbst.",ro:"Citesc fiecare mesaj personal.",es:"Leo cada mensaje personalmente.",it:"Leggo ogni messaggio di persona."},
+
+foot1:{de:"Für ein kleines Mädchen gemacht und dann richtig gemacht, damit auch die Kinder anderer Leute es haben können. Ojai, Kalifornien.",ro:"Făcută pentru o fetiță, apoi făcută ca lumea, ca să o poată avea și copiii altora. Ojai, California.",es:"Hecho para una niña pequeña, y luego hecho en serio para que también lo tuvieran los hijos de otras personas. Ojai, California.",it:"Fatto per una bambina, e poi fatto come si deve perché potessero averlo anche i figli di altri. Ojai, California."},
+back:{de:"← Zurück zum Buch",ro:"← Înapoi la carte",es:"← Volver al libro",it:"← Torna al libro"}
 };
+
+var ERRTXT={
+ bad:{en:"Please enter a valid email address.",de:"Bitte gib eine gültige E-Mail-Adresse ein.",ro:"Te rog introdu o adresă de email validă.",es:"Introduce una dirección de correo válida.",it:"Inserisci un indirizzo email valido."},
+ fail:{en:"Something went wrong. Please try again.",de:"Etwas ist schiefgelaufen. Bitte versuch es noch einmal.",ro:"Ceva nu a mers. Te rog încearcă din nou.",es:"Algo ha fallado. Inténtalo de nuevo.",it:"Qualcosa è andato storto. Riprova."}
+};
+
 var LANGS=[['en','EN'],['de','DE'],['ro','RO'],['es','ES'],['it','IT']];
-var ORIG={},cur='en';
+var ORIG={},ORIGPH={},cur='en';
 document.querySelectorAll('[data-t]').forEach(function(el){ORIG[el.getAttribute('data-t')]=el.innerHTML;});
+document.querySelectorAll('[data-tph]').forEach(function(el){ORIGPH[el.getAttribute('data-tph')]=el.getAttribute('placeholder')||'';});
+
 function apply(l){
   cur=l;
   document.querySelectorAll('[data-t]').forEach(function(el){
     var k=el.getAttribute('data-t');
     el.innerHTML=(l!=='en'&&T[k]&&T[k][l])?T[k][l]:ORIG[k];
   });
+  document.querySelectorAll('[data-tph]').forEach(function(el){
+    var k=el.getAttribute('data-tph');
+    el.setAttribute('placeholder',(l!=='en'&&T[k]&&T[k][l])?T[k][l]:ORIGPH[k]);
+  });
   document.documentElement.setAttribute('lang',l);
+  try{localStorage.setItem('mbw_lang',l);}catch(e){}
   paint();
 }
 function paint(){
@@ -115,6 +349,55 @@ function paint(){
     b.appendChild(t);
   });
 }
+
+function wireCapture(formId,inputId,okId,errId,list){
+  var f=document.getElementById(formId);
+  if(!f)return;
+  var input=document.getElementById(inputId),
+      ok=document.getElementById(okId),
+      err=document.getElementById(errId),
+      btn=f.querySelector('button');
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var em=(input.value||'').trim();
+    err.style.display='none';
+    if(em.indexOf('@')<1||em.indexOf('.')<0){
+      err.textContent=ERRTXT.bad[cur]||ERRTXT.bad.en;
+      err.style.display='block';
+      return;
+    }
+    btn.disabled=true;btn.style.opacity='.6';
+    fetch('/api/waitlist',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:em,list:list})
+    }).then(function(r){return r.json().catch(function(){return {ok:r.ok};});})
+      .then(function(d){
+        if(d&&d.ok){
+          f.style.display='none';
+          ok.style.display='block';
+        }else{
+          btn.disabled=false;btn.style.opacity='1';
+          err.textContent=(d&&d.message)||ERRTXT.fail[cur]||ERRTXT.fail.en;
+          err.style.display='block';
+        }
+      }).catch(function(){
+        btn.disabled=false;btn.style.opacity='1';
+        err.textContent=ERRTXT.fail[cur]||ERRTXT.fail.en;
+        err.style.display='block';
+      });
+  });
+}
+wireCapture('fSeries','eSeries','okSeries','errSeries','series');
+wireCapture('fPrint','ePrint','okPrint','errPrint','print');
+
+/* If Whop hands the buyer's email back on the redirect, save them typing it twice. */
+if(_pem.indexOf('@')>0){
+  ['eSeries','ePrint'].forEach(function(id){
+    var el=document.getElementById(id); if(el&&!el.value)el.value=_pem;
+  });
+}
+
 var pick='en';
 try{var s=localStorage.getItem('mbw_lang'); if(s)pick=s;}catch(e){}
 if(pick==='en'){var nv=(navigator.language||'en').slice(0,2).toLowerCase();

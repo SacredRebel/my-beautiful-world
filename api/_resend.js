@@ -2,16 +2,21 @@
 const FROM = process.env.RESEND_FROM || 'Edenverse <hello@edenverse.earth>';
 const REPLY_TO = process.env.RESEND_REPLY_TO || 'edenverse88@gmail.com';
 
-async function resend(path, body) {
+async function req(method, path, body) {
   const key = process.env.RESEND_API_KEY;
   if (!key) throw new Error('RESEND_API_KEY missing');
-  const res = await fetch('https://api.resend.com' + path, {
-    method: 'POST',
-    headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  });
+  const init = {
+    method,
+    headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' }
+  };
+  if (body !== undefined) init.body = JSON.stringify(body);
+  const res = await fetch('https://api.resend.com' + path, init);
   const json = await res.json().catch(() => ({}));
   return { ok: res.ok, status: res.status, json };
+}
+
+function resend(path, body) {
+  return req('POST', path, body);
 }
 
 exports.sendEmail = async function (to, mail) {
@@ -50,6 +55,44 @@ exports.addContact = async function (email, segmentId) {
     } catch (e) {
       console.warn('resend segment error', e.message);
     }
+  }
+  return false;
+};
+
+// Records what a contact has put their hand up for, in the "interests" contact
+// property. The free plan caps us at 3 segments, so interest is tracked as a
+// property rather than a segment per list.
+//
+// It merges rather than overwrites: someone who joins the series list and then
+// the print list ends up "series,print", not just "print". Best effort
+// throughout - a failure here must never stop the confirmation email going out.
+exports.tagInterest = async function (email, tag) {
+  const clean = String(tag || '').trim().toLowerCase();
+  if (!clean) return false;
+  const key = encodeURIComponent(email);
+
+  let existing = '';
+  try {
+    const g = await req('GET', '/contacts/' + key);
+    const c = (g.json && (g.json.data || g.json)) || {};
+    const props = c.properties || {};
+    existing = String(props.interests || '');
+  } catch (e) {
+    console.warn('resend contact read error', e.message);
+  }
+
+  const tags = existing.split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
+  if (tags.indexOf(clean) === -1) tags.push(clean);
+  // "none" is the property fallback; drop it the moment there is a real interest
+  const merged = tags.filter((t) => t !== 'none').join(',');
+  if (merged === existing) return true;
+
+  try {
+    const u = await req('PATCH', '/contacts/' + key, { properties: { interests: merged } });
+    if (u.ok) return true;
+    console.warn('resend property update', u.status, JSON.stringify(u.json).slice(0, 200));
+  } catch (e) {
+    console.warn('resend property update error', e.message);
   }
   return false;
 };
