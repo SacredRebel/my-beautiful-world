@@ -6,6 +6,7 @@
 const crypto = require('crypto');
 const { sendEmail, addContact } = require('./_resend');
 const { bookDelivery } = require('./_emails');
+const { trackCheckout } = require('./_pinterest');
 
 module.exports.config = { api: { bodyParser: false } };
 
@@ -120,6 +121,25 @@ module.exports = async (req, res) => {
       await addContact(email, SEGMENT_BUYERS);
       const sent = await sendEmail(email, bookDelivery());
       console.log('buyer handled', email.replace(/(.{2}).+(@.*)/, '$1***$2'), 'emailed:', sent);
+
+      // Report the sale to Pinterest. Never let this block or break book delivery -
+      // the buyer getting their book matters more than the attribution.
+      try {
+        const d = event.data || event;
+        const eventId = findOrderId(d) || req.headers['webhook-id'] || req.headers['svix-id'] || '';
+        if (eventId) {
+          await trackCheckout({
+            email: email,
+            eventId: eventId,
+            value: findAmount(d),
+            currency: d.currency || d.final_amount_currency,
+          });
+        } else {
+          console.warn('pinterest capi: no stable order id on the event, skipping to avoid double counting');
+        }
+      } catch (e) {
+        console.warn('pinterest capi threw, ignoring:', e && e.message);
+      }
     } else {
       console.warn('no email on payment event:', JSON.stringify(event).slice(0, 500));
     }
@@ -127,6 +147,31 @@ module.exports = async (req, res) => {
 
   res.status(200).json({ ok: true });
 };
+
+// The Whop identifier for this purchase. Used as the Pinterest event_id so that
+// a webhook retry reports the same sale rather than a second one.
+function findOrderId(d) {
+  if (!d || typeof d !== 'object') return '';
+  for (const k of ['receipt_id', 'payment_id', 'order_id', 'id']) {
+    if (typeof d[k] === 'string' && d[k]) return d[k];
+  }
+  for (const c of ['payment', 'receipt', 'order']) {
+    const inner = d[c];
+    if (inner && typeof inner === 'object' && typeof inner.id === 'string' && inner.id) return inner.id;
+  }
+  return '';
+}
+
+// What the buyer actually paid, when Whop tells us. Falls back to the list price
+// rather than guessing, and ignores anything that is not a sane positive number.
+function findAmount(d) {
+  if (!d || typeof d !== 'object') return null;
+  for (const k of ['final_amount', 'amount', 'total', 'subtotal']) {
+    const n = Number(d[k]);
+    if (Number.isFinite(n) && n > 0) return n;
+  }
+  return null;
+}
 
 function findEmail(obj, depth) {
   if (!obj || typeof obj !== 'object' || (depth || 0) > 6) return '';

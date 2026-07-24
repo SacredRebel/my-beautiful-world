@@ -11,9 +11,9 @@
 var _pq=new URLSearchParams(location.search), _pem=(_pq.get('email')||_pq.get('em')||'').trim();
 if(_pem.indexOf('@')>0){pintrk('load','2613187513702',{em:_pem});}else{pintrk('load','2613187513702');}
 pintrk('page');
-/* One purchase per session - a page refresh must not report a second sale. */
-(function(){var k='mbw_pin_checkout',done=false;try{done=!!sessionStorage.getItem(k);sessionStorage.setItem(k,'1');}catch(e){}
- if(!done){pintrk('track','checkout',{value:12.00,currency:'USD',order_quantity:1,order_id:(_pq.get('receipt_id')||_pq.get('order_id')||undefined),product_name:'My Beautiful World'});}})();
+/* No checkout event here. The sale is reported server-side from the verified
+   Whop webhook (api/_pinterest.js), which catches every purchase whether or not
+   the buyer ever lands back on this page. Firing it here too would double count. */
 </script>
 <noscript><img height="1" width="1" style="display:none;" alt="" src="https://ct.pinterest.com/v3/?event=init&tid=2613187513702&noscript=1" /></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
