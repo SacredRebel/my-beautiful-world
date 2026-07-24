@@ -83,10 +83,17 @@ h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.32rem;line-hei
  padding:1px 8px;font-weight:700;font-size:.9em;white-space:nowrap}
 
 /* ---------- gallery ---------- */
-.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:22px 0 14px}
-.gal img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:13px;display:block;background:#F6EFE1;
- box-shadow:0 8px 18px -14px rgba(58,50,46,.8)}
-.cap{text-align:center;font-size:.86rem;color:var(--soft);margin:0 0 20px}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0 6px}
+.gal figure{margin:0;grid-column:span 1}
+.gal figure.wide{grid-column:1 / -1}
+.gal a{display:block;text-decoration:none;color:inherit;border-radius:14px}
+.gal img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:14px;display:block;background:#F6EFE1;
+ border:1px solid var(--line);box-shadow:0 10px 22px -16px rgba(58,50,46,.85);transition:.16s}
+.gal a:hover img{transform:translateY(-2px);box-shadow:0 14px 26px -16px rgba(58,50,46,.9)}
+.gal figcaption{margin-top:7px;font-size:.79rem;color:var(--mute);letter-spacing:.01em;white-space:nowrap;
+ overflow:hidden;text-overflow:ellipsis}
+.gal figcaption b{font-weight:700;color:var(--soft)}
+.cap{text-align:center;font-size:.86rem;color:var(--soft);margin:14px 0 20px}
 
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 14px;text-align:center}
 .stat b{display:block;font-family:Fraunces,serif;font-weight:600;font-size:1.5rem;color:var(--acd);line-height:1.1}
@@ -134,7 +141,8 @@ form.cap2 button{flex:0 0 auto;font-size:.98rem;padding:14px 24px}
 @media(max-width:520px){
   .grid{grid-template-columns:1fr}
   .stats{grid-template-columns:repeat(2,1fr);gap:16px 10px}
-  .gal{grid-template-columns:repeat(3,1fr);gap:6px}
+  .gal{grid-template-columns:1fr;gap:16px}
+  .gal figure{grid-column:1 / -1}
   .covers{grid-template-columns:repeat(2,1fr);gap:12px}
   .cb{padding:24px 18px 22px}
   .heroart{width:150px;height:150px}
@@ -181,20 +189,26 @@ form.cap2 button{flex:0 0 auto;font-size:.98rem;padding:14px 24px}
       <h2 data-t="s2h">How to read it</h2>
       <p class="sub" data-t="s2lead">It is not a book you read cover to cover. It is a book you point at.</p>
       <div class="gal">
-        <img src="/assets/ty/g01-face.jpg" width="480" height="480" loading="lazy" decoding="async" alt="" />
-        <img src="/assets/ty/g02-hands.jpg" width="480" height="480" loading="lazy" decoding="async" alt="" />
-        <img src="/assets/ty/g03-feet.jpg" width="480" height="480" loading="lazy" decoding="async" alt="" />
-        <img src="/assets/ty/g04-river.jpg" width="480" height="480" loading="lazy" decoding="async" alt="" />
-        <img src="/assets/ty/g05-oak.jpg" width="480" height="480" loading="lazy" decoding="async" alt="" />
-        <img src="/assets/ty/g06-flower.jpg" width="480" height="480" loading="lazy" decoding="async" alt="" />
-        <img src="/assets/ty/g07-mountain.jpg" width="480" height="480" loading="lazy" decoding="async" alt="" />
-        <img src="/assets/ty/g08-mushroom.jpg" width="480" height="480" loading="lazy" decoding="async" alt="" />
-        <img src="/assets/ty/g09-lion.jpg" width="480" height="480" loading="lazy" decoding="async" alt="" />
-        <img src="/assets/ty/g10-bird.jpg" width="480" height="480" loading="lazy" decoding="async" alt="" />
-        <img src="/assets/ty/g11-boat.jpg" width="480" height="480" loading="lazy" decoding="async" alt="" />
-        <img src="/assets/ty/g12-moon.jpg" width="480" height="480" loading="lazy" decoding="async" alt="" />
+        <figure class="wide">
+          <a href="/assets/ty/pg-face.jpg" target="_blank" rel="noopener">
+            <img src="/assets/ty/pg-face.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="Page from the book: The Face, with each part labelled in six languages" />
+          </a>
+          <figcaption><b>The Face</b> &middot; page 2</figcaption>
+        </figure>
+        <figure>
+          <a href="/assets/ty/pg-lion.jpg" target="_blank" rel="noopener">
+            <img src="/assets/ty/pg-lion.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="Page from the book: The Lion, labelled in six languages" />
+          </a>
+          <figcaption><b>The Lion</b> &middot; page 15</figcaption>
+        </figure>
+        <figure>
+          <a href="/assets/ty/pg-night.jpg" target="_blank" rel="noopener">
+            <img src="/assets/ty/pg-night.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="Page from the book: The Night Sky, labelled in six languages" />
+          </a>
+          <figcaption><b>The Night Sky</b> &middot; page 33</figcaption>
+        </figure>
       </div>
-      <p class="cap" data-t="galcap">Twelve of the pictures waiting inside.</p>
+      <p class="cap" data-t="galcap">Real pages, straight out of your book. Tap any one to open it full size.</p>
       <ol class="steps">
         <li data-t="m1">Do not read every language. Pick one or two and stay there a while.</li>
         <li data-t="m2">Point first, then say the word. The finger does half the teaching.</li>
@@ -352,7 +366,7 @@ help:{de:"Irgendwo hängen geblieben? Schreib an <a href='mailto:edenverse88@gma
 e2:{de:"Bevor du anfängst",ro:"Înainte să începi",es:"Antes de empezar",it:"Prima di iniziare"},
 s2h:{de:"Wie man es liest",ro:"Cum se citește",es:"Cómo leerlo",it:"Come leggerlo"},
 s2lead:{de:"Es ist kein Buch, das man von vorne bis hinten liest. Es ist ein Buch, auf das man zeigt.",ro:"Nu e o carte pe care o citești din scoarță în scoarță. E o carte spre care arăți cu degetul.",es:"No es un libro que se lea de principio a fin. Es un libro que se señala.",it:"Non è un libro da leggere dall'inizio alla fine. È un libro da indicare."},
-galcap:{de:"Zwölf der Bilder, die drinnen auf dich warten.",ro:"Douăsprezece dintre imaginile care te așteaptă înăuntru.",es:"Doce de las ilustraciones que te esperan dentro.",it:"Dodici delle illustrazioni che ti aspettano dentro."},
+galcap:{de:"Echte Seiten, direkt aus deinem Buch. Tippe eine an, um sie in voller Größe zu öffnen.",ro:"Pagini reale, direct din cartea ta. Atinge oricare pentru a o deschide la dimensiune completă.",es:"Páginas reales, sacadas de tu libro. Toca cualquiera para abrirla a tamaño completo.",it:"Pagine vere, direttamente dal tuo libro. Tocca una qualsiasi per aprirla a grandezza intera."},
 m1:{de:"Lies nicht alle Sprachen. Nimm eine oder zwei und bleib eine Weile dabei.",ro:"Nu citi toate limbile. Alege una sau două și rămâi acolo o vreme.",es:"No leas todos los idiomas. Elige uno o dos y quédate ahí un tiempo.",it:"Non leggere tutte le lingue. Scegline una o due e restaci per un po'."},
 m2:{de:"Erst zeigen, dann das Wort sagen. Der Finger übernimmt die halbe Arbeit.",ro:"Arată întâi, apoi spune cuvântul. Degetul face jumătate din treabă.",es:"Primero señala, luego di la palabra. El dedo hace la mitad del trabajo.",it:"Prima indica, poi di' la parola. Il dito fa metà del lavoro."},
 m3:{de:"Lass die Farben sortieren. Jede Sprache behält auf jeder Seite ihre eigene Farbe, so lernt ein Kind, welcher Klang zu welcher Sprache gehört, lange bevor es einen Buchstaben lesen kann.",ro:"Lasă culorile să facă ordinea. Fiecare limbă își păstrează culoarea pe fiecare pagină, așa că un copil învață ce sunet aparține cărei limbi cu mult înainte să poată citi o literă.",es:"Deja que los colores ordenen. Cada idioma mantiene su color en todas las páginas, así un niño aprende qué sonido pertenece a qué idioma mucho antes de saber leer una letra.",it:"Lascia che siano i colori a fare ordine. Ogni lingua mantiene il suo colore su ogni pagina, così un bambino impara quale suono appartiene a quale lingua molto prima di saper leggere una lettera."},
