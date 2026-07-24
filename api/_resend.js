@@ -43,10 +43,11 @@ exports.addContact = async function (email, segmentId) {
     console.warn('resend contact create error', e.message);
   }
 
-  // file into the segment; try by id first, fall back to email
-  const attempts = [];
+  // File into the segment. The endpoint wants { email } - passing contact_id
+  // returns 422 "Missing `email` field", so email goes first and contact_id is
+  // kept only as a fallback in case that ever changes.
+  const attempts = [{ email }];
   if (contactId) attempts.push({ contact_id: contactId });
-  attempts.push({ email });
   for (const body of attempts) {
     try {
       const s = await resend('/segments/' + segmentId + '/contacts', body);
