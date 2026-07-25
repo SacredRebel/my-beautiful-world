@@ -7,14 +7,19 @@
 // reuse /api/subscribe - that one sends the free sample, which would be an
 // odd thing to send someone who owns the whole book.
 //
-// The Resend free plan caps us at 3 segments, so both lists file into the
-// General segment and the actual interest is recorded on the contact's
-// "interests" property instead.
+// Both lists file into "Book — buyers", which is where these people already
+// belong: they reached this form from the thank-you page, so they have bought.
+// Which of the two lists they raised a hand for is recorded on the contact's
+// "interests" property, so one segment carries both without losing the detail.
+//
+// This used to file into "General". That was wrong - General is Resend's
+// default audience and is now the Edenverse main-site list, so writing book
+// readers into it mixed the two brands in one container.
 
-const { sendEmail, addContact, tagInterest } = require('./_resend');
+const { sendEmail, addContact, tagInterest, setTopic, BOOK_TOPIC } = require('./_resend');
 const { waitlistConfirm } = require('./_emails');
 
-const SEGMENT_GENERAL = '16abb5e2-6dc1-46f1-aa49-3252b10ab565';
+const SEGMENT_BUYERS = 'ccacd682-48e3-4fff-8fa9-7df585e235a2';
 const LISTS = ['series', 'print'];
 
 module.exports = async (req, res) => {
@@ -45,8 +50,9 @@ module.exports = async (req, res) => {
     // Filing the contact is what actually matters here, so it is awaited and
     // its result is what the page is told about. The confirmation email is a
     // courtesy - if Resend refuses to send it, the person is still on the list.
-    await addContact(email, SEGMENT_GENERAL);
+    await addContact(email, SEGMENT_BUYERS);
     await tagInterest(email, list);
+    await setTopic(email, BOOK_TOPIC, 'opt_in');
 
     let sent = false;
     try {

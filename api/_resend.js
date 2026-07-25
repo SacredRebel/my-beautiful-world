@@ -60,6 +60,30 @@ exports.addContact = async function (email, segmentId) {
   return false;
 };
 
+// The topic a contact is opted into is what actually keeps the two brands
+// apart. Segments decide who a broadcast is addressed to; topics decide who is
+// allowed to receive it, and they are not capped by the plan. Every book
+// capture opts into BOOK_TOPIC, so an Edenverse broadcast can never reach a
+// book reader even if the two ever share a segment by accident.
+//
+// The endpoint is PATCH /contacts/{email}/topics and its body is a BARE ARRAY,
+// not an object - wrapping it in { topics: [...] } is rejected.
+const BOOK_TOPIC = '3ee7c02a-1c3b-4fc5-8113-9ea5081719b8'; // "My Beautiful World"
+exports.BOOK_TOPIC = BOOK_TOPIC;
+
+exports.setTopic = async function (email, topicId, subscription) {
+  const key = encodeURIComponent(email);
+  const body = [{ id: topicId || BOOK_TOPIC, subscription: subscription || 'opt_in' }];
+  try {
+    const t = await req('PATCH', '/contacts/' + key + '/topics', body);
+    if (t.ok) return true;
+    console.warn('resend topic set', t.status, JSON.stringify(t.json).slice(0, 200));
+  } catch (e) {
+    console.warn('resend topic error', e.message);
+  }
+  return false;
+};
+
 // Resend does not return contact properties as bare values. It returns them
 // wrapped: { interests: { value: "series", type: "string" } }. Reading the
 // wrapper directly with String() yields "[object Object]", which then gets
