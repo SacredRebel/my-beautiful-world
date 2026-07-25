@@ -390,7 +390,7 @@ footer a{color:inherit}
 <div id="langbar" role="group" aria-label="Choose language"></div>
 
 <div id="bar">
-  <div class="bn">My Beautiful World <small>·</small></div>
+  <div class="bn">My Beautiful World</div>
   <a class="btn sm" href="#offer">Get the book — $12</a>
 </div>
 
@@ -452,6 +452,12 @@ footer a{color:inherit}
 .wxtr.sa{font-style:italic;letter-spacing:.01em}
 .wxlangs{margin-bottom:22px}
 @media(max-width:520px){.wxgrid{grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:9px}.wxtr{font-size:1.28rem}.wxcard{min-height:84px;padding:13px 8px}}
+
+/* sticky header: reserve room for the fixed #langbar so it never covers the CTA */
+#bar{padding-right:calc(min(4vw,26px) + 234px)}
+#bar .bn{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#bar .btn.sm{flex:0 0 auto}
+@media(max-width:560px){#bar{padding-right:min(4vw,26px)}}
 </style>
 <section class="worddemo" id="explore">
   <div class="wrap">
