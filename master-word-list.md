@@ -1,4 +1,24 @@
-# 📖 Master Word List — My Beautiful World
+# 📖 Master Word List — My Beautiful World *(superseded)*
+
+> ## ⚠️ SUPERSEDED — historical record only
+>
+> This file is the **early 11-chapter, 5-language word plan**. It is not what shipped.
+>
+> The finished book teaches **300 words** across **6 chapters** and **49 content pages**, in
+> **six** languages (English, German, Romanian, Spanish, Italian, **Sanskrit**), with
+> **~2,094 translations** in total — 349 label groups × 6 languages.
+>
+> **The real, live word list is not in this repo.** It is generated from the book tool and
+> exported as `word-list.csv` / `word-list.json`, including page titles and an
+> unverified-Sanskrit column. Do not treat anything below as current, and do not quote a
+> word count from this file.
+>
+> Source of truth: *📘 PRINT BOOK UPDATE — A4 Lock-In & Full Production Record* (Notion, 05 Docs).
+>
+> Kept, not deleted, because it records the original vocabulary sketch.
+
+---
+
 
 All 5 languages: **English · Deutsch · Română · Español · Italiano**
 
@@ -275,4 +295,5 @@ All 5 languages: **English · Deutsch · Română · Español · Italiano**
 
 ---
 
-*~470 words × 5 languages = ~2,350 word pairs across 11 chapters*
+*Original sketch: ~470 words × 5 languages across 11 chapters.*
+*What shipped: **300 words × 6 languages across 6 chapters**, ~2,094 translations.*
