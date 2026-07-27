@@ -1,12 +1,12 @@
 # 🌿 My Beautiful World
 
-> A multilingual illustrated word book for children — in **English**, **German**, **Romanian**, **Spanish** & **Italian**.
+> A multilingual illustrated word book for children — in **English**, **German**, **Romanian**, **Spanish**, **Italian** & **Sanskrit**.
 
 ---
 
 ## ✨ About
 
-This is a handcrafted digital word book celebrating the beauty of the natural world through warm watercolor illustrations and five languages. Every page is a doorway into a word — felt, seen, and named across cultures.
+This is a digital word book celebrating the beauty of the natural world through warm illustrations and six languages. Every page is a doorway into a word — felt, seen, and named across cultures.
 
 **Live Book:** https://sacredrebel.github.io/my-beautiful-world/
 
@@ -84,6 +84,7 @@ my-beautiful-world/
 | Romanian | RO |
 | Spanish  | ES |
 | Italian  | IT |
+| Sanskrit | SA |
 
 ---
 
@@ -93,4 +94,4 @@ See [`design-system.md`](./design-system.md) for the complete visual style guide
 
 ---
 
-*Built with love, watercolors, and five languages. 🌿*
+*Built with love, illustrations, and six languages. 🌿*
