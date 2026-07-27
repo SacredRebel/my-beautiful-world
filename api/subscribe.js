@@ -1,5 +1,5 @@
 // POST /api/subscribe -> files the reader under "Book — free sample" and emails the 3 pages.
-const { sendEmail, addContact, setTopic, BOOK_TOPIC } = require('./_resend');
+const { sendEmail, addContact, BOOK_TOPIC } = require('./_resend');
 const { freeSample } = require('./_emails');
 
 const SEGMENT_SAMPLE = '6e57156d-c8b0-49b2-b7a1-2206fc9e5731';
@@ -21,8 +21,7 @@ module.exports = async (req, res) => {
   }
 
   try {
-    await addContact(email, SEGMENT_SAMPLE);           // best effort
-    await setTopic(email, BOOK_TOPIC, 'opt_in');       // best effort, keeps the brands apart
+    await addContact(email, SEGMENT_SAMPLE, BOOK_TOPIC); // best effort, keeps the brands apart
     const sent = await sendEmail(email, freeSample()); // the part that matters
     if (!sent) {
       // the page still shows its own download button, so this is not fatal

@@ -16,7 +16,7 @@
 // default audience and is now the Edenverse main-site list, so writing book
 // readers into it mixed the two brands in one container.
 
-const { sendEmail, addContact, tagInterest, setTopic, BOOK_TOPIC } = require('./_resend');
+const { sendEmail, addContact, tagInterest, BOOK_TOPIC } = require('./_resend');
 const { waitlistConfirm } = require('./_emails');
 
 const SEGMENT_BUYERS = 'ccacd682-48e3-4fff-8fa9-7df585e235a2';
@@ -50,9 +50,8 @@ module.exports = async (req, res) => {
     // Filing the contact is what actually matters here, so it is awaited and
     // its result is what the page is told about. The confirmation email is a
     // courtesy - if Resend refuses to send it, the person is still on the list.
-    await addContact(email, SEGMENT_BUYERS);
+    await addContact(email, SEGMENT_BUYERS, BOOK_TOPIC);
     await tagInterest(email, list);
-    await setTopic(email, BOOK_TOPIC, 'opt_in');
 
     let sent = false;
     try {

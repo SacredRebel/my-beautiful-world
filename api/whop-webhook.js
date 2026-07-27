@@ -4,7 +4,7 @@
 // so the exact format is discovered from real traffic rather than assumed.
 
 const crypto = require('crypto');
-const { sendEmail, addContact, setTopic, BOOK_TOPIC } = require('./_resend');
+const { sendEmail, addContact, BOOK_TOPIC } = require('./_resend');
 const { bookDelivery } = require('./_emails');
 const { trackCheckout } = require('./_pinterest');
 
@@ -118,8 +118,7 @@ module.exports = async (req, res) => {
   if (paid) {
     const email = findEmail(event.data || event);
     if (email) {
-      await addContact(email, SEGMENT_BUYERS);
-      await setTopic(email, BOOK_TOPIC, 'opt_in');
+      await addContact(email, SEGMENT_BUYERS, BOOK_TOPIC);
       const sent = await sendEmail(email, bookDelivery());
       console.log('buyer handled', email.replace(/(.{2}).+(@.*)/, '$1***$2'), 'emailed:', sent);
 

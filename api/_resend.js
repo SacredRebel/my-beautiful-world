@@ -19,6 +19,15 @@ function resend(path, body) {
   return req('POST', path, body);
 }
 
+// The topic a contact is opted into is what actually keeps the two brands
+// apart. Segments decide who a broadcast is addressed to; topics decide who is
+// allowed to receive it, and they are not capped by the plan. Every book
+// capture opts into BOOK_TOPIC, so an Edenverse broadcast can never reach a
+// book reader even if the two ever share a segment by accident. Both topics
+// default to opt_out, so the separation holds in both directions.
+const BOOK_TOPIC = '3ee7c02a-1c3b-4fc5-8113-9ea5081719b8'; // "My Beautiful World"
+exports.BOOK_TOPIC = BOOK_TOPIC;
+
 exports.sendEmail = async function (to, mail) {
   const r = await resend('/emails', {
     from: FROM, to: [to], reply_to: REPLY_TO,
@@ -31,17 +40,36 @@ exports.sendEmail = async function (to, mail) {
 // Best effort: contact filing must never block delivery of the email.
 // Two steps: create the contact, then file it into the segment. The create call
 // does not accept segment ids, so the second call is what actually files it.
-exports.addContact = async function (email, segmentId) {
+//
+// The topic goes inline on the create call. POST /contacts accepts a "topics"
+// array and behaves as an idempotent upsert: a repeat submission sets the topic
+// named in the array and leaves any other topic the contact already holds
+// alone. That matters for someone who signs up for both the book and Edenverse
+// - they keep both. Doing it here also means one API call per signup instead of
+// two. Verified empirically on the Edenverse side across three live signups.
+exports.addContact = async function (email, segmentId, topicId) {
   let contactId = '';
+  let topicSet = false;
+  const topic = topicId || BOOK_TOPIC;
   try {
-    const c = await resend('/contacts', { email, unsubscribed: false });
+    const c = await resend('/contacts', {
+      email,
+      unsubscribed: false,
+      topics: [{ id: topic, subscription: 'opt_in' }]
+    });
     contactId = (c.json && (c.json.id || (c.json.data && c.json.data.id))) || '';
+    topicSet = c.ok;
     if (!c.ok && c.status !== 409) {
       console.warn('resend contact create', c.status, JSON.stringify(c.json).slice(0, 200));
     }
   } catch (e) {
     console.warn('resend contact create error', e.message);
   }
+
+  // Fallback only. If the inline topic did not take, set it the long way so a
+  // contact is never left sitting on the opt_out default and silently unable to
+  // receive anything.
+  if (!topicSet) await exports.setTopic(email, topic, 'opt_in');
 
   // File into the segment. The endpoint wants { email } - passing contact_id
   // returns 422 "Missing `email` field", so email goes first and contact_id is
@@ -60,17 +88,13 @@ exports.addContact = async function (email, segmentId) {
   return false;
 };
 
-// The topic a contact is opted into is what actually keeps the two brands
-// apart. Segments decide who a broadcast is addressed to; topics decide who is
-// allowed to receive it, and they are not capped by the plan. Every book
-// capture opts into BOOK_TOPIC, so an Edenverse broadcast can never reach a
-// book reader even if the two ever share a segment by accident.
+// Fallback path, used only when the inline topic on contact create did not
+// take. The endpoint is PATCH /contacts/{email}/topics and its body is a BARE
+// ARRAY, not an object - wrapping it in { topics: [...] } is rejected.
 //
-// The endpoint is PATCH /contacts/{email}/topics and its body is a BARE ARRAY,
-// not an object - wrapping it in { topics: [...] } is rejected.
-const BOOK_TOPIC = '3ee7c02a-1c3b-4fc5-8113-9ea5081719b8'; // "My Beautiful World"
-exports.BOOK_TOPIC = BOOK_TOPIC;
-
+// NOT VERIFIED: whether a single-element array here merges into the contact's
+// existing topics or replaces the whole list. That is why it is the fallback
+// and no longer the normal path.
 exports.setTopic = async function (email, topicId, subscription) {
   const key = encodeURIComponent(email);
   const body = [{ id: topicId || BOOK_TOPIC, subscription: subscription || 'opt_in' }];
