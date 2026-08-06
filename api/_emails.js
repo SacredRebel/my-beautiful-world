@@ -126,7 +126,7 @@ exports.freeSample = function () {
       btn(SAMPLE, 'Download your 3 free pages') +
       card('How to read it with a small child',
         'Do not try to read every language. Pick the one your child hears at home, point at a picture, and say the word. Each language keeps its own colour on every page, so their eye learns the pattern long before they can read.') +
-      para('The full book is 52 pages and 305 first words, in English, German, Romanian, Spanish, Italian and Sanskrit.') +
+      para('The full book is 52 pages and 300+ first words, in English, German, Romanian, Spanish, Italian and Sanskrit.') +
       btn(CHECKOUT, 'Get the whole book &mdash; $12')
     ),
     text: `Here are your 3 free pages.
@@ -137,7 +137,7 @@ Download: ${SAMPLE}
 
 How to read it with a small child: do not try to read every language. Pick the one your child hears at home, point at a picture, and say the word.
 
-The full book is 52 pages and 305 first words, in six languages.
+The full book is 52 pages and 300+ first words, in six languages.
 
 Get the whole book - $12: ${CHECKOUT}
 
