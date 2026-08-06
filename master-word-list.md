@@ -4,16 +4,19 @@
 >
 > This file is the **early 11-chapter, 5-language word plan**. It is not what shipped.
 >
-> The finished book teaches **300 words** across **6 chapters** and **49 content pages**, in
+> The finished book teaches **305 words** across **6 chapters** and **50 word-bearing pages**, in
 > **six** languages (English, German, Romanian, Spanish, Italian, **Sanskrit**), with
-> **~2,094 translations** in total — 349 label groups × 6 languages.
+> **~2,130 translations** in total — 355 label groups × 6 languages.
+>
+> (An intermediate July 2026 lock read 300 words / 49 content pages / ~2,094 translations. The
+> 5 Aug 2026 translation audit and the new p51 Bedtime page superseded it.)
 >
 > **The real, live word list is not in this repo.** It is generated from the book tool and
 > exported as `word-list.csv` / `word-list.json`, including page titles and an
 > unverified-Sanskrit column. Do not treat anything below as current, and do not quote a
 > word count from this file.
 >
-> Source of truth: *📘 PRINT BOOK UPDATE — A4 Lock-In & Full Production Record* (Notion, 05 Docs).
+> Source of truth: *📘 My Beautiful World — Release Update Log (Aug 5, 2026)* (Notion, 05 Docs).
 >
 > Kept, not deleted, because it records the original vocabulary sketch.
 
@@ -296,4 +299,4 @@ All 5 languages: **English · Deutsch · Română · Español · Italiano**
 ---
 
 *Original sketch: ~470 words × 5 languages across 11 chapters.*
-*What shipped: **300 words × 6 languages across 6 chapters**, ~2,094 translations.*
+*What shipped: **305 words × 6 languages across 6 chapters**, ~2,130 translations.*

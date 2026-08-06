@@ -6,12 +6,17 @@
 > subject, images committed per chapter folder). That approach was abandoned.
 >
 > The finished book was produced in the book tool and is **locked**: 52 printed pages
-> (title page + 49 content pages + closing + colophon), 300 words, 6 chapters, 6 languages,
+> (p1 opener + p2–p51 word-bearing pages + p52 closer), 305 words, 6 chapters, 6 languages,
 > A4 landscape with bleed, all artwork at 4096 px flat JPEG. Layout is baked into
-> `book/part1/a4-locked.js` — 49 pages, 371 positioned elements — which lives with the book
-> tool, not in this repo.
+> `book/part1/a4-locked.js` (print) and `book/part1/locked-positions.js` (screen), which live
+> with the book tool, not in this repo.
 >
-> Source of truth: *📘 PRINT BOOK UPDATE — A4 Lock-In & Full Production Record* (Notion, 05 Docs).
+> An intermediate July 2026 lock read *52 pages = title page + 49 content pages + closing +
+> colophon, 300 words*. That was superseded on 5 Aug 2026 — the title page and colophon were
+> retired, a new p51 Bedtime page was added, and a six-model translation audit brought the
+> word count to 305.
+>
+> Source of truth: *📘 My Beautiful World — Release Update Log (Aug 5, 2026)* (Notion, 05 Docs).
 >
 > Kept, not deleted, because it records which pages were built first and in what order.
 

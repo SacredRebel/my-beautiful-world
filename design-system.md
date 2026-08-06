@@ -1,6 +1,6 @@
 # 🎨 Design System — My Beautiful World
 
-Source of truth for anything printed: **📘 PRINT BOOK UPDATE — A4 Lock-In & Full Production Record** (Notion, 05 Docs). The book is finished and locked; this file describes it, it does not define it.
+Source of truth for anything printed: **📘 My Beautiful World — Release Update Log (Aug 5, 2026)** (Notion, 05 Docs), which supersedes the earlier *PRINT BOOK UPDATE — A4 Lock-In & Full Production Record*. The book is finished and locked; this file describes it, it does not define it.
 
 ---
 
@@ -18,20 +18,30 @@ Every content page is one full-bleed illustration with its parts labeled in all 
 
 | | |
 |---|---|
-| Printed pages | 52 — title page + 49 content pages + closing + colophon |
-| Words taught | 300 · Page titles 49 · Translations ~2,094 |
+| Printed pages | 52 — p1 opener + p2–p51 word-bearing pages + p52 closer |
+| Digital PDF | 54 pages — the 52 interior pages plus front and back cover (`MBW-54pp-digital.pdf`) |
+| Words taught | 305 · Page titles 50 · Translations ~2,130 (derived: 355 label groups × 6) |
 | Chapters | 6 |
 | Languages | English, German, Romanian, Spanish, Italian, Sanskrit |
 | Trim | A4 landscape — 297 × 210 mm (11.69 × 8.27 in) |
-| PDF page | 303.53 × 216.24 mm = 11.94 × 8.51 in (trim + 0.125 in bleed all sides) |
-| Pixels | 3582 × 2553 px at 300 PPI |
+| PDF page | 859.89 × 613.276 pt = 11.94 × 8.51 in (trim + 0.125 in bleed), TrimBox inset 9 pt |
+| Final page images | 3438 × 2451 px JPEG q0.90, ≈288 PPI at A4 + bleed |
 | Bleed | 0.125 in / 3.175 mm all four sides |
 | Safe zone | 0.5 in from the PDF edge; 0.625 in on the binding edge |
 | Binding edge | Alternates — right-hand pages bind left, left-hand pages bind right |
 | Artwork | 4096 px wide, flat JPEG, **no alpha, no soft masks** |
 | Print assembly | Interior printed in 4 parts of 13 sheets each |
+| Binding | Lulu Hardcover Casewrap, premium colour, 80# paper |
 
-Layout is baked into `book/part1/a4-locked.js`: 49 pages, 371 positioned elements, in raw A4 canvas coordinates. The print renderer reads those values verbatim and never re-scales them. That file lives with the book tool, not in this repo.
+No title page and no colophon — both retired 5 Aug 2026. Covers are separate files (`cover-front.jpg` / `cover-back.jpg`).
+
+**Devanagari rule (design-system wide):** inside a word card the Devanagari sits on its own line directly below the IAST word (`.plate .deva-mini{display:block}` in `tokens/base.css`), so the script never overflows the blob. Page titles keep it inline.
+
+**Backdrop system:** every page title has the unified Backdrop menu — Auto glow or painted-brush backdrop, shared transparency slider, colour wheel, and a pick-from-image eyedropper. "Painted" here is the name of a procedural print-safe rendering mode; it is never public-facing copy.
+
+*Superseded July 2026 figures, kept for reference: 52 pages as title page + 49 content pages + closing + colophon, 300 words, 49 page titles, ~2,094 translations, 3582 × 2553 px at 300 PPI.*
+
+Layout is baked into two lock files in raw A4 canvas coordinates: `book/part1/a4-locked.js` (the print/A4 layer) and `book/part1/locked-positions.js` (the screen layer). The print renderer reads those values verbatim and never re-scales them. Both live with the book tool, not in this repo.
 
 ---
 

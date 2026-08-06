@@ -16,28 +16,33 @@ This is a digital word book celebrating the beauty of the natural world through 
 
 ## 📐 The locked specification
 
-Source of truth: **📘 PRINT BOOK UPDATE — A4 Lock-In & Full Production Record** (Notion, 05 Docs). If anything below ever disagrees with that document, that document wins.
+Source of truth: **📘 My Beautiful World — Release Update Log (Aug 5, 2026)** (Notion, 05 Docs). If anything below ever disagrees with that document, that document wins. It supersedes the July *PRINT BOOK UPDATE — A4 Lock-In* figures (300 words / 49 content pages), which are kept in the archive section at the bottom.
 
 | | |
 |---|---|
-| Printed pages | **52** — title page + 49 content pages + closing + colophon |
-| Words taught | **300** |
-| Page titles | **49**, each in all six languages |
-| Total translations | ~2,094 (349 label groups × 6 languages) |
+| Printed pages | **52** — p1 opener + p2–p51 word-bearing pages + p52 closer |
+| Digital PDF | **54 pages** — the 52 interior pages plus front and back cover (`MBW-54pp-digital.pdf`). This is the file buyers receive. |
+| Words taught | **305** |
+| Word-bearing pages | **50** (p2–p51, including the new p51 Bedtime page) |
+| Page titles | **50**, each in all six languages |
+| Total translations | ~2,130 (355 label groups × 6 languages) — derived from 305 words + 50 titles |
 | Chapters | **6** |
 | Languages | 6 — English, German, Romanian, Spanish, Italian, Sanskrit |
 | Trim size | A4 landscape — 297 × 210 mm (11.69 × 8.27 in) |
-| PDF page size | 303.53 × 216.24 mm = 11.94 × 8.51 in (trim + 0.125 in bleed all sides) |
-| Pixel size | 3582 × 2553 px at 300 PPI |
+| PDF page size | 859.89 × 613.276 pt = 11.94 × 8.51 in (trim + 0.125 in bleed), TrimBox inset 9 pt |
+| Final page images | 3438 × 2451 px JPEG q0.90, ≈288 PPI at A4 + bleed |
 | Bleed | 0.125 in / 3.175 mm, all four sides |
 | Safe zone | 0.5 in from the PDF edge; **0.625 in on the binding edge** |
 | Binding edge | Alternates per page — right-hand pages bind left, left-hand pages bind right |
 | Artwork | All illustrations 4096 px wide, flat JPEG, no alpha |
+| Binding | Lulu **Hardcover Casewrap**, premium colour, 80# paper (coil is not offered in A4 landscape) |
 | Signature check | 52 ÷ 4 = 13 ✅ (Lulu-friendly) |
+
+There is no longer a separate title page or colophon — both were retired in the Aug 2026 pass. The front and back covers are separate files (`cover-front.jpg` / `cover-back.jpg`); Lulu casewrap takes its own wraparound file, and the digital PDF embeds them as pages 1 and 54.
 
 **Fonts** — Fraunces (page titles, poetic lines) · Nunito 900 (the words a child reads) · Noto Serif italic (Sanskrit IAST) · Noto Serif Devanagari.
 
-The layout is baked into `book/part1/a4-locked.js` — **49 pages, 371 positioned elements**, in raw A4 canvas coordinates that are never re-mapped or re-scaled at print time. That file lives with the book tool, not in this repo.
+The layout is baked into two lock files that live with the book tool, not in this repo: `book/part1/a4-locked.js` (the print/A4 layer — the one that actually prints) and `book/part1/locked-positions.js` (the screen layer). Positions are held in raw A4 canvas coordinates that are never re-mapped or re-scaled at print time. Every browser edit is diffed against these files and baked, so nothing lives only in browser memory.
 
 ---
 
@@ -89,7 +94,9 @@ See [`design-system.md`](./design-system.md) for the visual style guide and [`RE
 
 ## 🗃️ Archive — the original plan (superseded)
 
-Kept because it records how the book started, not how it ended. The book shipped as **6 chapters / 49 content pages / 300 words / 6 languages**. The plan below was an early 11-chapter, 5-language sketch and was never built.
+Kept because it records how the book started, not how it ended. The book shipped as **6 chapters / 50 word-bearing pages / 305 words / 6 languages**. The plan below was an early 11-chapter, 5-language sketch and was never built.
+
+An intermediate July 2026 lock recorded **49 content pages / 300 words / 49 page titles / ~2,094 translations**, with a title page and a colophon. That was superseded on 5 Aug 2026 by the translation audit and the new p51 Bedtime page. The figures are kept here because they are what the July print tests and the first Pinterest batch were built against.
 
 | # | Chapter (original plan) | Pages | Status at the time |
 |---|---------|-------|--------|
