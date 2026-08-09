@@ -43,3 +43,27 @@ Live: landing `library.edenverse.earth` · checkout `whop.com/checkout/plan_vcHU
 ## Repo notes
 
 `index.html` is ~134 KB of fully self-contained HTML — no external JS or CSS, and the `DICT` i18n object is a single ~50 KB line. Any change must be committed as the whole file. Extracting the inline JS to `assets/js/` would make future edits far cheaper.
+
+## Landing page — state as of 9 Aug 2026
+
+`index.html` is a single self-contained 140 KB file. No build step, no external JS or CSS.
+
+Verified in headless Chromium: five-language switcher (EN/DE/RO/ES/IT) with zero English
+leaks across 236 visible strings; both email capture forms posting; every buy button
+resolving to the Whop checkout URL; Pinterest `addtocart` firing on checkout click.
+
+Two email captures now exist. `.capture` is the class; each carries a `data-source`
+(`landing-early`, `landing-offer`) that reaches Resend, so the two can be told apart.
+The capture JS wires **every** `.capture` on the page, scoped to itself — do not go back
+to `getElementById('capForm')`.
+
+`wireBuy()` rewrites every `a[href="#offer"]` to `CHECKOUT_URL`. **Any link that should
+not become a checkout link must not use `#offer`.** Free-sample links use `#sample`, and
+a click handler sends them to whichever `.capture` is nearest rather than to a fixed
+anchor. `wireBuy()` also runs on DOMContentLoaded, because markup below its `<script>`
+(the peek-inside lightbox CTA) is not parsed when the script first executes — that
+button was a dead in-page anchor from launch until 9 Aug.
+
+New user-visible strings must be added to `DICT` (plain text, keyed by the normalised
+English string) or `HDICT` (strings containing markup, keyed by `data-i18n-html`).
+A string in neither will silently stay English for DE/RO/ES/IT visitors.
