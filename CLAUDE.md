@@ -29,7 +29,7 @@ Chapters: My Body 2–8 · Nature & Plants 9–15 · Animals 16–22 · My Home 
 
 Files: `MBW-interior-52pp-lulu-hardcover.pdf` (52pp, Lulu) · `MBW-54pp-digital.pdf` (54pp incl. covers, what buyers receive).
 
-Funnel: Pinterest → library.edenverse.earth → free 3-page sample by email (Resend) → Whop checkout $12 (→$19) → delivery email → thank-you page (print + series waitlists).
+Funnel: Pinterest → library.edenverse.earth → free 3-page sample by email (Resend) → Whop checkout $12 (→$15) → delivery email → thank-you page (print + series waitlists).
 
 Live: landing `library.edenverse.earth` · checkout `whop.com/checkout/plan_vcHU3P33oWwsa/` · Pinterest tag `2613187513702` · Conversions API server-side from the Whop webhook.
 
